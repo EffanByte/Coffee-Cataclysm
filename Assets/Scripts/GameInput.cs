@@ -12,7 +12,10 @@ public class GameInput : MonoBehaviour
         PlayerInputSystem.Player.Enable();
     }
 
-
+    private void OnDisable()
+    {
+        PlayerInputSystem.Player.Disable();
+    }
     public Vector2 GetMovementNormalized()
     {
         Vector2 InputVector = PlayerInputSystem.Player.Move.ReadValue<Vector2>();

@@ -5,6 +5,7 @@ public class GameInput : MonoBehaviour
     private PlayerInputSystem PlayerInputSystem;
 
 
+
     private void Awake()
     {
         PlayerInputSystem = new PlayerInputSystem();

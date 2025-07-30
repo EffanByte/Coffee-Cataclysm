@@ -10,7 +10,7 @@ public class IdleState
     {
         state = new State<PlayerState>(onEnter: state =>
         {
-            Debug.Log("Idle State");
+            //Debug.Log("Idle State");
         });
     }
 }

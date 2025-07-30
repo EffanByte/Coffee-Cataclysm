@@ -27,22 +27,26 @@ public class Player : MonoBehaviour
         fsm = new StateMachine<PlayerState>();
 
         var idle = new IdleState();
-        var move = new MoveState();
+        var move = new MoveState(transform, gameInput, moveSpeed);
 
         fsm.AddState(PlayerState.IDLE, idle.state);
         fsm.AddState(PlayerState.MOVE, move.state);
 
         fsm.SetStartState(PlayerState.IDLE);
+
+        fsm.AddTransition(PlayerState.IDLE, PlayerState.MOVE, condition: _ => gameInput.GetMovementNormalized().magnitude > 0.1f);
+        fsm.AddTransition(PlayerState.MOVE, PlayerState.IDLE, condition: _ => gameInput.GetMovementNormalized().magnitude < 0.1f);
+
         fsm.Init();
 
-        fsm.AddTransition(PlayerState.IDLE, PlayerState.MOVE, condition: _ => gameInput.GetMovementNormalized().magnitude > 0);
-        fsm.AddTransition(PlayerState.MOVE, PlayerState.IDLE, condition: _ => gameInput.GetMovementNormalized().magnitude == 0);
     }
 
 
     void Update()
     {
-        PlayerMovement();
+        fsm.OnLogic();
+        string currentStateName = fsm.ActiveStateName.ToString();
+        Debug.Log($"Current State: {currentStateName}");
     }
 
     private void PlayerMovement()

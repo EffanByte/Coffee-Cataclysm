@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class DoorTrigger : MonoBehaviour
 {
-    private int OutSideSceneIndex = 2;
+    private int OutSideSceneIndex = 1;
 
     private void OnTriggerEnter(Collider other)
     {

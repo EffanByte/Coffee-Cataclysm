@@ -662,6 +662,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3170492796060578032, guid: 7ee30afcf3f8ade45807d7af74f9a413, type: 3}
   m_PrefabInstance: {fileID: 8959234501238943835}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &938707695 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8474141353663963513, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
+  m_PrefabInstance: {fileID: 7686975808949829174}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &938707700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 938707695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3673ef981c688f4b83394693e311f7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vibrationDuration: 2
+  vibrationMagnitude: 0.05
 --- !u!1001 &1098659343
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1859,7 +1878,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5513266505007367429, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5513266505007367429, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       propertyPath: m_TagString
@@ -1954,6 +1973,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 433979359672493896, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 694717010809424858, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -2060,7 +2083,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7576136108233149626, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
       insertIndex: -1
       addedObject: {fileID: 560318323}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8474141353663963513, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 938707700}
   m_SourcePrefab: {fileID: 100100000, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
 --- !u!4 &7686975808949829175 stripped
 Transform:

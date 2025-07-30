@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class CoffeeMakerVibration : MonoBehaviour
 {
-    public float vibrationDuration = 2f;  // How long to shake
-    public float vibrationMagnitude = 0.05f; // How far to move each frame
+    public Transform player; // Drag the Player's transform here
+    public float interactionRange = 3f;
+    public float viewAngle = 45f; // Half-angle of the cone in degrees
+    public float vibrationDuration = 2f;
+    public float vibrationMagnitude = 0.05f;
 
     private Vector3 originalPosition;
     private float timer;
@@ -16,8 +19,7 @@ public class CoffeeMakerVibration : MonoBehaviour
 
     void Update()
     {
-        // Simulate interaction (e.g., press E when nearby)
-        if (Input.GetKeyDown(KeyCode.E)) // You can change to OnTrigger logic
+        if (Input.GetKeyDown(KeyCode.E) && IsPlayerFacingMe())
         {
             StartVibration();
         }
@@ -37,6 +39,19 @@ public class CoffeeMakerVibration : MonoBehaviour
                 timer = 0;
             }
         }
+    }
+
+    bool IsPlayerFacingMe()
+    {
+        Vector3 toCoffeeMaker = (transform.position - player.position).normalized;
+
+        // Angle between player's forward direction and direction to this object
+        float angle = Vector3.Angle(player.forward, toCoffeeMaker);
+
+        // Distance between player and coffee maker
+        float distance = Vector3.Distance(player.position, transform.position);
+
+        return angle < viewAngle && distance < interactionRange;
     }
 
     public void StartVibration()

@@ -23,50 +23,52 @@ public class HoldingManager : MonoBehaviour
     {
         if (IsHoldingItem)
         {
-            Debug.Log("Already holding an item.");
+            Debug.Log("Already holding something.");
             return;
         }
 
         Collider[] hits = Physics.OverlapSphere(transform.position, interactionRange);
 
-        Transform bestCandidate = null;
-        float bestAngle = interactionConeAngle; // smaller is better
+        Transform bestTarget = null;
+        float bestAngle = interactionConeAngle;
 
         foreach (var hit in hits)
         {
-            if (hit.CompareTag("BrownBeanPot") || hit.CompareTag("WhiteBeanPot"))
-            {
-                Vector3 toTarget = (hit.transform.position - transform.position).normalized;
-                float angle = Vector3.Angle(transform.forward, toTarget);
-                float distance = Vector3.Distance(transform.position, hit.transform.position);
+            if (!hit.CompareTag("BrownBeanPot") && !hit.CompareTag("WhiteBeanPot"))
+                continue;
 
-                if (angle < interactionConeAngle * 0.5f && distance <= interactionRange)
+            Vector3 toTarget = (hit.transform.position - transform.position).normalized;
+            float angle = Vector3.Angle(transform.forward, toTarget);
+            float distance = Vector3.Distance(transform.position, hit.transform.position);
+
+            Debug.Log($"Checking: {hit.name} | Angle: {angle} | Dist: {distance}");
+
+            if (angle < interactionConeAngle * 0.5f && distance <= interactionRange)
+            {
+                if (angle < bestAngle)
                 {
-                    if (angle < bestAngle)
-                    {
-                        bestAngle = angle;
-                        bestCandidate = hit.transform;
-                    }
+                    bestAngle = angle;
+                    bestTarget = hit.transform;
                 }
             }
         }
 
-        if (bestCandidate == null)
+        if (bestTarget == null)
         {
             Debug.Log("No valid item in front to pick up.");
             return;
         }
 
-        // Identify type
-        if (bestCandidate.CompareTag("BrownBeanPot"))
+        if (bestTarget.CompareTag("BrownBeanPot"))
         {
             PickUpItem(HeldItemType.CoffeeBeanBrown);
         }
-        else if (bestCandidate.CompareTag("WhiteBeanPot"))
+        else if (bestTarget.CompareTag("WhiteBeanPot"))
         {
             PickUpItem(HeldItemType.CoffeeBeanWhite);
         }
     }
+
 
 
     public void PickUpItem(HeldItemType item)

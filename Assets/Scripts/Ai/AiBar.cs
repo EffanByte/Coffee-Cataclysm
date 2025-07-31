@@ -38,14 +38,12 @@ public class AiBar : MonoBehaviour
         // Idle State
         fsm.AddState(AIState.IDLE, onEnter: State =>
         {
-            Debug.Log("AI is now idle.");
         });
 
         // Move State
         fsm.AddState(AIState.MOVE, onEnter: state =>
         {
-            Debug.Log("Entered MOVE state");
-            Debug.Log("AI is moving.");
+
             if (targetWaypoint != null)
             {
                 animator.SetBool("IsRunning",true);
@@ -71,7 +69,6 @@ public class AiBar : MonoBehaviour
     {
         fsm.OnLogic();
         string currentStateName = fsm.ActiveStateName.ToString();
-        Debug.Log($"Current State: {currentStateName}");
     }
 
     private void AssignWaypoint()

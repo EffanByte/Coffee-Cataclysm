@@ -7,7 +7,6 @@ public enum PlayerState
 {
     IDLE,
     MOVE,
-    HOLDING,
 }
 
 public class Player : MonoBehaviour
@@ -20,7 +19,10 @@ public class Player : MonoBehaviour
     private StateMachine<PlayerState> fsm;
 
     // NEW
-    [SerializeField] private HoldingManager heldItemManager;
+    private HoldingManager heldItemManager;
+    private PlayerInteractor playerInteractor;
+
+
 
     void Start()
     {
@@ -28,6 +30,12 @@ public class Player : MonoBehaviour
         if (heldItemManager == null)
         {
             Debug.LogError("HoldingManager component is missing on Player.");
+            return;
+        }
+        playerInteractor = GetComponent<PlayerInteractor>();
+        if (playerInteractor == null)
+        {
+            Debug.LogError("PlayerInteractor component is missing on Player.");
             return;
         }
 
@@ -65,6 +73,8 @@ public class Player : MonoBehaviour
 
     private void InputSystem_OnInteractPlayer(object sender, System.EventArgs e)
     {
-        heldItemManager.TryPickupInFront();
+        playerInteractor.Interact();
     }
+
+
 }

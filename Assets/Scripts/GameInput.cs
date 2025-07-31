@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 #endif
 public class GameInput : MonoBehaviour
 {
-    private PlayerInputSystem PlayerInputSystem; 
+    private PlayerInputSystem PlayerInputSystem;
     public event EventHandler OnInteractPlayer;
     private void Awake()
     {
@@ -28,6 +28,7 @@ public class GameInput : MonoBehaviour
 #if ENABLE_INPUT_SYSTEM
     public void OnInteractPerformed(InputAction.CallbackContext value)
     {
+        Debug.Log("Interact performed");
         OnInteractPlayer?.Invoke(this, EventArgs.Empty);
     }
 #endif 

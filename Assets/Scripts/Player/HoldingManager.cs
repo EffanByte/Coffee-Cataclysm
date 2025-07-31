@@ -7,7 +7,6 @@ public enum HeldItemType
     CoffeeBeanWhite,
     Cup,
     WaterJug,
-    // Add more as needed
 }
 
 public class HoldingManager : MonoBehaviour
@@ -30,24 +29,12 @@ public class HoldingManager : MonoBehaviour
         Collider[] hits = Physics.OverlapSphere(transform.position, interactionRange);
 
         Transform bestCandidate = null;
-        float bestAngle = interactionConeAngle; // smaller is better
 
         foreach (var hit in hits)
         {
             if (hit.CompareTag("BrownBeanPot") || hit.CompareTag("WhiteBeanPot"))
             {
-                Vector3 toTarget = (hit.transform.position - transform.position).normalized;
-                float angle = Vector3.Angle(transform.forward, toTarget);
-                float distance = Vector3.Distance(transform.position, hit.transform.position);
-
-                if (angle < interactionConeAngle * 0.5f && distance <= interactionRange)
-                {
-                    if (angle < bestAngle)
-                    {
-                        bestAngle = angle;
-                        bestCandidate = hit.transform;
-                    }
-                }
+                bestCandidate = hit.transform;
             }
         }
 
@@ -60,10 +47,12 @@ public class HoldingManager : MonoBehaviour
         // Identify type
         if (bestCandidate.CompareTag("BrownBeanPot"))
         {
+            Debug.Log("Picking up brown coffee bean pot.");
             PickUpItem(HeldItemType.CoffeeBeanBrown);
         }
         else if (bestCandidate.CompareTag("WhiteBeanPot"))
         {
+            Debug.Log("Picking up white coffee bean pot.");
             PickUpItem(HeldItemType.CoffeeBeanWhite);
         }
     }

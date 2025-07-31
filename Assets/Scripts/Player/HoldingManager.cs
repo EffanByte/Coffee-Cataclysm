@@ -16,7 +16,7 @@ public class HoldingManager : MonoBehaviour
 
     [SerializeField] private HeldItemVisualizer visualizer;
     [SerializeField] private float interactionRange = 3f;
-    [SerializeField] private float interactionConeAngle = 40f;
+    [SerializeField] private float interactionConeAngle = 30f;
 
     public void TryPickupInFront()
     {

@@ -1,15 +1,24 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityHFSM;
+public enum BlendState
+{
+    NoBlend,
+    LowBlend,
+    MediumBlend,
+    HighBlend
+}
 public class CoffeeMakerInteraction : MonoBehaviour
 {
+
+    private StateMachine<BlendState> blendFSM;
+
     [Header("Brewing Settings")]
-    public float brewDuration = 2f;
+    [SerializeField] private float brewDuration = 5f;
     public float vibrationMagnitude = 0.05f;
 
     [Header("Progress Bar UI")]
     public Slider progressBar;
-    public Image progressBorder;
     public Color doneColor = Color.yellow;
 
     [Header("Blend Spawn")]
@@ -22,37 +31,64 @@ public class CoffeeMakerInteraction : MonoBehaviour
 
     private GameObject spawnedBlend;
     private bool isBlendReady = false;
-    private float blendTimer = 0f;
-    private float blendTimeout = 7f;
+    [SerializeField] private float blendTimer = 0f;
+    [SerializeField] private float blendTimeout = 7f;
+
 
     private HeldItemType currentBean = HeldItemType.None;
 
+
     void Start()
     {
-        originalPosition = transform.localPosition;
+        blendFSM = new StateMachine<BlendState>();
 
+
+        blendFSM.AddState(BlendState.NoBlend, new State<BlendState>(
+            onEnter: s => Debug.Log("Entered: NoBlend")
+        ));
+        blendFSM.AddState(BlendState.LowBlend, new State<BlendState>(
+            onEnter: s => Debug.Log("Entered: LowBlend")
+        ));
+        blendFSM.AddState(BlendState.MediumBlend, new State<BlendState>(
+            onEnter: s => Debug.Log("Entered: MediumBlend")
+        ));
+        blendFSM.AddState(BlendState.HighBlend, new State<BlendState>(
+            onEnter: s => Debug.Log("Entered: HighBlend")
+        ));
+
+        blendFSM.SetStartState(BlendState.NoBlend);
+
+        blendFSM.AddTransition(BlendState.NoBlend, BlendState.LowBlend, _ => timer >= brewDuration * 0.2f && timer < brewDuration * 0.4f);
+        blendFSM.AddTransition(BlendState.LowBlend, BlendState.MediumBlend, _ =>timer >= brewDuration * 0.4f && timer < brewDuration * 0.7f);
+        blendFSM.AddTransition(BlendState.MediumBlend, BlendState.HighBlend, _ =>timer >= brewDuration * 0.7f && timer < brewDuration * 1.2f);
+
+        blendFSM.Init();
+
+        originalPosition = transform.localPosition;
+       
         if (progressBar != null)
         {
             progressBar.gameObject.SetActive(false);
             progressBar.value = 0;
         }
-
-        if (progressBorder != null)
-            progressBorder.enabled = false;
+        
     }
 
     void Update()
     {
+        blendFSM.OnLogic();
+        Debug.Log(timer);
+        float percent = timer / brewDuration;
+        
         if (isBrewing)
         {
             timer += Time.deltaTime;
 
-            if (timer < brewDuration)
+            if (timer < brewDuration + 0.2f)
             {
                 transform.localPosition = originalPosition + Random.insideUnitSphere * vibrationMagnitude;
-
                 if (progressBar != null)
-                    progressBar.value = timer / brewDuration;
+                    progressBar.value = percent;
             }
             else
             {
@@ -85,24 +121,12 @@ public class CoffeeMakerInteraction : MonoBehaviour
             progressBar.gameObject.SetActive(true);
             progressBar.value = 0;
         }
-
-        if (progressBorder != null)
-            progressBorder.enabled = false;
     }
 
     void FinishBrewing()
     {
         isBrewing = false;
         transform.localPosition = originalPosition;
-
-        if (progressBar != null)
-            progressBar.value = 1;
-
-        if (progressBorder != null)
-        {
-            progressBorder.enabled = true;
-            progressBorder.color = doneColor;
-        }
 
         if (coffeeBlendPrefab != null && blendSpawnPoint != null)
         {

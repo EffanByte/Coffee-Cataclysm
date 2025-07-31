@@ -133,10 +133,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224609453}
-  - component: {fileID: 224609454}
+  - component: {fileID: 224609455}
   m_Layer: 0
   m_Name: Coffee-1
-  m_TagString: Untagged
+  m_TagString: WhiteBeanPot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158,26 +158,27 @@ Transform:
   - {fileID: 1098659344}
   m_Father: {fileID: 307641858}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &224609454
-MonoBehaviour:
+--- !u!65 &224609455
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 224609452}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1718b6826644c6d4bb299d85a8976890, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  interactionRange: 3
-  viewAngle: 45
-  brewDuration: 2
-  vibrationMagnitude: 0.05
-  progressBar: {fileID: 382585518}
-  progressBorder: {fileID: 0}
-  doneColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &276337142 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6950498818016327161, guid: 7ee30afcf3f8ade45807d7af74f9a413, type: 3}
@@ -520,9 +521,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 430153150}
+  - component: {fileID: 430153151}
   m_Layer: 0
   m_Name: Coffee-2
-  m_TagString: Untagged
+  m_TagString: BrownBeanPot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -544,6 +546,27 @@ Transform:
   - {fileID: 406565722}
   m_Father: {fileID: 307641858}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &430153151
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430153149}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &449376390 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6859827924294464827, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
@@ -555,6 +578,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1aca7895f32f804c9ced49a88bbcbf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &449376391 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4198401829539157722, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
+  m_PrefabInstance: {fileID: 5567129353443077911}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &504575234
 GameObject:
   m_ObjectHideFlags: 0
@@ -975,14 +1003,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1718b6826644c6d4bb299d85a8976890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  interactionRange: 3
-  viewAngle: 45
   brewDuration: 2
   vibrationMagnitude: 0.05
   progressBar: {fileID: 382585518}
-  progressBorder: {fileID: 0}
   doneColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  coffeeBlendPrefab: {fileID: 0}
+  blendSpawnPoint: {fileID: 0}
+  blendTimer: 0
+  blendTimeout: 7
+--- !u!65 &768913316
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 768913306}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.037656464, y: 0.03476647, z: 0.026755955}
+  m_Center: {x: 0.0010825666, y: -0.000024328936, z: -0.006861589}
 --- !u!1 &776783251
 GameObject:
   m_ObjectHideFlags: 0
@@ -1182,14 +1231,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1718b6826644c6d4bb299d85a8976890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  interactionRange: 3
-  viewAngle: 45
   brewDuration: 2
   vibrationMagnitude: 0.05
   progressBar: {fileID: 708616856}
-  progressBorder: {fileID: 0}
   doneColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  coffeeBlendPrefab: {fileID: 0}
+  blendSpawnPoint: {fileID: 0}
+  blendTimer: 0
+  blendTimeout: 7
+--- !u!65 &986643279
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986643268}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.037656464, y: 0.03476647, z: 0.026755955}
+  m_Center: {x: 0.0010825666, y: -0.000024328936, z: -0.006861589}
 --- !u!1001 &1098659343
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2231,6 +2301,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!114 &1804737572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804737559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 206efd04e25999e49bfd97975a8cf057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionRange: 2.5
+  coneAngle: 45
 --- !u!1 &1824494282
 GameObject:
   m_ObjectHideFlags: 0
@@ -2938,15 +3022,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2436261690270933856, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.97
+      value: 11.86
       objectReference: {fileID: 0}
     - target: {fileID: 2436261690270933856, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 1.33
       objectReference: {fileID: 0}
     - target: {fileID: 2436261690270933856, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 8.99
       objectReference: {fileID: 0}
     - target: {fileID: 2436261690270933856, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3000,6 +3084,18 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6859827924294464827, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
+      propertyPath: visualAnchor
+      value: 
+      objectReference: {fileID: 449376391}
+    - target: {fileID: 6859827924294464827, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
+      propertyPath: coffeeBeanBrownPrefab
+      value: 
+      objectReference: {fileID: 958732029257513384, guid: 605a414e3dbfa234ba55b436573c50b1, type: 3}
+    - target: {fileID: 6859827924294464827, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
+      propertyPath: coffeeBeanWhitePrefab
+      value: 
+      objectReference: {fileID: 567709065423979755, guid: 04a7140dcbc102241913c1be8c5ebfb4, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3007,6 +3103,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5513266505007367429, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1804737565}
+    - targetCorrespondingSourceObject: {fileID: 5513266505007367429, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1804737572}
   m_SourcePrefab: {fileID: 100100000, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
 --- !u!1001 &5797937328423754062
 PrefabInstance:
@@ -3081,6 +3180,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 433979359672493896, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 433979359672493896, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 433979359672493896, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 433979359672493896, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1108713057340664900, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -3113,9 +3228,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Coffee-Maker-2
       objectReference: {fileID: 0}
+    - target: {fileID: 6045698639037914883, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
+      propertyPath: m_TagString
+      value: CoffeeMaker
+      objectReference: {fileID: 0}
     - target: {fileID: 6225011336041864508, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6389889125312005561, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6389889125312005561, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.47
       objectReference: {fileID: 0}
     - target: {fileID: 7533009230068543179, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
       propertyPath: m_IsActive
@@ -3173,9 +3300,39 @@ PrefabInstance:
       propertyPath: m_Name
       value: Coffee-Maker-1
       objectReference: {fileID: 0}
+    - target: {fileID: 8474141353663963513, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
+      propertyPath: m_TagString
+      value: CoffeeMaker
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138333631409224643, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138333631409224643, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138333631409224643, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138333631409224643, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138333631409224643, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138333631409224643, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8399445297266389948, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
-    m_RemovedGameObjects: []
+    - {fileID: 6938367217070379611, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 7634373220542329922, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7576136108233149626, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
       insertIndex: -1
@@ -3190,9 +3347,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8474141353663963513, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
       insertIndex: -1
       addedObject: {fileID: 768913312}
+    - targetCorrespondingSourceObject: {fileID: 8474141353663963513, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 768913316}
     - targetCorrespondingSourceObject: {fileID: 6045698639037914883, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
       insertIndex: -1
       addedObject: {fileID: 986643274}
+    - targetCorrespondingSourceObject: {fileID: 6045698639037914883, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 986643279}
   m_SourcePrefab: {fileID: 100100000, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
 --- !u!1001 &8353135610834346716
 PrefabInstance:

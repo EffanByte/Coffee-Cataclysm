@@ -45,7 +45,7 @@ public class PlayerInteractor : MonoBehaviour
 
             if (heldItem == HeldItemType.CoffeeBeanBrown || heldItem == HeldItemType.CoffeeBeanWhite)
             {
-                coffeeMaker.StartBrewing(heldItem);
+                coffeeMaker.InsertBean(heldItem);
                 holdingManager.DropItem();
                 return true;
             }

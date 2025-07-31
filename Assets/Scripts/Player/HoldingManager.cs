@@ -8,7 +8,8 @@ public enum HeldItemType
     Cup,
     WaterJug,
     CoffeeBlendBrown,   // ✅ Add this
-    CoffeeBlendWhite    // ✅ Add this
+    CoffeeBlendWhite,    // ✅ Add this
+    MixedCoffeeBlend    // ✅ Add this
 }
 
 

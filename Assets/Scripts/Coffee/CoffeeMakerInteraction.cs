@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityHFSM;
@@ -6,7 +7,10 @@ public enum BlendState
     NoBlend,
     LowBlend,
     MediumBlend,
-    HighBlend
+    HighBlend,
+    CoffeeBlendBrown,
+    CoffeeBlendWhite,
+    MixedCoffeeBlend // 👈 new blend
 }
 public class CoffeeMakerInteraction : MonoBehaviour
 {
@@ -15,7 +19,7 @@ public class CoffeeMakerInteraction : MonoBehaviour
 
     [Header("Brewing Settings")]
     [SerializeField] private float brewDuration = 5f;
-    public float vibrationMagnitude = 0.05f;
+    public float vibrationMagnitude = 0.01f;
 
     [Header("Progress Bar UI")]
     public Slider progressBar;
@@ -35,7 +39,8 @@ public class CoffeeMakerInteraction : MonoBehaviour
     [SerializeField] private float blendTimeout = 7f;
 
 
-    private HeldItemType currentBean = HeldItemType.None;
+    private List<HeldItemType> insertedBeans = new();
+
 
 
     void Start()
@@ -77,7 +82,6 @@ public class CoffeeMakerInteraction : MonoBehaviour
     void Update()
     {
         blendFSM.OnLogic();
-        Debug.Log(timer);
         float percent = timer / brewDuration;
         
         if (isBrewing)
@@ -109,9 +113,23 @@ public class CoffeeMakerInteraction : MonoBehaviour
         }
     }
 
-    public void StartBrewing(HeldItemType beanType)
+    public void InsertBean(HeldItemType beanType)
     {
-        currentBean = beanType;
+        if (!CanStartBrewing())
+            return;
+
+        if (insertedBeans.Count == 0)
+            StartBrewing();
+        insertedBeans.Add(beanType);
+
+        float beanCount = insertedBeans.Count;
+        timer = timer - (timer * 0.25f);
+        
+        Debug.Log($"Bean inserted: {beanType}.");
+    }
+
+    public void StartBrewing()
+    {
         isBrewing = true;
         timer = 0;
         originalPosition = transform.localPosition;
@@ -121,7 +139,10 @@ public class CoffeeMakerInteraction : MonoBehaviour
             progressBar.gameObject.SetActive(true);
             progressBar.value = 0;
         }
+
+        Debug.Log($"Brewing with {insertedBeans.Count} bean(s).");
     }
+
 
     void FinishBrewing()
     {
@@ -135,11 +156,18 @@ public class CoffeeMakerInteraction : MonoBehaviour
             blendTimer = 0f;
 
             var blendItem = spawnedBlend.GetComponent<CoffeeBlendItem>();
+            HeldItemType blend = HeldItemType.None;
             if (blendItem != null)
             {
-                HeldItemType blend = currentBean == HeldItemType.CoffeeBeanBrown
-                    ? HeldItemType.CoffeeBlendBrown
-                    : HeldItemType.CoffeeBlendWhite;
+                bool hasBrown = insertedBeans.Contains(HeldItemType.CoffeeBeanBrown);
+                bool hasWhite = insertedBeans.Contains(HeldItemType.CoffeeBeanWhite);
+
+                if (hasBrown && hasWhite)
+                    blend = HeldItemType.MixedCoffeeBlend;
+                else if (hasBrown)
+                    blend = HeldItemType.CoffeeBlendBrown;
+                else if (hasWhite)
+                    blend = HeldItemType.CoffeeBlendWhite;
 
                 blendItem.SetBlendType(blend);
             }

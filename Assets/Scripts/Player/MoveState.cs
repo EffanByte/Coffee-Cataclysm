@@ -1,6 +1,6 @@
 ﻿using UnityHFSM;
 using UnityEngine;
-using UnityEngine.Windows;
+
 public class MoveState
 {
     public State<PlayerState> state;
@@ -12,12 +12,19 @@ public class MoveState
             {
                 Vector2 inputVector = input.GetMovementNormalized();
                 Vector3 moveDir = new(inputVector.x, 0f, inputVector.y);
-                float moveDistance = Time.deltaTime * speed;
 
-                playerTransform.position += moveDir * moveDistance;
+                if (moveDir.sqrMagnitude > 0.01f)
+                {
+                    // Rotate player to face move direction
+                    Quaternion targetRotation = Quaternion.LookRotation(moveDir);
+                    playerTransform.rotation = Quaternion.Slerp(playerTransform.rotation, targetRotation, Time.deltaTime * 10f);
+
+                    // Move
+                    float moveDistance = Time.deltaTime * speed;
+                    playerTransform.position += moveDir * moveDistance;
+                }
             },
             onExit: s => Debug.Log("Exited Move")
         );
     }
-
 }

@@ -62,13 +62,13 @@ public class CoffeeMakerInteraction : MonoBehaviour
         }
     }
 
-    bool IsPlayerFacingMe()
-    {
-        Vector3 toCoffeeMaker = (transform.position - player.position).normalized;
-        float angle = Vector3.Angle(player.forward, toCoffeeMaker);
-        float distance = Vector3.Distance(player.position, transform.position);
-        return angle < viewAngle && distance < interactionRange;
-    }
+        bool IsPlayerFacingMe()
+        {
+            Vector3 toCoffeeMaker = (transform.position - player.position).normalized;
+            float angle = Vector3.Angle(player.forward, toCoffeeMaker);
+            float distance = Vector3.Distance(player.position, transform.position);
+            return angle < viewAngle && distance < interactionRange;
+        }
 
     void StartBrewing()
     {

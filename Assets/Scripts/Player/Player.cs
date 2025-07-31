@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityHFSM;
 
-public enum BeanType {none, brown, white}
+public enum BeanType { none, brown, white }
 public enum PlayerState
 {
     IDLE,
@@ -12,8 +12,6 @@ public enum PlayerState
 
 public class Player : MonoBehaviour
 {
-    public PlayerState currentState;
-
     public static Transform transformPlayer;
 
     [SerializeField] private float moveSpeed;
@@ -21,40 +19,52 @@ public class Player : MonoBehaviour
 
     private StateMachine<PlayerState> fsm;
 
+    // NEW
+    [SerializeField] private HoldingManager heldItemManager;
+
     void Start()
     {
-        transformPlayer = this.transform;
+        heldItemManager = GetComponent<HoldingManager>();
+        if (heldItemManager == null)
+        {
+            Debug.LogError("HoldingManager component is missing on Player.");
+            return;
+        }
+
+        transformPlayer = transform;
 
         fsm = new StateMachine<PlayerState>();
 
-        var idle = new IdleState();
-        var move = new MoveState(transform, gameInput, moveSpeed);
-
-        fsm.AddState(PlayerState.IDLE, idle.state);
-        fsm.AddState(PlayerState.MOVE, move.state);
+        fsm.AddState(PlayerState.IDLE, new IdleState().state);
+        fsm.AddState(PlayerState.MOVE, new MoveState(transform, gameInput, moveSpeed).state);
 
         fsm.SetStartState(PlayerState.IDLE);
 
-        fsm.AddTransition(PlayerState.IDLE, PlayerState.MOVE, condition: _ => gameInput.GetMovementNormalized().magnitude > 0.1f);
-        fsm.AddTransition(PlayerState.MOVE, PlayerState.IDLE, condition: _ => gameInput.GetMovementNormalized().magnitude < 0.1f);
+        fsm.AddTransition(PlayerState.IDLE, PlayerState.MOVE, _ => gameInput.GetMovementNormalized().magnitude > 0.1f);
+        fsm.AddTransition(PlayerState.MOVE, PlayerState.IDLE, _ => gameInput.GetMovementNormalized().magnitude < 0.1f);
 
         fsm.Init();
     }
 
+    private void AssignEvents()
+    {
+        gameInput.OnInteractPlayer += InputSystem_OnInteractPlayer;
+    }
 
+    private void Awake()
+    {
+        AssignEvents();
+    }
     void Update()
     {
         fsm.OnLogic();
-        string currentStateName = fsm.ActiveStateName.ToString();
-        Debug.Log($"Current State: {currentStateName}");
     }
 
-    private void PlayerMovement()
-    {
-        Vector2 InputVector = gameInput.GetMovementNormalized();
-        Vector3 moveDir = new(InputVector.x, 0f , InputVector.y);
+    public bool HasItem() => heldItemManager.IsHoldingItem;
+    public HeldItemType GetHeldItem() => heldItemManager.HeldItem;
 
-        float moveDistance = Time.deltaTime * moveSpeed;
-        transform.position += moveDir * moveDistance;
+    private void InputSystem_OnInteractPlayer(object sender, System.EventArgs e)
+    {
+        heldItemManager.TryPickupInFront();
     }
 }

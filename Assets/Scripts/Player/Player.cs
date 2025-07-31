@@ -65,6 +65,51 @@ public class Player : MonoBehaviour
 
     private void InputSystem_OnInteractPlayer(object sender, System.EventArgs e)
     {
-        heldItemManager.TryPickupInFront();
+        // First try item pickup
+        if (!heldItemManager.IsHoldingItem)
+        {
+            heldItemManager.TryPickupInFront();
+            return;
+        }
+
+        // Then try CoffeeMaker interaction
+        TryUseCoffeeMaker();
     }
+
+    private void TryUseCoffeeMaker()
+    {
+        float range = 2.5f;
+        float coneAngle = 45f;
+
+        Collider[] hits = Physics.OverlapSphere(transform.position, range);
+
+        foreach (var hit in hits)
+        {
+            if (!hit.TryGetComponent(out CoffeeMakerInteraction coffeeMaker))
+                continue;
+
+            Vector3 toTarget = (hit.transform.position - transform.position).normalized;
+            float angle = Vector3.Angle(transform.forward, toTarget);
+
+            if (angle < coneAngle * 0.5f)
+            {
+                // If holding a coffee bean, drop it
+                HeldItemType heldItem = heldItemManager.HeldItem;
+
+                if (heldItem == HeldItemType.CoffeeBeanBrown || heldItem == HeldItemType.CoffeeBeanWhite)
+                {
+                    if (coffeeMaker.CanStartBrewing())
+                    {
+                        coffeeMaker.StartBrewing(heldItem);
+                        heldItemManager.DropItem();
+                    }
+                    return;
+                }
+            }
+        }
+
+        Debug.Log("No coffee maker in front.");
+    }
+
+
 }

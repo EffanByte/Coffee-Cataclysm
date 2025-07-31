@@ -3,23 +3,25 @@ using UnityEngine.UI;
 
 public class CoffeeMakerInteraction : MonoBehaviour
 {
-    [Header("Player Interaction")]
-    public Transform player;
-    public float interactionRange = 3f;
-    public float viewAngle = 45f;
-
     [Header("Brewing Settings")]
     public float brewDuration = 2f;
     public float vibrationMagnitude = 0.05f;
 
     [Header("Progress Bar UI")]
     public Slider progressBar;
-    public Image progressBorder; // Optional border or glow
+    public Image progressBorder;
     public Color doneColor = Color.yellow;
+
+    [Header("Spawn Settings")]
+    public GameObject coffeeBlendPrefab; // Assign a prefab that has CoffeeBlendItem on it
+    public Transform spawnPoint; // Where the coffee appears
 
     private Vector3 originalPosition;
     private float timer = 0f;
     private bool isBrewing = false;
+    private bool isBlendReady = false;
+
+    private HeldItemType currentBean = HeldItemType.None;
 
     void Start()
     {
@@ -37,21 +39,13 @@ public class CoffeeMakerInteraction : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && IsPlayerFacingMe() && !isBrewing)
-        {
-            StartBrewing();
-        }
-
         if (isBrewing)
         {
             timer += Time.deltaTime;
 
             if (timer < brewDuration)
             {
-                // Vibrate the coffee maker
                 transform.localPosition = originalPosition + Random.insideUnitSphere * vibrationMagnitude;
-
-                // Update progress bar
                 if (progressBar != null)
                     progressBar.value = timer / brewDuration;
             }
@@ -62,16 +56,13 @@ public class CoffeeMakerInteraction : MonoBehaviour
         }
     }
 
-        bool IsPlayerFacingMe()
-        {
-            Vector3 toCoffeeMaker = (transform.position - player.position).normalized;
-            float angle = Vector3.Angle(player.forward, toCoffeeMaker);
-            float distance = Vector3.Distance(player.position, transform.position);
-            return angle < viewAngle && distance < interactionRange;
-        }
+    public bool CanStartBrewing() => !isBrewing && !isBlendReady;
 
-    void StartBrewing()
+    public void StartBrewing(HeldItemType beanType)
     {
+        if (!CanStartBrewing()) return;
+
+        currentBean = beanType;
         isBrewing = true;
         timer = 0;
         originalPosition = transform.localPosition;
@@ -90,6 +81,7 @@ public class CoffeeMakerInteraction : MonoBehaviour
     {
         isBrewing = false;
         transform.localPosition = originalPosition;
+        isBlendReady = true;
 
         if (progressBar != null)
             progressBar.value = 1;
@@ -100,7 +92,20 @@ public class CoffeeMakerInteraction : MonoBehaviour
             progressBorder.color = doneColor;
         }
 
-        // Optional: hide progress bar after delay
+        // if (coffeeBlendPrefab != null && spawnPoint != null)
+        // {
+        //     GameObject blend = Instantiate(coffeeBlendPrefab, spawnPoint.position, Quaternion.identity);
+        //     var blendItem = blend.GetComponent<CoffeeBlendItem>();
+
+        //     if (blendItem != null)
+        //     {
+        //         if (currentBean == HeldItemType.CoffeeBeanBrown)
+        //             blendItem.SetBlendType(HeldItemType.CoffeeBlendBrown);
+        //         else if (currentBean == HeldItemType.CoffeeBeanWhite)
+        //             blendItem.SetBlendType(HeldItemType.CoffeeBlendWhite);
+        //     }
+        // }
+
         Invoke(nameof(HideProgressBar), 1.5f);
     }
 

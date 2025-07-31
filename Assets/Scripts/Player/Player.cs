@@ -2,11 +2,12 @@ using System;
 using UnityEngine;
 using UnityHFSM;
 
-
+public enum BeanType {none, brown, white}
 public enum PlayerState
 {
     IDLE,
     MOVE,
+    HOLDING,
 }
 
 public class Player : MonoBehaviour

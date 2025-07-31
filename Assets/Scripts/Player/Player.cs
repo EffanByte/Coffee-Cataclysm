@@ -38,7 +38,6 @@ public class Player : MonoBehaviour
         fsm.AddTransition(PlayerState.MOVE, PlayerState.IDLE, condition: _ => gameInput.GetMovementNormalized().magnitude < 0.1f);
 
         fsm.Init();
-
     }
 
 

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemyBarPool : MonoBehaviour
 {
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private int poolSize = 10;
 
     private Queue<GameObject> pool = new Queue<GameObject>();
@@ -12,7 +12,8 @@ public class EnemyBarPool : MonoBehaviour
     {
         for (int i = 0; i < poolSize; i++)
         {
-            GameObject enemy = Instantiate(enemyPrefab);
+            GameObject randomPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+            GameObject enemy = Instantiate(randomPrefab);
             enemy.SetActive(false);
             pool.Enqueue(enemy);
         }

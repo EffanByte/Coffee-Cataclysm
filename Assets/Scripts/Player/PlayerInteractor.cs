@@ -18,9 +18,8 @@ public class PlayerInteractor : MonoBehaviour
     }
     public void Interact()
     {
-        if (TryUseCoffeeMaker()) return;
 
-        // Try to pick up a bean or item
+        TryUseCoffeeMaker();
         holdingManager.TryPickupInFront();
     }
 
@@ -33,7 +32,17 @@ public class PlayerInteractor : MonoBehaviour
             if (!hit.CompareTag("CoffeeMaker"))
                 continue;
             CoffeeMakerInteraction coffeeMaker = hit.GetComponent<CoffeeMakerInteraction>();
+
+            // 1. If blend is ready, give to player
+            if (coffeeMaker.IsBlendReady())
+            {
+                coffeeMaker.GiveBlendToPlayer();
+                return true;
+            }
+
+            // 2. Otherwise, try to start brewing
             var heldItem = holdingManager.HeldItem;
+
             if (heldItem == HeldItemType.CoffeeBeanBrown || heldItem == HeldItemType.CoffeeBeanWhite)
             {
                 coffeeMaker.StartBrewing(heldItem);
@@ -41,10 +50,12 @@ public class PlayerInteractor : MonoBehaviour
                 return true;
             }
 
+            return false; // nothing valid to interact with
         }
 
         return false;
     }
 
-    
+
+
 }

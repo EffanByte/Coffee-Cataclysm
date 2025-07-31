@@ -7,7 +7,10 @@ public enum HeldItemType
     CoffeeBeanWhite,
     Cup,
     WaterJug,
+    CoffeeBlendBrown,   // ✅ Add this
+    CoffeeBlendWhite    // ✅ Add this
 }
+
 
 public class HoldingManager : MonoBehaviour
 {

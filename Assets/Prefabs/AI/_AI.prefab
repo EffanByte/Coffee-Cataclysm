@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7026124800239567320}
   - component: {fileID: 7477031928215702947}
   m_Layer: 0
-  m_Name: AI
+  m_Name: _AI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

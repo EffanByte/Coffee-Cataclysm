@@ -11,6 +11,8 @@ public enum AIState
 [RequireComponent(typeof(NavMeshAgent))]
 public class AiBar : MonoBehaviour
 {
+    [SerializeField]private Animator animator;
+
     public AIState currentState;
 
     private NavMeshAgent agent;
@@ -46,8 +48,13 @@ public class AiBar : MonoBehaviour
             Debug.Log("AI is moving.");
             if (targetWaypoint != null)
             {
+                animator.SetBool("IsRunning",true);
                 agent.SetDestination(targetWaypoint.position);
             }
+        },
+        onExit: state =>
+        {
+            animator.SetBool("IsRunning", false);
         });
       
         // Transitions

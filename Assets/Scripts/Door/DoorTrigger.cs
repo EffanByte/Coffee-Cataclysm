@@ -3,13 +3,13 @@ using UnityEngine.SceneManagement;
 
 public class DoorTrigger : MonoBehaviour
 {
-    private int OutSideSceneIndex = 1;
+    private int LoaderScene = 1;
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
-            GameStateManager.Instance.GoToOutSide(OutSideSceneIndex);
+            GameStateManager.Instance.GoToOutSide(LoaderScene);
         }
     }
 }

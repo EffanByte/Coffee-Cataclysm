@@ -15,8 +15,7 @@ public class MoveState
                 float moveDistance = Time.deltaTime * speed;
 
                 playerTransform.position += moveDir * moveDistance;
-            },
-            onExit: s => Debug.Log("Exited Move")
+            }
         );
     }
 

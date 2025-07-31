@@ -44,16 +44,8 @@ public class Player : MonoBehaviour
     void Update()
     {
         fsm.OnLogic();
-        string currentStateName = fsm.ActiveStateName.ToString();
-        Debug.Log($"Current State: {currentStateName}");
+        //string currentStateName = fsm.ActiveStateName.ToString();
+        //Debug.Log($"Current State: {currentStateName}");
     }
 
-    private void PlayerMovement()
-    {
-        Vector2 InputVector = gameInput.GetMovementNormalized();
-        Vector3 moveDir = new(InputVector.x, 0f , InputVector.y);
-
-        float moveDistance = Time.deltaTime * moveSpeed;
-        transform.position += moveDir * moveDistance;
-    }
 }

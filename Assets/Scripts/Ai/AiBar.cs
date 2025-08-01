@@ -18,7 +18,7 @@ public class AiBar : MonoBehaviour
 
     [SerializeField] private GameObject orderBubblePrefab;
     public AIState currentState;
-
+    private bool orderReceived = false;
     private NavMeshAgent agent;
     private Transform targetWaypoint;
     private WaypointManager waypointManager;
@@ -57,13 +57,17 @@ public class AiBar : MonoBehaviour
         onExit: state =>
         {
             animator.SetBool("IsRunning", false);
-            Debug.Log("Reached waypoint, ordering coffee.");
             OrderCoffee();
         });
 
         // Transitions
         fsm.AddTransition(AIState.IDLE, AIState.MOVE, condition: _ => targetWaypoint != null && agent.remainingDistance > 0.1f);
         fsm.AddTransition(AIState.MOVE, AIState.IDLE, condition: _ => !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance);
+        fsm.AddTransition(AIState.IDLE, AIState.MOVE, condition: _ => orderReceived, onTransition: _ =>
+        {
+            orderReceived = false; // Reset order received flag
+            AssignExitWaypoint(); // Assign a new waypoint after receiving an order
+        });
         // Start in Idle
         fsm.SetStartState(AIState.IDLE);
         fsm.Init();
@@ -101,8 +105,8 @@ public class AiBar : MonoBehaviour
     private void OrderCoffee()
     {
         currentOrder = (HeldItemType)UnityEngine.Random.Range(5, Enum.GetValues(typeof(HeldItemType)).Length); // Randomly select a coffee blend
-        Debug.Log(currentOrder);    
-        GameObject orderBubble = Instantiate(orderBubblePrefab, transform.position + new Vector3(2.5f, 5, 0), Quaternion.identity);
+        Debug.Log(currentOrder);
+        GameObject orderBubble = Instantiate(orderBubblePrefab, transform.position + new Vector3(1.5f, 3, 0), Quaternion.identity);
         orderBubble.GetComponent<OrderBubble>().SetIcon(currentOrder);
     }
 
@@ -119,5 +123,12 @@ public class AiBar : MonoBehaviour
             currentOrder = HeldItemType.None; // Reset order after serving
         }
         Debug.Log($"Received order: {currentOrder}");
+        orderReceived = true;
+    }
+
+    private void AssignExitWaypoint()
+    {
+        Transform exitWaypoint = waypointManager.GetExitWaypoint();
+        agent.SetDestination(exitWaypoint.position);
     }
 }

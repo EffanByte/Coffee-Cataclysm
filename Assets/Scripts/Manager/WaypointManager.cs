@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class WaypointManager : MonoBehaviour
 {
-    [SerializeField]private Transform[] waypoints;
+    [SerializeField] private Transform[] waypoints;
+    [SerializeField] private Transform exitWaypoint;
     private bool[] isOccupied;
 
     void Awake()
@@ -33,5 +34,9 @@ public class WaypointManager : MonoBehaviour
                 break;
             }
         }
+    }
+    public Transform GetExitWaypoint()
+    {
+    return exitWaypoint;
     }
 }

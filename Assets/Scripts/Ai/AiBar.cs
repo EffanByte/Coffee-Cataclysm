@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityHFSM;
@@ -23,6 +24,7 @@ public class AiBar : MonoBehaviour
     private Transform targetWaypoint;
     private WaypointManager waypointManager;
     private StateMachine<AIState> fsm;
+    private GameObject orderBubble;
 
     private void Start()
     {
@@ -42,6 +44,7 @@ public class AiBar : MonoBehaviour
         // Idle State
         fsm.AddState(AIState.IDLE, onEnter: State =>
         {
+
         });
 
         // Move State
@@ -51,21 +54,31 @@ public class AiBar : MonoBehaviour
             if (targetWaypoint != null)
             {
                 animator.SetBool("IsRunning", true);
-                agent.SetDestination(targetWaypoint.position);
             }
         },
         onExit: state =>
         {
             animator.SetBool("IsRunning", false);
-            OrderCoffee();
         });
 
         // Transitions
-        fsm.AddTransition(AIState.IDLE, AIState.MOVE, condition: _ => targetWaypoint != null && agent.remainingDistance > 0.1f);
-        fsm.AddTransition(AIState.MOVE, AIState.IDLE, condition: _ => !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance);
+        fsm.AddTransition(AIState.IDLE, AIState.MOVE, condition: _ => targetWaypoint != null && agent.remainingDistance > 0.1f, onTransition: _ =>
+        {
+            if (targetWaypoint != null)
+            {
+                agent.SetDestination(targetWaypoint.position);
+            }
+        });
+        fsm.AddTransition(AIState.MOVE, AIState.IDLE, condition: _ => !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance, onTransition: _ =>
+        {
+            if (orderReceived)
+            {
+                transform.gameObject.SetActive(false);
+            }
+            OrderCoffee();
+        });
         fsm.AddTransition(AIState.IDLE, AIState.MOVE, condition: _ => orderReceived, onTransition: _ =>
         {
-            orderReceived = false; // Reset order received flag
             AssignExitWaypoint(); // Assign a new waypoint after receiving an order
         });
         // Start in Idle
@@ -106,7 +119,7 @@ public class AiBar : MonoBehaviour
     {
         currentOrder = (HeldItemType)UnityEngine.Random.Range(5, Enum.GetValues(typeof(HeldItemType)).Length); // Randomly select a coffee blend
         Debug.Log(currentOrder);
-        GameObject orderBubble = Instantiate(orderBubblePrefab, transform.position + new Vector3(1.5f, 3, 0), Quaternion.identity);
+        orderBubble = Instantiate(orderBubblePrefab, transform.position + new Vector3(1.5f, 3, 0), Quaternion.identity, transform);
         orderBubble.GetComponent<OrderBubble>().SetIcon(currentOrder);
     }
 
@@ -124,6 +137,7 @@ public class AiBar : MonoBehaviour
         }
         Debug.Log($"Received order: {currentOrder}");
         orderReceived = true;
+        orderBubble.SetActive(false);
     }
 
     private void AssignExitWaypoint()

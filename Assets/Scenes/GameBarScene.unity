@@ -1008,7 +1008,6 @@ MonoBehaviour:
   progressBar: {fileID: 382585518}
   doneColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   coffeeBlendPrefab: {fileID: 0}
-  blendSpawnPoint: {fileID: 0}
   blendTimer: 0
   blendTimeout: 7
 --- !u!65 &768913316
@@ -1236,7 +1235,6 @@ MonoBehaviour:
   progressBar: {fileID: 708616856}
   doneColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   coffeeBlendPrefab: {fileID: 0}
-  blendSpawnPoint: {fileID: 0}
   blendTimer: 0
   blendTimeout: 7
 --- !u!65 &986643279
@@ -2821,6 +2819,18 @@ PrefabInstance:
       propertyPath: visualAnchor
       value: 
       objectReference: {fileID: 449376391}
+    - target: {fileID: 6859827924294464827, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
+      propertyPath: blendMixPrefab
+      value: 
+      objectReference: {fileID: 919132149155446097, guid: ac31eb67be424be4ba78bf2f64436ad7, type: 3}
+    - target: {fileID: 6859827924294464827, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
+      propertyPath: blendBrownPrefab
+      value: 
+      objectReference: {fileID: 919132149155446097, guid: 9e2dfa78e38482d499055f96329e0cda, type: 3}
+    - target: {fileID: 6859827924294464827, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
+      propertyPath: blendWhitePrefab
+      value: 
+      objectReference: {fileID: 919132149155446097, guid: becc220de49e44b4aa650d2da6602cec, type: 3}
     - target: {fileID: 6859827924294464827, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       propertyPath: coffeeBeanBrownPrefab
       value: 

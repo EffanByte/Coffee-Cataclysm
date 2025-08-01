@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityHFSM;
 
-public class EnemyMovement : MonoBehaviour
+public abstract class BaseEnemyMovement : MonoBehaviour
 {
     [SerializeField] private Transform player;
     [SerializeField] private float updateSpeed = 0.1f;
@@ -14,7 +14,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float chaseStartDistance = 10f;
     [SerializeField] private float chaseStopDistance = 12f;
 
-    private void Start()
+    protected virtual void Start()
     {
         agent = GetComponent<NavMeshAgent>();
 
@@ -22,12 +22,12 @@ public class EnemyMovement : MonoBehaviour
 
         SetupFSM();
     }
-    private void Update()
+    protected virtual void Update()
     {
         fsm.OnLogic();
     }
 
-    private void SetupFSM()
+    protected virtual void SetupFSM()
     {
         fsm = new StateMachine<AIState>();
 
@@ -36,6 +36,7 @@ public class EnemyMovement : MonoBehaviour
         {
             agent.ResetPath();
             Debug.Log("Enemy is idle.");
+            animator.SetBool("IsRunning", true);
         });
 
         // MOVE: Chase player
@@ -63,7 +64,7 @@ public class EnemyMovement : MonoBehaviour
         fsm.Init();
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         agent.SetDestination(player.position);
     }

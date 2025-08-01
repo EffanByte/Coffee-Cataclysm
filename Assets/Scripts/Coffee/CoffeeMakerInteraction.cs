@@ -31,16 +31,13 @@ public class CoffeeMakerInteraction : MonoBehaviour
     private float timer = 0f;
     private bool isBrewing = false;
     private GameObject spawnedBlend;
-    HeldItemType blend = HeldItemType.None;
+    HeldItemType blendType = HeldItemType.None;
     private bool isBlendReady = false;
     [SerializeField] private float blendTimer = 0f;
     [SerializeField] private float blendTimeout = 7f;
 
 
     private List<HeldItemType> insertedBeans = new();
-
-
-
     void Start()
     {
         blendFSM = new StateMachine<BlendState>();
@@ -52,18 +49,15 @@ public class CoffeeMakerInteraction : MonoBehaviour
         blendFSM.AddState(BlendState.LowBlend, new State<BlendState>(
             onEnter: s => Debug.Log("Entered: LowBlend")
         ));
-        blendFSM.AddState(BlendState.MediumBlend, new State<BlendState>(
-            onEnter: s => Debug.Log("Entered: MediumBlend")
-        ));
         blendFSM.AddState(BlendState.HighBlend, new State<BlendState>(
-            onEnter: s => Debug.Log("Entered: HighBlend")
+    onEnter: s => Debug.Log("Entered: LowBlend")
         ));
+
 
         blendFSM.SetStartState(BlendState.NoBlend);
 
-        blendFSM.AddTransition(BlendState.NoBlend, BlendState.LowBlend, _ => timer >= brewDuration * 0.2f && timer < brewDuration * 0.4f);
-        blendFSM.AddTransition(BlendState.LowBlend, BlendState.MediumBlend, _ => timer >= brewDuration * 0.4f && timer < brewDuration * 0.7f);
-        blendFSM.AddTransition(BlendState.MediumBlend, BlendState.HighBlend, _ => timer >= brewDuration * 0.7f && timer < brewDuration * 1.2f);
+        blendFSM.AddTransition(BlendState.NoBlend, BlendState.LowBlend, _ => timer >= brewDuration * 0.2f && timer < brewDuration * 0.5f);
+        blendFSM.AddTransition(BlendState.LowBlend, BlendState.HighBlend, _ => timer >= brewDuration * 0.5f && timer < brewDuration * 1f);
 
         blendFSM.Init();
 
@@ -155,11 +149,11 @@ public class CoffeeMakerInteraction : MonoBehaviour
         bool hasWhite = insertedBeans.Contains(HeldItemType.CoffeeBeanWhite);
 
         if (hasBrown && hasWhite)
-            blend = HeldItemType.MixedCoffeeBlend;
+            blendType = HeldItemType.MixedCoffeeBlend;
         else if (hasBrown)
-            blend = HeldItemType.CoffeeBlendBrown;
+            blendType = HeldItemType.CoffeeBlendBrown;
         else if (hasWhite)
-            blend = HeldItemType.CoffeeBlendWhite;
+            blendType = HeldItemType.CoffeeBlendWhite;
 
         insertedBeans.Clear();
         Invoke(nameof(HideProgressBar), 4f);
@@ -183,11 +177,12 @@ public class CoffeeMakerInteraction : MonoBehaviour
 
     public void GiveBlendToPlayer()
     {
+
         Debug.Log("Before holding manager condition");
         if (Player.transformPlayer.TryGetComponent(out HoldingManager holding))
         {
             Debug.Log("Giving blend to player.");
-            holding.PickUpItem(HeldItemType.CoffeeBlendBrown); // HARD-CODED FOR NOW
+            holding.PickUpItem(blendType);
             Destroy(spawnedBlend);
             spawnedBlend = null;
             isBlendReady = false;

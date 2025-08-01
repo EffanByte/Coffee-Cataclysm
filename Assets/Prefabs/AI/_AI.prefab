@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  orderBubblePrefab: {fileID: 0}
+  orderBubblePrefab: {fileID: 2092896343914496279, guid: fb7a4779abe25544880c704d4b78c1bb, type: 3}
   currentState: 0
 --- !u!136 &7026124800239567320
 CapsuleCollider:

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityHFSM;
@@ -99,9 +100,9 @@ public class AiBar : MonoBehaviour
 
     private void OrderCoffee()
     {
-        currentOrder = (HeldItemType)Random.Range(5, 8);
-
-        GameObject orderBubble = Instantiate(orderBubblePrefab, transform.position + Vector3.up * 2, Quaternion.identity);
+        currentOrder = (HeldItemType)UnityEngine.Random.Range(5, Enum.GetValues(typeof(HeldItemType)).Length); // Randomly select a coffee blend
+        Debug.Log(currentOrder);    
+        GameObject orderBubble = Instantiate(orderBubblePrefab, transform.position + new Vector3(2.5f, 5, 0), Quaternion.identity);
         orderBubble.GetComponent<OrderBubble>().SetIcon(currentOrder);
     }
 

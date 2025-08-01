@@ -64,31 +64,31 @@ public class CoffeeMakerInteraction : MonoBehaviour
         blendFSM.SetStartState(BlendState.NoBlend);
 
         blendFSM.AddTransition(BlendState.NoBlend, BlendState.LowBlend, _ => timer >= brewDuration * 0.2f && timer < brewDuration * 0.4f);
-        blendFSM.AddTransition(BlendState.LowBlend, BlendState.MediumBlend, _ =>timer >= brewDuration * 0.4f && timer < brewDuration * 0.7f);
-        blendFSM.AddTransition(BlendState.MediumBlend, BlendState.HighBlend, _ =>timer >= brewDuration * 0.7f && timer < brewDuration * 1.2f);
+        blendFSM.AddTransition(BlendState.LowBlend, BlendState.MediumBlend, _ => timer >= brewDuration * 0.4f && timer < brewDuration * 0.7f);
+        blendFSM.AddTransition(BlendState.MediumBlend, BlendState.HighBlend, _ => timer >= brewDuration * 0.7f && timer < brewDuration * 1.2f);
 
         blendFSM.Init();
 
         originalPosition = transform.localPosition;
-       
+
         if (progressBar != null)
         {
             progressBar.gameObject.SetActive(false);
             progressBar.value = 0;
         }
-        
+
     }
 
     void Update()
     {
         blendFSM.OnLogic();
         float percent = timer / brewDuration;
-        
+
         if (isBrewing)
         {
             timer += Time.deltaTime;
-
-            if (timer < brewDuration + 0.2f)
+            Debug.Log(timer);
+            if (timer < brewDuration)
             {
                 transform.localPosition = originalPosition + Random.insideUnitSphere * vibrationMagnitude;
                 if (progressBar != null)
@@ -96,6 +96,7 @@ public class CoffeeMakerInteraction : MonoBehaviour
             }
             else
             {
+                Debug.Log("Brewing finished!");
                 FinishBrewing();
             }
         }
@@ -124,7 +125,7 @@ public class CoffeeMakerInteraction : MonoBehaviour
 
         float beanCount = insertedBeans.Count;
         timer = timer - (timer * 0.25f);
-        
+
         Debug.Log($"Bean inserted: {beanType}.");
     }
 
@@ -172,8 +173,7 @@ public class CoffeeMakerInteraction : MonoBehaviour
                 blendItem.SetBlendType(blend);
             }
         }
-
-        Invoke(nameof(HideProgressBar), 1.5f);
+        insertedBeans.Clear();
     }
 
     void HideProgressBar()

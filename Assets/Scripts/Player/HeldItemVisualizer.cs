@@ -7,6 +7,9 @@ public class HeldItemVisualizer : MonoBehaviour
     [Header("Held Item Prefabs")]
     [SerializeField] private GameObject coffeeBeanBrownPrefab;
     [SerializeField] private GameObject coffeeBeanWhitePrefab;
+    [SerializeField] private GameObject blendBrownPrefab;
+    [SerializeField] private GameObject blendWhitePrefab;
+    [SerializeField] private GameObject blendMixPrefab;
     [SerializeField] private GameObject cupPrefab;
     [SerializeField] private GameObject waterJugPrefab;
 
@@ -47,6 +50,9 @@ public class HeldItemVisualizer : MonoBehaviour
             HeldItemType.CoffeeBeanWhite => coffeeBeanWhitePrefab,
             HeldItemType.Cup => cupPrefab,
             HeldItemType.WaterJug => waterJugPrefab,
+            HeldItemType.CoffeeBlendBrown => blendBrownPrefab,
+            HeldItemType.CoffeeBlendWhite => blendWhitePrefab,
+            HeldItemType.MixedCoffeeBlend => blendMixPrefab,
             _ => null
         };
     }

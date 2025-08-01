@@ -7,9 +7,9 @@ public enum HeldItemType
     CoffeeBeanWhite,
     Cup,
     WaterJug,
-    CoffeeBlendBrown,   // ✅ Add this
-    CoffeeBlendWhite,    // ✅ Add this
-    MixedCoffeeBlend    // ✅ Add this
+    CoffeeBlendBrown, 
+    CoffeeBlendWhite,    
+    MixedCoffeeBlend    
 }
 
 
@@ -42,12 +42,7 @@ public class HoldingManager : MonoBehaviour
             }
         }
 
-        if (bestCandidate == null)
-        {
-            Debug.Log("No valid item in front to pick up.");
-            return;
-        }
-
+        if (bestCandidate == null) return;
         // Identify type
         if (bestCandidate.CompareTag("BrownBeanPot"))
         {
@@ -71,7 +66,6 @@ public class HoldingManager : MonoBehaviour
 
     public void DropItem()
     {
-        Debug.Log($"Dropped: {HeldItem}");
         HeldItem = HeldItemType.None;
         visualizer?.Hide();
     }

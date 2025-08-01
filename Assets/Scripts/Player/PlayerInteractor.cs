@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerInteractor : MonoBehaviour
@@ -32,10 +33,12 @@ public class PlayerInteractor : MonoBehaviour
             if (!hit.CompareTag("CoffeeMaker"))
                 continue;
             CoffeeMakerInteraction coffeeMaker = hit.GetComponent<CoffeeMakerInteraction>();
-
+            Debug.Log("Doing Check for CoffeeMakerInteraction");
             // 1. If blend is ready, give to player
+            Debug.Log(coffeeMaker.IsBlendReady());
             if (coffeeMaker.IsBlendReady())
             {
+                Debug.Log("Interacted to take blend");
                 coffeeMaker.GiveBlendToPlayer();
                 return true;
             }

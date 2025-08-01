@@ -27,13 +27,11 @@ public class CoffeeMakerInteraction : MonoBehaviour
 
     [Header("Blend Spawn")]
     public GameObject coffeeBlendPrefab;
-    public Transform blendSpawnPoint;
-
     private Vector3 originalPosition;
     private float timer = 0f;
     private bool isBrewing = false;
-
     private GameObject spawnedBlend;
+    HeldItemType blend = HeldItemType.None;
     private bool isBlendReady = false;
     [SerializeField] private float blendTimer = 0f;
     [SerializeField] private float blendTimeout = 7f;
@@ -101,7 +99,7 @@ public class CoffeeMakerInteraction : MonoBehaviour
             }
         }
 
-        if (isBlendReady && spawnedBlend != null)
+        if (isBlendReady)
         {
             blendTimer += Time.deltaTime;
             if (blendTimer >= blendTimeout)
@@ -150,30 +148,21 @@ public class CoffeeMakerInteraction : MonoBehaviour
         isBrewing = false;
         transform.localPosition = originalPosition;
 
-        if (coffeeBlendPrefab != null && blendSpawnPoint != null)
-        {
-            spawnedBlend = Instantiate(coffeeBlendPrefab, blendSpawnPoint.position, Quaternion.identity);
-            isBlendReady = true;
-            blendTimer = 0f;
+        isBlendReady = true;
+        blendTimer = 0f;
 
-            var blendItem = spawnedBlend.GetComponent<CoffeeBlendItem>();
-            HeldItemType blend = HeldItemType.None;
-            if (blendItem != null)
-            {
-                bool hasBrown = insertedBeans.Contains(HeldItemType.CoffeeBeanBrown);
-                bool hasWhite = insertedBeans.Contains(HeldItemType.CoffeeBeanWhite);
+        bool hasBrown = insertedBeans.Contains(HeldItemType.CoffeeBeanBrown);
+        bool hasWhite = insertedBeans.Contains(HeldItemType.CoffeeBeanWhite);
 
-                if (hasBrown && hasWhite)
-                    blend = HeldItemType.MixedCoffeeBlend;
-                else if (hasBrown)
-                    blend = HeldItemType.CoffeeBlendBrown;
-                else if (hasWhite)
-                    blend = HeldItemType.CoffeeBlendWhite;
+        if (hasBrown && hasWhite)
+            blend = HeldItemType.MixedCoffeeBlend;
+        else if (hasBrown)
+            blend = HeldItemType.CoffeeBlendBrown;
+        else if (hasWhite)
+            blend = HeldItemType.CoffeeBlendWhite;
 
-                blendItem.SetBlendType(blend);
-            }
-        }
         insertedBeans.Clear();
+        Invoke(nameof(HideProgressBar), 4f);
     }
 
     void HideProgressBar()
@@ -182,8 +171,6 @@ public class CoffeeMakerInteraction : MonoBehaviour
             progressBar.gameObject.SetActive(false);
     }
 
-    // 🔧 New methods for PlayerInteractor access
-
     public bool CanStartBrewing()
     {
         return !isBrewing && !isBlendReady;
@@ -191,34 +178,22 @@ public class CoffeeMakerInteraction : MonoBehaviour
 
     public bool IsBlendReady()
     {
-        return isBlendReady && spawnedBlend != null;
+        return isBlendReady;
     }
 
     public void GiveBlendToPlayer()
     {
-        if (!IsBlendReady()) return;
-
-        if (spawnedBlend.TryGetComponent(out CoffeeBlendItem blendItem))
+        Debug.Log("Before holding manager condition");
+        if (Player.transformPlayer.TryGetComponent(out HoldingManager holding))
         {
-            HeldItemType blendType = blendItem.blendType;
-
-            if (blendType != HeldItemType.None &&
-                Player.transformPlayer.TryGetComponent(out HoldingManager holding))
-            {
-                if (!holding.IsHoldingItem)
-                {
-                    holding.PickUpItem(blendType);
-                    Destroy(spawnedBlend);
-                    spawnedBlend = null;
-                    isBlendReady = false;
-                    blendTimer = 0f;
-                    Debug.Log("Player picked up blend.");
-                }
-                else
-                {
-                    Debug.Log("Player already holding something.");
-                }
-            }
+            Debug.Log("Giving blend to player.");
+            holding.PickUpItem(HeldItemType.CoffeeBlendBrown); // HARD-CODED FOR NOW
+            Destroy(spawnedBlend);
+            spawnedBlend = null;
+            isBlendReady = false;
+            blendTimer = 0f;
+            Debug.Log("Player picked up blend.");
         }
     }
 }
+

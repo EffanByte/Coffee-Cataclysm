@@ -54,6 +54,7 @@ public class AiBar : MonoBehaviour
         onExit: state =>
         {
             animator.SetBool("IsRunning", false);
+            Debug.Log("Reached waypoint, ordering coffee.");
             OrderCoffee();
         });
 
@@ -97,7 +98,7 @@ public class AiBar : MonoBehaviour
     private void OrderCoffee()
     {
         currentOrder = (HeldItemType)Random.Range(5, 8);
-
+        Debug.Log($"Ordering coffee: {currentOrder}");
     }
 
     public void ReceiveOrder(HeldItemType order)

@@ -43,15 +43,9 @@ public class CoffeeMakerInteraction : MonoBehaviour
         blendFSM = new StateMachine<BlendState>();
 
 
-        blendFSM.AddState(BlendState.NoBlend, new State<BlendState>(
-            onEnter: s => Debug.Log("Entered: NoBlend")
-        ));
-        blendFSM.AddState(BlendState.LowBlend, new State<BlendState>(
-            onEnter: s => Debug.Log("Entered: LowBlend")
-        ));
-        blendFSM.AddState(BlendState.HighBlend, new State<BlendState>(
-    onEnter: s => Debug.Log("Entered: LowBlend")
-        ));
+        blendFSM.AddState(BlendState.NoBlend, new State<BlendState>());
+        blendFSM.AddState(BlendState.LowBlend, new State<BlendState>());
+        blendFSM.AddState(BlendState.HighBlend, new State<BlendState>());
 
 
         blendFSM.SetStartState(BlendState.NoBlend);
@@ -79,7 +73,6 @@ public class CoffeeMakerInteraction : MonoBehaviour
         if (isBrewing)
         {
             timer += Time.deltaTime;
-            Debug.Log(timer);
             if (timer < brewDuration)
             {
                 transform.localPosition = originalPosition + Random.insideUnitSphere * vibrationMagnitude;
@@ -178,16 +171,13 @@ public class CoffeeMakerInteraction : MonoBehaviour
     public void GiveBlendToPlayer()
     {
 
-        Debug.Log("Before holding manager condition");
         if (Player.transformPlayer.TryGetComponent(out HoldingManager holding))
         {
-            Debug.Log("Giving blend to player.");
             holding.PickUpItem(blendType);
             Destroy(spawnedBlend);
             spawnedBlend = null;
             isBlendReady = false;
             blendTimer = 0f;
-            Debug.Log("Player picked up blend.");
         }
     }
 }

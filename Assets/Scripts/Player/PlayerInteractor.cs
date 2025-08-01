@@ -21,6 +21,7 @@ public class PlayerInteractor : MonoBehaviour
     {
         TryUseCoffeeMaker();
         holdingManager.TryPickupInFront();
+        TryServeCoffee();
     }
 
     private bool TryUseCoffeeMaker()
@@ -58,6 +59,23 @@ public class PlayerInteractor : MonoBehaviour
         return false;
     }
 
+    private void TryServeCoffee()
+    {
+        Collider[] hits = Physics.OverlapSphere(transform.position, interactionRange);
 
+        foreach (var hit in hits)
+        {
+            if (!hit.CompareTag("Customer"))
+                continue;
 
+            AiBar aiBar = hit.GetComponent<AiBar>();
+            if (aiBar != null && holdingManager.IsHoldingItem)
+            {
+                HeldItemType heldItem = holdingManager.HeldItem;
+                aiBar.ReceiveOrder(heldItem);
+                holdingManager.DropItem();
+                return;
+            }
+        }
+    }
 }

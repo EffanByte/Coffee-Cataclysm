@@ -11,8 +11,9 @@ public enum AIState
 [RequireComponent(typeof(NavMeshAgent))]
 public class AiBar : MonoBehaviour
 {
-    [SerializeField]private Animator animator;
+    [SerializeField] private Animator animator;
 
+    HeldItemType currentOrder = HeldItemType.None;
     public AIState currentState;
 
     private NavMeshAgent agent;
@@ -46,19 +47,19 @@ public class AiBar : MonoBehaviour
 
             if (targetWaypoint != null)
             {
-                animator.SetBool("IsRunning",true);
+                animator.SetBool("IsRunning", true);
                 agent.SetDestination(targetWaypoint.position);
             }
         },
         onExit: state =>
         {
             animator.SetBool("IsRunning", false);
+            OrderCoffee();
         });
-      
+
         // Transitions
         fsm.AddTransition(AIState.IDLE, AIState.MOVE, condition: _ => targetWaypoint != null && agent.remainingDistance > 0.1f);
         fsm.AddTransition(AIState.MOVE, AIState.IDLE, condition: _ => !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance);
-
         // Start in Idle
         fsm.SetStartState(AIState.IDLE);
         fsm.Init();
@@ -91,5 +92,26 @@ public class AiBar : MonoBehaviour
         {
             waypointManager.ReleaseWaypoint(targetWaypoint);
         }
+    }
+
+    private void OrderCoffee()
+    {
+        currentOrder = (HeldItemType)Random.Range(5, 8);
+
+    }
+
+    public void ReceiveOrder(HeldItemType order)
+    {
+        if (order == HeldItemType.None)
+        {
+            Debug.LogWarning("Received an empty order.");
+            return;
+        }
+        if (currentOrder == order)
+        {
+            Debug.Log("Received correct order: " + order);
+            currentOrder = HeldItemType.None; // Reset order after serving
+        }
+        Debug.Log($"Received order: {currentOrder}");
     }
 }

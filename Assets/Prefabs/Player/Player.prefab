@@ -128,7 +128,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   gameInput: {fileID: 0}
-  heldItemManager: {fileID: 5035622026604321504}
 --- !u!54 &6105542955118023059
 Rigidbody:
   m_ObjectHideFlags: 0

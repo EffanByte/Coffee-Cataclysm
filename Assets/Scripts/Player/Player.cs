@@ -26,19 +26,21 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        heldItemManager = GetComponent<HoldingManager>();
-        if (heldItemManager == null)
+        if (GameStateManager.Instance.currentState == GameSceneState.GameBar)
         {
-            Debug.LogError("HoldingManager component is missing on Player.");
-            return;
+            heldItemManager = GetComponent<HoldingManager>();
+            if (heldItemManager == null)
+            {
+                Debug.LogError("HoldingManager component is missing on Player.");
+                return;
+            }
+            playerInteractor = GetComponent<PlayerInteractor>();
+            if (playerInteractor == null)
+            {
+                Debug.LogError("PlayerInteractor component is missing on Player.");
+                return;
+            }
         }
-        playerInteractor = GetComponent<PlayerInteractor>();
-        if (playerInteractor == null)
-        {
-            Debug.LogError("PlayerInteractor component is missing on Player.");
-            return;
-        }
-
         transformPlayer = transform;
 
         fsm = new StateMachine<PlayerState>();

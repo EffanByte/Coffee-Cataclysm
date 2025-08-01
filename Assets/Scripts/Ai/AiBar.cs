@@ -14,6 +14,8 @@ public class AiBar : MonoBehaviour
     [SerializeField] private Animator animator;
 
     HeldItemType currentOrder = HeldItemType.None;
+
+    [SerializeField] private GameObject orderBubblePrefab;
     public AIState currentState;
 
     private NavMeshAgent agent;
@@ -98,7 +100,9 @@ public class AiBar : MonoBehaviour
     private void OrderCoffee()
     {
         currentOrder = (HeldItemType)Random.Range(5, 8);
-        Debug.Log($"Ordering coffee: {currentOrder}");
+
+        GameObject orderBubble = Instantiate(orderBubblePrefab, transform.position + Vector3.up * 2, Quaternion.identity);
+        orderBubble.GetComponent<OrderBubble>().SetIcon(currentOrder);
     }
 
     public void ReceiveOrder(HeldItemType order)

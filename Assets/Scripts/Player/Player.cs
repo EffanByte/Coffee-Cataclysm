@@ -14,18 +14,18 @@ public class Player : MonoBehaviour
     public static Transform transformPlayer;
 
     [SerializeField] private float moveSpeed;
-    [SerializeField] private GameInput gameInput;
 
     private StateMachine<PlayerState> fsm;
 
     // NEW
     private HoldingManager heldItemManager;
     private PlayerInteractor playerInteractor;
-
+    GameInput gameInput;
 
 
     void Start()
     {
+        gameInput = GetComponentInChildren<GameInput>();
         if (GameStateManager.Instance.currentState == GameSceneState.GameBar)
         {
             heldItemManager = GetComponent<HoldingManager>();
@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
 
         fsm.AddTransition(PlayerState.IDLE, PlayerState.MOVE, _ => gameInput.GetMovementNormalized().magnitude > 0.1f);
         fsm.AddTransition(PlayerState.MOVE, PlayerState.IDLE, _ => gameInput.GetMovementNormalized().magnitude < 0.1f);
-
+    
         fsm.Init();
     }
 
@@ -63,6 +63,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        gameInput = GetComponentInChildren<GameInput>(); 
         AssignEvents();
     }
     void Update()

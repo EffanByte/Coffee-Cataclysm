@@ -29,12 +29,14 @@ public class PlayroomManager : MonoBehaviour
             maxPlayersPerRoom = 4,
         }, () =>
         {
-            print($"[Unity Log] isHost: {_playroomKit.IsHost()}");
-
+            _playroomKit.OnPlayerJoin(spawnPlayer);
         });
     }
 
     void spawnPlayer(PlayroomKit.Player player)
     {
+        GameObject playerObject = Instantiate(PlayerPrefab, new Vector3(), Quaternion.identity);
+        if (player.id != _playroomKit.MyPlayer().id)
+        playerObject.GetComponentInChildren<GameInput>().gameObject.SetActive(false);
     }
 }

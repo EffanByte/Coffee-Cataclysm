@@ -6,6 +6,7 @@ public class PlayroomManager : MonoBehaviour
 
     public static PlayroomManager Instance { get; private set; }
     private PlayroomKit _playroomKit;
+    [SerializeField] GameObject PlayerPrefab;
 
     void Awake()
     {

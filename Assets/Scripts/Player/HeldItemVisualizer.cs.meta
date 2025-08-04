@@ -1,2 +1,19 @@
 fileFormatVersion: 2
 guid: f1aca7895f32f804c9ced49a88bbcbf4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - visualAnchor: {instanceID: 0}
+  - coffeeBeanBrownPrefab: {fileID: 958732029257513384, guid: 605a414e3dbfa234ba55b436573c50b1, type: 3}
+  - coffeeBeanWhitePrefab: {fileID: 567709065423979755, guid: 04a7140dcbc102241913c1be8c5ebfb4, type: 3}
+  - blendBrownPrefab: {fileID: 919132149155446097, guid: 35a5b9f57925f6a4097ad19fc0d711c1, type: 3}
+  - blendWhitePrefab: {fileID: 919132149155446097, guid: becc220de49e44b4aa650d2da6602cec, type: 3}
+  - blendMixPrefab: {fileID: 919132149155446097, guid: ac31eb67be424be4ba78bf2f64436ad7, type: 3}
+  - cupPrefab: {instanceID: 0}
+  - waterJugPrefab: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

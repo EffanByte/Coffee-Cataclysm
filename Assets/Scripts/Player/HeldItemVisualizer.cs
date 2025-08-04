@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class HeldItemVisualizer : MonoBehaviour
 {
-    [SerializeField] private Transform visualAnchor;
+    private Transform visualAnchor;
 
     [Header("Held Item Prefabs")]
     [SerializeField] private GameObject coffeeBeanBrownPrefab;
@@ -15,6 +15,10 @@ public class HeldItemVisualizer : MonoBehaviour
 
     private GameObject currentVisual;
 
+    private void Start()
+    {
+        visualAnchor = transform;
+    }
     public void Show(HeldItemType item)
     {
         Hide(); // Clear old one

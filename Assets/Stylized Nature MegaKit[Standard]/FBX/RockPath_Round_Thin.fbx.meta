@@ -3,7 +3,12 @@ guid: 205519743da5e594b943fadba1edccd5
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PathRocks
+    second: {fileID: 2100000, guid: 3938e26538b0b8b4c80f5be3a4ed6f07, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

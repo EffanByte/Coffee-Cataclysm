@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
         fsm.AddState(PlayerState.IDLE, new IdleState().state);
         fsm.AddState(PlayerState.MOVE, new MoveState(transform, gameInput, moveSpeed).state);
 
-        fsm.SetStartState(PlayerState.IDLE);
+        fsm.SetStartState(PlayerState.IDLE);    
 
         fsm.AddTransition(PlayerState.IDLE, PlayerState.MOVE, _ => gameInput.GetMovementNormalized().magnitude > 0.1f);
         fsm.AddTransition(PlayerState.MOVE, PlayerState.IDLE, _ => gameInput.GetMovementNormalized().magnitude < 0.1f);

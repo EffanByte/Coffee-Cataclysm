@@ -35,7 +35,7 @@ public class PlayroomManager : MonoBehaviour
 
     void spawnPlayer(PlayroomKit.Player player)
     {
-        GameObject playerObject = Instantiate(PlayerPrefab, new Vector3(), Quaternion.identity);
+        GameObject playerObject = Instantiate(PlayerPrefab, new Vector3(0, 1, 2), Quaternion.identity); // using default position for now   
         if (player.id != _playroomKit.MyPlayer().id)
         playerObject.GetComponentInChildren<GameInput>().gameObject.SetActive(false);
     }

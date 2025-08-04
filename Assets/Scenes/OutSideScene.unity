@@ -929,6 +929,10 @@ PrefabInstance:
       value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 1580666820997462780, guid: e92e25aeeb90d9d4da4c23394a6ddcb5, type: 3}
+      propertyPath: objectsAroundTree
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1580666820997462780, guid: e92e25aeeb90d9d4da4c23394a6ddcb5, type: 3}
       propertyPath: 'rocks.Array.data[0]'
       value: 
       objectReference: {fileID: 131997916179514403, guid: 5dd99a1803e4faf4c944c265048ebd61, type: 3}

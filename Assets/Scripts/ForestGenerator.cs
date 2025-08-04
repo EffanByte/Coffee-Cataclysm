@@ -20,9 +20,14 @@ public class ForestGenerator : MonoBehaviour
 
     [Header("Spawn Settings")]
     [Range(0f, 1f)] public float treeChance = 0.3f;
-    [Range(0f, 1f)] public float rockChance = 0.15f;
-    [Range(0f, 1f)] public float mushroomChance = 0.1f;
-    [Range(0f, 1f)] public float bushChance = 0.2f;
+    [Range(0f, 1f)] public float rockChance = 0.4f;
+    [Range(0f, 1f)] public float mushroomChance = 0.6f;
+    [Range(0f, 1f)] public float bushChance = 0.5f;
+
+    [Header("Pattern Settings")]
+    public bool spawnAroundTrees = true;
+    [Range(1, 5)] public int objectsAroundTree = 3;
+    public float treeRadius = 4f;
 
     [Header("Spacing")]
     public float minSpacing = 2f;
@@ -103,30 +108,91 @@ public class ForestGenerator : MonoBehaviour
         Vector3 chunkWorldPos = new Vector3(chunkPos.x * chunkSize, 0, chunkPos.y * chunkSize);
         chunk.transform.position = chunkWorldPos;
 
-        // Use noise for consistent but random placement
         Random.InitState((int)(chunkPos.x * 1000 + chunkPos.y));
-
-        // Generate random positions within chunk
-        int objectCount = Random.Range(3, 8); // 3-7 objects per chunk
         List<Vector3> usedPositions = new List<Vector3>();
 
-        for (int i = 0; i < objectCount; i++)
+        // === Spawn Trees ===
+        int treeCount = Random.Range(2, 5);
+        List<Vector3> treePositions = new List<Vector3>();
+
+        for (int i = 0; i < treeCount; i++)
         {
             Vector3 localPos = GetRandomValidPosition(usedPositions);
-            if (localPos == Vector3.zero) continue; // No valid position found
+            if (localPos == Vector3.zero || trees.Length == 0) continue;
 
             Vector3 worldPos = chunkWorldPos + localPos;
-            GameObject prefab = SelectRandomObject();
+            GameObject tree = Instantiate(trees[Random.Range(0, trees.Length)], worldPos, GetRandomRotation(), chunk.transform);
+            tree.transform.localScale = GetRandomScale();
+            usedPositions.Add(localPos);
+            treePositions.Add(worldPos);
+        }
 
-            if (prefab != null)
+        // === Spawn Around Trees ===
+        if (spawnAroundTrees)
+        {
+            foreach (Vector3 treePos in treePositions)
             {
-                GameObject obj = Instantiate(prefab, worldPos, GetRandomRotation(), chunk.transform);
-                obj.transform.localScale = GetRandomScale();
-                usedPositions.Add(localPos);
+                for (int i = 0; i < objectsAroundTree; i++)
+                {
+                    float angle = Random.Range(0f, Mathf.PI * 2f);
+                    float radius = Random.Range(1f, treeRadius);
+                    Vector3 offset = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * radius;
+
+                    Vector3 nearPos = treePos + offset;
+                    if (!IsValidPosition(nearPos, usedPositions)) continue;
+
+                    GameObject extra = null;
+                    if (Random.value < 0.5f && bushes.Length > 0)
+                        extra = bushes[Random.Range(0, bushes.Length)];
+                    else if (mushrooms.Length > 0)
+                        extra = mushrooms[Random.Range(0, mushrooms.Length)];
+
+                    if (extra != null)
+                    {
+                        GameObject obj = Instantiate(extra, nearPos, GetRandomRotation(), chunk.transform);
+                        obj.transform.localScale = GetRandomScale();
+                        usedPositions.Add(nearPos - chunkWorldPos); // Local pos
+                    }
+                }
             }
         }
 
+        // === Spawn Rocks & Mushrooms separately ===
+        int rockCount = Random.Range(1, 4);
+        for (int i = 0; i < rockCount; i++)
+        {
+            Vector3 localPos = GetRandomValidPosition(usedPositions);
+            if (localPos == Vector3.zero || rocks.Length == 0) continue;
+
+            Vector3 worldPos = chunkWorldPos + localPos;
+            GameObject rock = Instantiate(rocks[Random.Range(0, rocks.Length)], worldPos, GetRandomRotation(), chunk.transform);
+            rock.transform.localScale = GetRandomScale();
+            usedPositions.Add(localPos);
+        }
+
+        int mushroomCount = Random.Range(2, 5);
+        for (int i = 0; i < mushroomCount; i++)
+        {
+            Vector3 localPos = GetRandomValidPosition(usedPositions);
+            if (localPos == Vector3.zero || mushrooms.Length == 0) continue;
+
+            Vector3 worldPos = chunkWorldPos + localPos;
+            GameObject mushroom = Instantiate(mushrooms[Random.Range(0, mushrooms.Length)], worldPos, GetRandomRotation(), chunk.transform);
+            mushroom.transform.localScale = GetRandomScale();
+            usedPositions.Add(localPos);
+        }
+
         return chunk;
+    }
+
+    bool IsValidPosition(Vector3 pos, List<Vector3> usedPositions)
+    {
+        foreach (Vector3 used in usedPositions)
+        {
+            if (Vector3.Distance(pos, used) < minSpacing)
+                return false;
+        }
+        return true;
     }
 
     Vector3 GetRandomValidPosition(List<Vector3> usedPositions)

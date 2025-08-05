@@ -8,6 +8,7 @@ public class PlayerData
     public PlayroomKit.Player player;
     public GameObject playerObject;
     public Player playerScript;
+    public HeldItemType HeldItem { get; private set; } = HeldItemType.None;
     public PlayerData(PlayroomKit.Player player, GameObject playerObject, Player playerScript)
     {
         this.player = player;
@@ -72,16 +73,25 @@ public class PlayroomManager : MonoBehaviour
     private void HandleHeldItem(string data, string sender)
     {
         Players.TryGetValue(_playroomKit.GetPlayer(sender), out PlayerData playerData);
+        Debug.Log(sender);
         GameObject playerObject = playerData.playerObject;
-        playerObject.GetComponentInChildren<HoldingManager>().PickUpItem((HeldItemType)System.Enum.Parse(typeof(HeldItemType), data));
+        playerObject.GetComponentInChildren<HeldItemVisualizer>().Show((HeldItemType)Enum.Parse(typeof(HeldItemType), data));
     }
     void spawnPlayer(PlayroomKit.Player player)
     {
-        GameObject playerObject = Instantiate(PlayerPrefab, new Vector3(0, 1, 2), Quaternion.identity); // using default position for now   
+        GameObject playerObject;
+        playerObject = Instantiate(PlayerPrefab, new Vector3(0, 1, 2), Quaternion.identity); // using default position for now   
         Player playerScript = playerObject.GetComponent<Player>();
 
         Players.Add(player, new PlayerData(player, playerObject, playerScript));
         spawned = true;
+        if (_playroomKit.GetPlayer(player.id) == _playroomKit.MyPlayer())
+        Debug.Log("My Player ID: " + player.id);
+        else
+        {
+            Debug.Log("Other Player ID: " + player.id);
+        }
+    
     }
 
     public PlayroomKit GetPlayroomKit()

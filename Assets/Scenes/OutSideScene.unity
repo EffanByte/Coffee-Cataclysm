@@ -1435,6 +1435,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyPoolHandler
       objectReference: {fileID: 0}
+    - target: {fileID: 4966535923168693873, guid: 94f9d94167ac31841aedb39a78f8c2ec, type: 3}
+      propertyPath: npcPrefabs.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4966535923168693873, guid: 94f9d94167ac31841aedb39a78f8c2ec, type: 3}
+      propertyPath: 'npcPrefabs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 443458887114141317, guid: 6ecbc8ff175774042890cd6246a63590, type: 3}
+    - target: {fileID: 4966535923168693873, guid: 94f9d94167ac31841aedb39a78f8c2ec, type: 3}
+      propertyPath: 'npcPrefabs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2307338142158408600, guid: 1eb70be091a29404f9e93321f7127284, type: 3}
+    - target: {fileID: 4966535923168693873, guid: 94f9d94167ac31841aedb39a78f8c2ec, type: 3}
+      propertyPath: 'npcPrefabs.Array.data[2]'
+      value: 
+      objectReference: {fileID: 328159158491283297, guid: 4057370fc91217f4693662503b44983a, type: 3}
+    - target: {fileID: 4966535923168693873, guid: 94f9d94167ac31841aedb39a78f8c2ec, type: 3}
+      propertyPath: 'npcPrefabs.Array.data[3]'
+      value: 
+      objectReference: {fileID: 390111397489618476, guid: 2ad4bdff2e2625e4a8331b70cdd64534, type: 3}
+    - target: {fileID: 4966535923168693873, guid: 94f9d94167ac31841aedb39a78f8c2ec, type: 3}
+      propertyPath: 'npcPrefabs.Array.data[4]'
+      value: 
+      objectReference: {fileID: 6754614704541882905, guid: 6c6b112fe09fcac4a8c37ecc19e67fe1, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

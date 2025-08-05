@@ -1,26 +1,61 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Pool;
 
 public class EnemyPoolHandler : MonoBehaviour
 {
+    [Header("Pool Settings")]
+    public GameObject[] npcPrefabs;
+    public int poolSize = 10;
 
-    private ObjectPool<GameObject> pool;
+    private List<GameObject> pool = new List<GameObject>();
 
-    public void Initialize(ObjectPool<GameObject> objectPool)
+    public static EnemyPoolHandler Instance { get; private set; }
+
+    private void Awake()
     {
-        pool = objectPool;
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
     }
 
-    public void Despawn()
+    private void Start()
     {
-        if (pool != null)
+        for (int i = 0; i < poolSize; i++)
         {
-            pool.Release(gameObject);
+            GameObject npc = Instantiate(npcPrefabs[Random.Range(0, npcPrefabs.Length)],transform);
+            npc.SetActive(false);
+            pool.Add(npc);
+        }
+    }
+
+    public GameObject GetNPC()
+    {
+        foreach (GameObject npc in pool)
+        {
+            if (!npc.activeInHierarchy)
+            {
+                npc.SetActive(true);
+                return npc;
+            }
+        }
+
+        Debug.LogWarning("No available NPC in pool!");
+        return null;
+    }
+
+    /// <summary>
+    /// Despawns a specific enemy and returns it to the pool.
+    /// </summary>
+    public void Despawn(GameObject enemy)
+    {
+        if (pool.Contains(enemy))
+        {
+            enemy.SetActive(false);
         }
         else
         {
-            Debug.LogWarning("No pool assigned to enemy.");
-            Destroy(gameObject);
+            Debug.LogWarning("Trying to despawn an enemy that is not in the pool!");
         }
     }
 }

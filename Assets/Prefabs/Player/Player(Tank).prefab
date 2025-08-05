@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player(Tank)
       objectReference: {fileID: 0}
+    - target: {fileID: 6585293335611000891, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1000847096779852590}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -125,5 +129,10 @@ PrefabInstance:
 --- !u!4 &490322772253368353 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7046068367438465595, guid: 792a39d970ba94544b9e2e6249de9aa3, type: 3}
+  m_PrefabInstance: {fileID: 7423427726020389402}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1000847096779852590 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7703100459794325812, guid: 792a39d970ba94544b9e2e6249de9aa3, type: 3}
   m_PrefabInstance: {fileID: 7423427726020389402}
   m_PrefabAsset: {fileID: 0}

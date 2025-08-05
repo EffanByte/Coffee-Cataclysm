@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5605636196330912017, guid: 8ac162277565a7a41af8510dddace31e, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 3e51d0a5e4e0ffd48b4cd93d9450a83b, type: 2}
     - target: {fileID: 7405451812838852627, guid: 8ac162277565a7a41af8510dddace31e, type: 3}
       propertyPath: m_Name
       value: Mage
@@ -60,6 +64,11 @@ PrefabInstance:
 --- !u!4 &2076662609267737432 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3599308567600596915, guid: 8ac162277565a7a41af8510dddace31e, type: 3}
+  m_PrefabInstance: {fileID: 3252330868406469867}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6983290658530786810 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5605636196330912017, guid: 8ac162277565a7a41af8510dddace31e, type: 3}
   m_PrefabInstance: {fileID: 3252330868406469867}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8043680958449672468
@@ -114,6 +123,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player(Healer)
       objectReference: {fileID: 0}
+    - target: {fileID: 6585293335611000891, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 6983290658530786810}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

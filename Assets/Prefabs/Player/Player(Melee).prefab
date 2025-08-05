@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Knight
       objectReference: {fileID: 0}
+    - target: {fileID: 4606912912288075603, guid: 0098f86c3bab3a54cb1259428083cedf, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 3e51d0a5e4e0ffd48b4cd93d9450a83b, type: 2}
     - target: {fileID: 5438021387942412213, guid: 0098f86c3bab3a54cb1259428083cedf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -60,6 +64,11 @@ PrefabInstance:
 --- !u!4 &12591503932812013 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5438021387942412213, guid: 0098f86c3bab3a54cb1259428083cedf, type: 3}
+  m_PrefabInstance: {fileID: 5429934067822024024}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &8409358115010877963 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4606912912288075603, guid: 0098f86c3bab3a54cb1259428083cedf, type: 3}
   m_PrefabInstance: {fileID: 5429934067822024024}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9114032509822860833
@@ -114,6 +123,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player(Melee)
       objectReference: {fileID: 0}
+    - target: {fileID: 6585293335611000891, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 8409358115010877963}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

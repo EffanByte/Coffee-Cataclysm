@@ -18,20 +18,18 @@ public class Player : MonoBehaviour
     private StateMachine<PlayerState> fsm;
 
     // NEW
+   [SerializeField] private Animator animator;
     private HoldingManager heldItemManager;
     private PlayerInteractor playerInteractor;
     GameInput gameInput;
-
     public IPlayer currentClass = null;
 
     private void Awake()
     {
         gameInput = GetComponentInChildren<GameInput>();
-
         // TODO: will be selected from UI
         currentClass = new PlayerAttacker(PlayerType.Attacker);
     }
-
     protected virtual void Start()
     {
         AssignEvents();
@@ -41,34 +39,27 @@ public class Player : MonoBehaviour
 
         SetStates();
     }
-
     private void SetStates()
     {
         fsm = new StateMachine<PlayerState>();
 
         fsm.AddState(PlayerState.IDLE, new IdleState().state);
-        fsm.AddState(PlayerState.MOVE, new MoveState(transform, gameInput, moveSpeed).state);
+        fsm.AddState(PlayerState.MOVE, new MoveState(transform, gameInput, moveSpeed, animator).state);
 
         fsm.SetStartState(PlayerState.IDLE);
-
-        Movement();
+        fsm.AddTransition(PlayerState.IDLE, PlayerState.MOVE, _ => gameInput.GetMovementNormalized().magnitude > 0.1f);
+        fsm.AddTransition(PlayerState.MOVE, PlayerState.IDLE, _ => gameInput.GetMovementNormalized().magnitude < 0.1f);
 
         fsm.Init();
     }
-
-
-
     private void AssignEvents()
     {
         gameInput.OnInteractPlayer += InputSystem_OnInteractPlayer;
     }
-
-
     void Update()
     {
         fsm.OnLogic();
     }
-
     public bool HasItem() => heldItemManager.IsHoldingItem;
     public HeldItemType GetHeldItem() => heldItemManager.HeldItem;
 
@@ -96,29 +87,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Damage()
+
+    public Animator GetAnimator()
     {
-
-    }
-
-    public void UseAbility()
-    {
-;
-    }
-
-    public void Attack()
-    {
-
-    }
-
-    public void Movement()
-    {
-        fsm.AddTransition(PlayerState.IDLE, PlayerState.MOVE, _ => gameInput.GetMovementNormalized().magnitude > 0.1f);
-        fsm.AddTransition(PlayerState.MOVE, PlayerState.IDLE, _ => gameInput.GetMovementNormalized().magnitude < 0.1f);
-    }
-
-    public void Health()
-    {
-
+        return animator;
     }
 }

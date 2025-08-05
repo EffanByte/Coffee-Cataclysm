@@ -1,6 +1,7 @@
 using UnityEngine;
 using Playroom;
 using System.Collections.Generic;
+using System;
 
 public class PlayerData
 {
@@ -18,9 +19,10 @@ public class PlayerData
 public class PlayroomManager : MonoBehaviour
 {
 
+    bool spawned = false;
     public static PlayroomManager Instance { get; private set; }
     private PlayroomKit _playroomKit;
-    public Dictionary<PlayroomKit.Player, PlayerData> Players = new();
+    public static Dictionary<PlayroomKit.Player, PlayerData> Players = new();
 
     [SerializeField] GameObject PlayerPrefab;
 
@@ -38,6 +40,23 @@ public class PlayroomManager : MonoBehaviour
 
     }
 
+    void FixedUpdate()
+    {
+        if (spawned)
+        {
+            var myPlayer = _playroomKit.MyPlayer();
+            myPlayer.SetState("position", Players[myPlayer].playerObject.transform.position);
+
+            foreach (var player in Players)
+            {
+                if (player.Key.id != myPlayer.id)
+                {
+                    GameObject playerObject = player.Value.playerObject;
+                    playerObject.transform.position = player.Key.GetState<Vector3>("position");
+                }
+            }
+        }
+    }
     void InitializePlayroom()
     {
         _playroomKit.InsertCoin(new InitOptions()
@@ -55,8 +74,11 @@ public class PlayroomManager : MonoBehaviour
         Player playerScript = playerObject.GetComponent<Player>();
 
         Players.Add(player, new PlayerData(player, playerObject, playerScript));
-        
-        if (player.id != _playroomKit.MyPlayer().id)
-            playerObject.GetComponentInChildren<GameInput>().gameObject.SetActive(false);
+        spawned = true;
+    }
+
+    public PlayroomKit GetPlayroomKit()
+    {
+        return _playroomKit;
     }
 }

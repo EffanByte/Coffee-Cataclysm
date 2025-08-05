@@ -1,4 +1,5 @@
 using System;
+using Playroom;
 using UnityEngine;
 using UnityHFSM;
 
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour
 
     private StateMachine<PlayerState> fsm;
 
+    private PlayroomKit _playroomKit;
     // NEW
     private HoldingManager heldItemManager;
     private PlayerInteractor playerInteractor;
@@ -25,6 +27,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        _playroomKit = PlayroomManager.Instance.GetPlayroomKit();
         gameInput = GetComponentInChildren<GameInput>();
         if (GameStateManager.Instance.currentState == GameSceneState.GameBar)
         {
@@ -46,7 +49,7 @@ public class Player : MonoBehaviour
         fsm = new StateMachine<PlayerState>();
 
         fsm.AddState(PlayerState.IDLE, new IdleState().state);
-        fsm.AddState(PlayerState.MOVE, new MoveState(transform, gameInput, moveSpeed).state);
+        fsm.AddState(PlayerState.MOVE, new MoveState(PlayroomManager.Players[_playroomKit.MyPlayer()], gameInput, moveSpeed).state);
 
         fsm.SetStartState(PlayerState.IDLE);    
 

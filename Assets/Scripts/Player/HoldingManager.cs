@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using Playroom;
 public enum HeldItemType
 {
     None,
@@ -18,10 +18,15 @@ public class HoldingManager : MonoBehaviour
     public HeldItemType HeldItem { get; private set; } = HeldItemType.None;
     public bool IsHoldingItem => HeldItem != HeldItemType.None;
 
-    [SerializeField] private HeldItemVisualizer visualizer;
+    private PlayroomKit _playroomKit;
+    private HeldItemVisualizer visualizer;
     [SerializeField] private float interactionRange = 3f;
     [SerializeField] private float interactionConeAngle = 30f;
 
+    private void Awake()
+    {
+        visualizer = GetComponentInChildren<HeldItemVisualizer>();
+    }
     public void TryPickupInFront()
     {
         if (IsHoldingItem)
@@ -57,11 +62,12 @@ public class HoldingManager : MonoBehaviour
     }
 
 
+
     public void PickUpItem(HeldItemType item)
     {
         HeldItem = item;
         visualizer?.Show(item);
-        Debug.Log($"Picked up: {item}");
+        _playroomKit.RpcCall("HandleHeldItem", item.ToString());
     }
 
     public void DropItem()

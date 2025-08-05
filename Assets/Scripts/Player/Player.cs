@@ -1,4 +1,5 @@
 using System;
+using Playroom;
 using UnityEngine;
 using UnityHFSM;
 
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour
 
     private StateMachine<PlayerState> fsm;
 
+    private PlayroomKit _playroomKit;
     // NEW
    [SerializeField] private Animator animator;
     private HoldingManager heldItemManager;
@@ -26,6 +28,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        _playroomKit = PlayroomManager.Instance.GetPlayroomKit();
         gameInput = GetComponentInChildren<GameInput>();
         // TODO: will be selected from UI
         currentClass = new PlayerAttacker(PlayerType.Attacker);
@@ -44,7 +47,10 @@ public class Player : MonoBehaviour
         fsm = new StateMachine<PlayerState>();
 
         fsm.AddState(PlayerState.IDLE, new IdleState().state);
-        fsm.AddState(PlayerState.MOVE, new MoveState(transform, gameInput, moveSpeed, animator).state);
+
+        fsm.AddState(PlayerState.MOVE, new MoveState(PlayroomManager.Players[_playroomKit.MyPlayer()], gameInput, moveSpeed , animator).state);
+
+        fsm.SetStartState(PlayerState.IDLE);    
 
         fsm.SetStartState(PlayerState.IDLE);
         fsm.AddTransition(PlayerState.IDLE, PlayerState.MOVE, _ => gameInput.GetMovementNormalized().magnitude > 0.1f);

@@ -46,9 +46,16 @@ public class PlayroomManager : MonoBehaviour
         }, () =>
         {
             _playroomKit.OnPlayerJoin(spawnPlayer);
+            _playroomKit.RpcRegister("HandleHeldItem", HandleHeldItem);
         });
     }
 
+    private void HandleHeldItem(string data, string sender)
+    {
+        Players.TryGetValue(_playroomKit.GetPlayer(sender), out PlayerData playerData);
+        GameObject playerObject = playerData.playerObject;
+        playerObject.GetComponentInChildren<HoldingManager>().PickUpItem((HeldItemType)System.Enum.Parse(typeof(HeldItemType), data));
+    }
     void spawnPlayer(PlayroomKit.Player player)
     {
         GameObject playerObject = Instantiate(PlayerPrefab, new Vector3(0, 1, 2), Quaternion.identity); // using default position for now   

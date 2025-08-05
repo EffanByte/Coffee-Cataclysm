@@ -8,12 +8,13 @@ public class PlayerData
     public PlayroomKit.Player player;
     public GameObject playerObject;
     public Player playerScript;
-    public HeldItemType HeldItem { get; private set; } = HeldItemType.None;
+    public HeldItemType HeldItem;
     public PlayerData(PlayroomKit.Player player, GameObject playerObject, Player playerScript)
     {
         this.player = player;
         this.playerObject = playerObject;
         this.playerScript = playerScript;
+        HeldItem = HeldItemType.None;
     }
 }
 
@@ -67,15 +68,43 @@ public class PlayroomManager : MonoBehaviour
         {
             _playroomKit.OnPlayerJoin(spawnPlayer);
             _playroomKit.RpcRegister("HandleHeldItem", HandleHeldItem);
+            _playroomKit.RpcRegister("HandleDropItem", HandleDropItem);
+            _playroomKit.RpcRegister("HandleBlendCoffee", HandleHeldItem);
+            _playroomKit.RpcRegister("HandleReceiveBlend", HandleReceiveBlend);
+            _playroomKit.RpcRegister("HandleInsertBean", HandleInsertBean);
+
         });
     }
 
+    private void HandleInsertBean(string data, string sender)
+    {
+
+    }
+
+    private void HandleReceiveBlend(string data, string sender)
+    {
+
+    }
+    private void HandleBlendCoffee(string data, string sender)
+    {
+
+    }
     private void HandleHeldItem(string data, string sender)
     {
         Players.TryGetValue(_playroomKit.GetPlayer(sender), out PlayerData playerData);
         Debug.Log(sender);
         GameObject playerObject = playerData.playerObject;
         playerObject.GetComponentInChildren<HeldItemVisualizer>().Show((HeldItemType)Enum.Parse(typeof(HeldItemType), data));
+        playerData.HeldItem = (HeldItemType)Enum.Parse(typeof(HeldItemType), data);
+    }
+
+    private void HandleDropItem(string data, string sender)
+    {
+        Players.TryGetValue(_playroomKit.GetPlayer(sender), out PlayerData playerData);
+        Debug.Log(sender);
+        GameObject playerObject = playerData.playerObject;
+        playerObject.GetComponentInChildren<HeldItemVisualizer>().Hide();
+        playerData.HeldItem = HeldItemType.None;
     }
     void spawnPlayer(PlayroomKit.Player player)
     {

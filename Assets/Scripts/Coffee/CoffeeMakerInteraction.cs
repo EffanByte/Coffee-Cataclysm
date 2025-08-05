@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityHFSM;
+using Playroom;
 public enum BlendState
 {
     NoBlend,
@@ -30,18 +31,18 @@ public class CoffeeMakerInteraction : MonoBehaviour
     private Vector3 originalPosition;
     private float timer = 0f;
     private bool isBrewing = false;
-    private GameObject spawnedBlend;
     HeldItemType blendType = HeldItemType.None;
     private bool isBlendReady = false;
     [SerializeField] private float blendTimer = 0f;
     [SerializeField] private float blendTimeout = 7f;
 
-
+    private PlayroomKit _playroomKit;
     private List<HeldItemType> insertedBeans = new();
     void Start()
     {
-        blendFSM = new StateMachine<BlendState>();
+        _playroomKit = PlayroomManager.Instance.GetPlayroomKit();
 
+        blendFSM = new StateMachine<BlendState>();
 
         blendFSM.AddState(BlendState.NoBlend, new State<BlendState>());
         blendFSM.AddState(BlendState.LowBlend, new State<BlendState>());
@@ -92,7 +93,6 @@ public class CoffeeMakerInteraction : MonoBehaviour
             if (blendTimer >= blendTimeout)
             {
                 Debug.Log("Blend burned!");
-                Destroy(spawnedBlend);
                 isBlendReady = false;
                 blendTimer = 0f;
             }
@@ -108,7 +108,6 @@ public class CoffeeMakerInteraction : MonoBehaviour
             StartBrewing();
         insertedBeans.Add(beanType);
 
-        float beanCount = insertedBeans.Count;
         timer = timer - (timer * 0.25f);
 
         Debug.Log($"Bean inserted: {beanType}.");
@@ -170,15 +169,7 @@ public class CoffeeMakerInteraction : MonoBehaviour
 
     public void GiveBlendToPlayer()
     {
-
-        if (Player.transformPlayer.TryGetComponent(out HoldingManager holding))
-        {
-            holding.PickUpItem(blendType);
-            Destroy(spawnedBlend);
-            spawnedBlend = null;
-            isBlendReady = false;
-            blendTimer = 0f;
-        }
+        _playroomKit.RpcCall("HandleReceiveBlend", 0, PlayroomKit.RpcMode.ALL);
     }
 }
 

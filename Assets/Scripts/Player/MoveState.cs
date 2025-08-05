@@ -6,12 +6,19 @@ public class MoveState
 {
     public State<PlayerState> state;
 
+
     PlayroomKit _playroomKit = PlayroomManager.Instance.GetPlayroomKit();
-    public MoveState(PlayerData playerData, GameInput input, float speed)
+    public MoveState(PlayerData playerData, GameInput input, float speed,Animator animator)
+
     {
         state = new State<PlayerState>(
+            onEnter: s =>
+            {
+                animator.SetBool("IsWalking", true);
+            },
             onLogic: s =>
             {
+
                 Transform playerTransform = playerData.playerObject.transform;
 
              //   if (playerData.player.id == _playroomKit.MyPlayer().id)
@@ -31,8 +38,11 @@ public class MoveState
                     }
              //   }
             
+
             },
-            onExit: s => Debug.Log("Exited Move")
+            onExit: s => { 
+                animator.SetBool("IsWalking", false);
+            }
         );
     }
 }

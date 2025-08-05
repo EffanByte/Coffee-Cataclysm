@@ -22,10 +22,63 @@ public class Player : MonoBehaviour
     private PlayerInteractor playerInteractor;
     GameInput gameInput;
 
+    public IPlayer currentClass = null;
 
-    void Start()
+    private void Awake()
     {
         gameInput = GetComponentInChildren<GameInput>();
+
+        // TODO: will be selected from UI
+        currentClass = new PlayerAttacker(PlayerType.Attacker);
+    }
+
+    protected virtual void Start()
+    {
+        AssignEvents();
+        GetPlayerComponent();
+
+        transformPlayer = transform;
+
+        SetStates();
+    }
+
+    private void SetStates()
+    {
+        fsm = new StateMachine<PlayerState>();
+
+        fsm.AddState(PlayerState.IDLE, new IdleState().state);
+        fsm.AddState(PlayerState.MOVE, new MoveState(transform, gameInput, moveSpeed).state);
+
+        fsm.SetStartState(PlayerState.IDLE);
+
+        Movement();
+
+        fsm.Init();
+    }
+
+
+
+    private void AssignEvents()
+    {
+        gameInput.OnInteractPlayer += InputSystem_OnInteractPlayer;
+    }
+
+
+    void Update()
+    {
+        fsm.OnLogic();
+    }
+
+    public bool HasItem() => heldItemManager.IsHoldingItem;
+    public HeldItemType GetHeldItem() => heldItemManager.HeldItem;
+
+    private void InputSystem_OnInteractPlayer(object sender, System.EventArgs e)
+    {
+        playerInteractor.Interact();
+    }
+
+    private void GetPlayerComponent()
+    {
         if (GameStateManager.Instance.currentState == GameSceneState.GameBar)
         {
             heldItemManager = GetComponent<HoldingManager>();
@@ -41,43 +94,31 @@ public class Player : MonoBehaviour
                 return;
             }
         }
-        transformPlayer = transform;
+    }
 
-        fsm = new StateMachine<PlayerState>();
+    public void Damage()
+    {
 
-        fsm.AddState(PlayerState.IDLE, new IdleState().state);
-        fsm.AddState(PlayerState.MOVE, new MoveState(transform, gameInput, moveSpeed).state);
+    }
 
-        fsm.SetStartState(PlayerState.IDLE);    
+    public void UseAbility()
+    {
+;
+    }
 
+    public void Attack()
+    {
+
+    }
+
+    public void Movement()
+    {
         fsm.AddTransition(PlayerState.IDLE, PlayerState.MOVE, _ => gameInput.GetMovementNormalized().magnitude > 0.1f);
         fsm.AddTransition(PlayerState.MOVE, PlayerState.IDLE, _ => gameInput.GetMovementNormalized().magnitude < 0.1f);
-    
-        fsm.Init();
     }
 
-    private void AssignEvents()
+    public void Health()
     {
-        gameInput.OnInteractPlayer += InputSystem_OnInteractPlayer;
+
     }
-
-    private void Awake()
-    {
-        gameInput = GetComponentInChildren<GameInput>(); 
-        AssignEvents();
-    }
-    void Update()
-    {
-        fsm.OnLogic();
-    }
-
-    public bool HasItem() => heldItemManager.IsHoldingItem;
-    public HeldItemType GetHeldItem() => heldItemManager.HeldItem;
-
-    private void InputSystem_OnInteractPlayer(object sender, System.EventArgs e)
-    {
-        playerInteractor.Interact();
-    }
-
-
 }

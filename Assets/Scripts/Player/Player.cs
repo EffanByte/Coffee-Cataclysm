@@ -14,24 +14,34 @@ public class Player : MonoBehaviour
 {
     public static Transform transformPlayer;
 
-    [SerializeField] private float moveSpeed;
+    [Header("Player Character Speed")]
+    [SerializeField] protected float moveSpeed;
+    [SerializeField] private Animator animator;
 
     private StateMachine<PlayerState> fsm;
-
     private PlayroomKit _playroomKit;
-    // NEW
-   [SerializeField] private Animator animator;
     private HoldingManager heldItemManager;
-    private PlayerInteractor playerInteractor;
+    private PlayerInteractor playerInteractor;  
+
+
     GameInput gameInput;
     public IPlayer currentClass = null;
 
     private void Awake()
     {
+        if (transformPlayer != null && transformPlayer != this.transform)
+        {
+            Destroy(gameObject); // Already a player exists, destroy the duplicate
+            return;
+        }
+        transformPlayer = this.transform;
+        DontDestroyOnLoad(this.gameObject);
+
         _playroomKit = PlayroomManager.Instance.GetPlayroomKit();
         gameInput = GetComponentInChildren<GameInput>();
         // TODO: will be selected from UI
         currentClass = new PlayerAttacker(PlayerType.Attacker);
+
     }
     protected virtual void Start()
     {
@@ -93,9 +103,4 @@ public class Player : MonoBehaviour
         }
     }
 
-
-    public Animator GetAnimator()
-    {
-        return animator;
-    }
 }

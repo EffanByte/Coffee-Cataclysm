@@ -7,12 +7,20 @@ public class GameInput : MonoBehaviour
 {
     private PlayerInputSystem PlayerInputSystem;
     public event EventHandler OnInteractPlayer;
+    public event EventHandler OnAttackPlayer;
+
+
     private void Awake()
     {
         PlayerInputSystem = new PlayerInputSystem();
         PlayerInputSystem.Player.Enable();
-
         PlayerInputSystem.Player.Interact.performed += OnInteractPerformed;
+        PlayerInputSystem.Player.Attack.performed += Attack_performed;
+    }
+
+    private void Attack_performed(InputAction.CallbackContext obj)
+    {
+        OnAttackPlayer?.Invoke(this,EventArgs.Empty);
     }
 
     private void OnDisable()

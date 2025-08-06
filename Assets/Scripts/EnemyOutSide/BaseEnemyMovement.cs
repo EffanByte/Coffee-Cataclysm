@@ -36,15 +36,37 @@ public abstract class BaseEnemyMovement : MonoBehaviour
         {
             agent.ResetPath();
             Debug.Log("Enemy is idle.");
+        },
+        onLogic: s =>
+        {
+            if (Player.transformPlayer == null) return;
+            float distance = Vector3.Distance(transform.position, Player.transformPlayer.position);
+            if (distance < 3f)
+            {
+                animator.SetTrigger("Attack");
+            }
+        },
+        onExit: s =>
+        {
             animator.SetBool("IsRunning", true);
-        });
+        }
+        );
 
         // MOVE: Chase player
         fsm.AddState(AIState.MOVE, onLogic: s =>
         {
-            if (player != null)
+            if (Player.transformPlayer == null) return;
+            float distance = Vector3.Distance(transform.position, Player.transformPlayer.position);
+            if (distance < agent.stoppingDistance)
+            {
+                animator.SetTrigger("Attack");
+            }
+            else
+            {
+                if (player != null)
+                    if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")) return;
                 agent.SetDestination(player.position);
-            animator.SetBool("IsRunning", true);
+            }
         },
         onExit: s =>
         {
@@ -66,6 +88,7 @@ public abstract class BaseEnemyMovement : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")) return;
         agent.SetDestination(player.position);
     }
 }

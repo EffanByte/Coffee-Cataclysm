@@ -77,6 +77,9 @@ public class PlayroomManager : MonoBehaviour
     }
     void spawnPlayer(PlayroomKit.Player player)
     {
+        if (Players.ContainsKey(player))
+            return; // Player already spawned, skip
+
         GameObject playerObject = Instantiate(PlayerPrefab, new Vector3(0, 1, 2), Quaternion.identity); // using default position for now   
         Player playerScript = playerObject.GetComponent<Player>();
 

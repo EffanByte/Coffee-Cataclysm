@@ -9,6 +9,7 @@ public class PortalTrigger : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
+            other.transform.position = new Vector3(13f, 1f, -6f);
             GameStateManager.Instance.GoToGameBar(LoaderScene);
         }
     }

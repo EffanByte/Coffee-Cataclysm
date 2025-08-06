@@ -9,6 +9,7 @@ public class DoorTrigger : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
+            other.transform.position = new Vector3(0f, 1f, 0f);
             GameStateManager.Instance.GoToOutSide(LoaderScene);
         }
     }

@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4349654120547590623, guid: 95609d75852f41146944ded870260787, type: 3}
+      propertyPath: m_BaseOffset
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4349654120547590623, guid: 95609d75852f41146944ded870260787, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2394579234779452381, guid: 95609d75852f41146944ded870260787, type: 3}
       propertyPath: m_Name
       value: Enemy(SkeletonMinion)
@@ -83,8 +91,8 @@ MonoBehaviour:
   player: {fileID: 0}
   updateSpeed: 0.1
   animator: {fileID: 909884636624606212}
-  chaseStartDistance: 10
-  chaseStopDistance: 12
+  chaseStartDistance: 20
+  chaseStopDistance: 22
 --- !u!4 &8187509817114647493 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6182692231960929844, guid: 95609d75852f41146944ded870260787, type: 3}

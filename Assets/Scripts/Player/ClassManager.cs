@@ -8,38 +8,42 @@ public enum PlayerType
     Healer,
 }
 
-public abstract class ClassManager : IPlayer
+public abstract class ClassManager : MonoBehaviour, IPlayer  
 {
     protected float speed;
+    protected int maxHealth;
     protected PlayerType _playerType;
+    protected GameInput gameInput;
+
+
 
     public ClassManager(PlayerType playerType)
     {
         _playerType = playerType;
     }
 
+    protected virtual void Start()
+    {
+        gameInput = GetComponentInChildren<GameInput>();
+    }
+
     public virtual void Attack()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public virtual void Damage()
     {
-        throw new System.NotImplementedException();
+
     }
+
 
     public virtual void Health()
     {
-        throw new System.NotImplementedException();
-    }
 
-    public virtual void Movement()
-    {
-        Debug.Log("Moving");
     }
-
     public virtual void UseAbility()
     {
-        throw new System.NotImplementedException();
+
     }
 }

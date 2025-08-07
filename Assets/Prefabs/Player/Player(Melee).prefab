@@ -8,6 +8,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6896378130465267009}
     m_Modifications:
+    - target: {fileID: 304402105776927948, guid: 0098f86c3bab3a54cb1259428083cedf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 474665823910456122, guid: 0098f86c3bab3a54cb1259428083cedf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050617638766076942, guid: 0098f86c3bab3a54cb1259428083cedf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3052321489266961769, guid: 0098f86c3bab3a54cb1259428083cedf, type: 3}
       propertyPath: m_Name
       value: Knight
@@ -56,6 +68,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6473650869716704502, guid: 0098f86c3bab3a54cb1259428083cedf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699565502990954801, guid: 0098f86c3bab3a54cb1259428083cedf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6724302248841140631, guid: 0098f86c3bab3a54cb1259428083cedf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702015458930393965, guid: 0098f86c3bab3a54cb1259428083cedf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -64,6 +92,16 @@ PrefabInstance:
 --- !u!4 &12591503932812013 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5438021387942412213, guid: 0098f86c3bab3a54cb1259428083cedf, type: 3}
+  m_PrefabInstance: {fileID: 5429934067822024024}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5606236382057053794 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 474665823910456122, guid: 0098f86c3bab3a54cb1259428083cedf, type: 3}
+  m_PrefabInstance: {fileID: 5429934067822024024}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5720262424693842324 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 304402105776927948, guid: 0098f86c3bab3a54cb1259428083cedf, type: 3}
   m_PrefabInstance: {fileID: 5429934067822024024}
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &8409358115010877963 stripped
@@ -119,6 +157,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4101904792092552111, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
+      propertyPath: weapons.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4101904792092552111, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
+      propertyPath: 'weapons.Array.data[0]'
+      value: 
+      objectReference: {fileID: 5606236382057053794}
+    - target: {fileID: 4101904792092552111, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
+      propertyPath: 'weapons.Array.data[1]'
+      value: 
+      objectReference: {fileID: 5720262424693842324}
     - target: {fileID: 5513266505007367429, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       propertyPath: m_Name
       value: Player(Melee)

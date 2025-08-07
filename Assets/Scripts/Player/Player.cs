@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     private PlayerInteractor playerInteractor;
     GameInput gameInput;
 
+    private PlayerState currentState;
 
     void Start()
     {
@@ -58,7 +59,6 @@ public class Player : MonoBehaviour
     
         fsm.Init();
     }
-
     private void AssignEvents()
     {
         gameInput.OnInteractPlayer += InputSystem_OnInteractPlayer;

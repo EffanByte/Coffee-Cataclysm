@@ -1,6 +1,7 @@
 using UnityEngine;
 using Playroom;
 using System.Collections.Generic;
+using SimpleJSON;
 using System;
 
 public class PlayerData
@@ -72,18 +73,27 @@ public class PlayroomManager : MonoBehaviour
             _playroomKit.RpcRegister("HandleBlendCoffee", HandleHeldItem);
             _playroomKit.RpcRegister("HandleReceiveBlend", HandleReceiveBlend);
             _playroomKit.RpcRegister("HandleInsertBean", HandleInsertBean);
-
+            _playroomKit.RpcRegister("HandleStartBrew", HandleStartBrew);
         });
     }
 
     private void HandleInsertBean(string data, string sender)
     {
-
+        var parts = data.Split(new[] { "|?|" }, StringSplitOptions.None);
+        string makerId = parts[0];
+        HeldItemType bean = (HeldItemType)Enum.Parse(typeof(HeldItemType), parts[1]);
+        var maker = CoffeeMakerInteraction.GetById(makerId);
+        maker?.ProcessInsertBean(bean);
     }
 
     private void HandleReceiveBlend(string data, string sender)
     {
 
+    }
+
+    private void HandleStartBrew(string data, string sender)
+    {
+        
     }
     private void HandleBlendCoffee(string data, string sender)
     {

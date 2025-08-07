@@ -1101,6 +1101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1718b6826644c6d4bb299d85a8976890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MakerId: CoffeeMaker-A
   brewDuration: 2
   vibrationMagnitude: 0.05
   progressBar: {fileID: 382585518}
@@ -1328,6 +1329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1718b6826644c6d4bb299d85a8976890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MakerId: CoffeeMaker-B
   brewDuration: 2
   vibrationMagnitude: 0.05
   progressBar: {fileID: 708616856}
@@ -2831,6 +2833,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 433979359672493896, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 433979359672493896, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.029
+      objectReference: {fileID: 0}
     - target: {fileID: 433979359672493896, guid: ed7418cf7ce3ca44891410967292c946, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1

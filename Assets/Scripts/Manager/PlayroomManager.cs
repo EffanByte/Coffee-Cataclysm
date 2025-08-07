@@ -64,7 +64,7 @@ public class PlayroomManager : MonoBehaviour
             maxPlayersPerRoom = 4,
         }, () =>
         {
-            _playroomKit.OnPlayerJoin(spawnPlayer);
+            _playroomKit.OnPlayerJoin(SpawnPlayer);
             _playroomKit.RpcRegister("HandleHeldItem", HandleHeldItem);
         });
     }
@@ -75,7 +75,7 @@ public class PlayroomManager : MonoBehaviour
         GameObject playerObject = playerData.playerObject;
         playerObject.GetComponentInChildren<HoldingManager>().PickUpItem((HeldItemType)System.Enum.Parse(typeof(HeldItemType), data));
     }
-    void spawnPlayer(PlayroomKit.Player player)
+    void SpawnPlayer(PlayroomKit.Player player)
     {
         if (Players.ContainsKey(player))
             return; // Player already spawned, skip

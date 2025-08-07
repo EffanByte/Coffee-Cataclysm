@@ -11,7 +11,6 @@ public class PlayerAttacker : ClassManager
     {
         base.Start();
         gameInput.OnAttackPlayer += GameInput_OnAttackPlayer;
- 
     }
 
     private void GameInput_OnAttackPlayer(object sender, System.EventArgs e)
@@ -29,6 +28,7 @@ public class PlayerAttacker : ClassManager
     public override void Attack()
     {
         base.Attack();
+        playerAnimatonController.ChangeAnimation("Shoot",1);
         Debug.Log("Player Attacker Attacking");
     }
 

@@ -25,8 +25,15 @@ public class GameInput : MonoBehaviour
 
     private void OnDisable()
     {
+        if (PlayerInputSystem == null)
+        {
+            Debug.LogError("PlayerInputSystem or Player is null in OnDisable!");
+            return;
+        }
+
         PlayerInputSystem.Player.Disable();
     }
+    
 
     public Vector2 GetMovementNormalized()
     {

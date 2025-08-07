@@ -14,6 +14,9 @@ public abstract class BaseEnemyMovement : MonoBehaviour
     [SerializeField] private float chaseStartDistance = 10f;
     [SerializeField] private float chaseStopDistance = 12f;
 
+    private float hitInterval = 1.0f; // Time between hits
+    private float hitTimer = 0f;
+
     protected virtual void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -91,4 +94,49 @@ public abstract class BaseEnemyMovement : MonoBehaviour
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")) return;
         agent.SetDestination(player.position);
     }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag("Player"))
+    //    {
+    //        var anim = other.GetComponent<PlayerAnimatonController>();
+
+    //        if (anim.GetCurrentAnimation() == "Hit_A")
+    //        {
+    //            anim.ChangeAnimation("Hit_B");
+    //        }
+    //        else
+    //        {
+    //            anim.ChangeAnimation("Hit_A");
+    //        }
+    //    }
+    //}
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            hitTimer += Time.deltaTime;
+
+            if (hitTimer >= hitInterval)
+            {
+                var anim = other.GetComponent<PlayerAnimatonController>();
+
+                if (anim.GetCurrentAnimation() == "Hit_A")
+                    anim.ChangeAnimation("Hit_B");
+                else
+                    anim.ChangeAnimation("Hit_A");
+
+                hitTimer = 0f; // reset timer
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            hitTimer = 0f; // reset when player leaves
+        }
+    }
+
 }

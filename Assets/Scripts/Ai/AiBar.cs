@@ -118,7 +118,7 @@ public class AiBar : MonoBehaviour
     private void OrderCoffee()
     {
         currentOrder = (HeldItemType)UnityEngine.Random.Range(5, Enum.GetValues(typeof(HeldItemType)).Length); // Randomly select a coffee blend
-        Debug.Log(currentOrder);
+        //Debug.Log(currentOrder);
         orderBubble = Instantiate(orderBubblePrefab, transform.position + new Vector3(1.5f, 3, 0), Quaternion.identity, transform);
         orderBubble.GetComponent<OrderBubble>().SetIcon(currentOrder);
     }

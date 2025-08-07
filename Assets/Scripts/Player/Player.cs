@@ -10,6 +10,7 @@ public enum PlayerState
     MOVE,
 }
 
+
 public class Player : MonoBehaviour
 {
     public static Transform transformPlayer;
@@ -26,6 +27,8 @@ public class Player : MonoBehaviour
 
     GameInput gameInput;
     public IPlayer currentClass = null;
+    public PlayerState currentState;
+    public PlayerAttackState currentAttackState;
 
     private void Awake()
     {
@@ -47,10 +50,9 @@ public class Player : MonoBehaviour
     {
         AssignEvents();
         GetPlayerComponent();
-
         transformPlayer = transform;
-
         SetStates();
+        
     }
     private void SetStates()
     {
@@ -61,8 +63,7 @@ public class Player : MonoBehaviour
         fsm.AddState(PlayerState.MOVE, new MoveState(PlayroomManager.Players[_playroomKit.MyPlayer()], gameInput, moveSpeed , animator).state);
 
         fsm.SetStartState(PlayerState.IDLE);    
-
-        fsm.SetStartState(PlayerState.IDLE);
+        
         fsm.AddTransition(PlayerState.IDLE, PlayerState.MOVE, _ => gameInput.GetMovementNormalized().magnitude > 0.1f);
         fsm.AddTransition(PlayerState.MOVE, PlayerState.IDLE, _ => gameInput.GetMovementNormalized().magnitude < 0.1f);
 
@@ -74,6 +75,7 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
+        currentState = fsm.ActiveState.name;
         fsm.OnLogic();
     }
     public bool HasItem() => heldItemManager.IsHoldingItem;

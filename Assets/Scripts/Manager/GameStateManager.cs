@@ -14,6 +14,8 @@ public class GameStateManager : MonoBehaviour
     public static GameStateManager Instance { get; private set; }
 
     public GameSceneState currentState;
+    public event EventHandler OnStateOutSide;
+    public event EventHandler OnStateGameBar;
 
     private StateMachine<GameSceneState> fsm;
 
@@ -53,6 +55,7 @@ public class GameStateManager : MonoBehaviour
     {
         fsm.Trigger("OutSide");
         currentState = GameSceneState.OutSide;
+        OnStateOutSide?.Invoke(this,EventArgs.Empty);
         SceneManager.LoadScene(SceneIndex);
     }
 
@@ -60,6 +63,7 @@ public class GameStateManager : MonoBehaviour
     {
         fsm.Trigger("GameBar");
         currentState = GameSceneState.GameBar;
+        OnStateGameBar?.Invoke(this, EventArgs.Empty);
         SceneManager.LoadScene(SceneIndex);
     }
 }

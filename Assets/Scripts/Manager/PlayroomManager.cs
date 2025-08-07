@@ -73,7 +73,6 @@ public class PlayroomManager : MonoBehaviour
             _playroomKit.RpcRegister("HandleBlendCoffee", HandleHeldItem);
             _playroomKit.RpcRegister("HandleReceiveBlend", HandleReceiveBlend);
             _playroomKit.RpcRegister("HandleInsertBean", HandleInsertBean);
-            _playroomKit.RpcRegister("HandleStartBrew", HandleStartBrew);
         });
     }
 
@@ -87,15 +86,6 @@ public class PlayroomManager : MonoBehaviour
     }
 
     private void HandleReceiveBlend(string data, string sender)
-    {
-
-    }
-
-    private void HandleStartBrew(string data, string sender)
-    {
-        
-    }
-    private void HandleBlendCoffee(string data, string sender)
     {
 
     }

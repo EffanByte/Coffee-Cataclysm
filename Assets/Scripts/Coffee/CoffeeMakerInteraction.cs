@@ -191,7 +191,7 @@ public class CoffeeMakerInteraction : MonoBehaviour
 
     public void GiveBlendToPlayer()
     {
-        _playroomKit.RpcCall("HandleReceiveBlend", 0, PlayroomKit.RpcMode.ALL);
+        _playroomKit.RpcCall("HandleReceiveBlend", , PlayroomKit.RpcMode.ALL);
     }
 
     // helper to find by ID

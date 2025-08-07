@@ -28,7 +28,7 @@ public class PlayerAttacker : ClassManager
     public override void Attack()
     {
         base.Attack();
-        playerAnimatonController.ChangeAnimation("Shoot");
+        playerAnimatonController.ChangeAnimation("Shoot",1);
         Debug.Log("Player Attacker Attacking");
     }
 

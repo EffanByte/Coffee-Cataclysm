@@ -29,6 +29,8 @@ public class PlayerTank : ClassManager
     public override void Attack()
     {
         base.Attack();
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")) return;
+        animator.SetTrigger("Attack");
         Debug.Log("Player Tank Attacking");
     }
 

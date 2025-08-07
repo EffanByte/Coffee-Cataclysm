@@ -11,6 +11,9 @@ public class PlayerMelee : ClassManager
     {
         base.Start();
         gameInput.OnAttackPlayer += GameInput_OnAttackPlayer;
+
+        if (_playerType == PlayerType.Melee)
+            _playerAttackState = PlayerAttackState.Melee;
     }
 
     private void GameInput_OnAttackPlayer(object sender, System.EventArgs e)
@@ -28,6 +31,7 @@ public class PlayerMelee : ClassManager
     public override void Attack()
     {
         base.Attack();
+        playerAnimatonController.ChangeAnimation("Melee");
         Debug.Log("Player Melee Attacking");
     }
 

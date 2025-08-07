@@ -27,6 +27,7 @@ public class PlayerHealer : ClassManager
     public override void Attack()
     {
         base.Attack();
+        playerAnimatonController.ChangeAnimation("Mage_Shoot");
         Debug.Log("Player Healer Attacking");
     }
 

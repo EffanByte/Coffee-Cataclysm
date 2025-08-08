@@ -1,13 +1,12 @@
 using System;
 using UnityEngine;
-
+using Playroom;
 public class PlayerInteractor : MonoBehaviour
 {
     [SerializeField] private float interactionRange = 2.5f;
     [SerializeField] private float coneAngle = 45f;
     private HoldingManager holdingManager;
-
-
+    private PlayroomKit _playroomKit;
     private void Start()
     {
         holdingManager = GetComponent<HoldingManager>();
@@ -66,13 +65,11 @@ public class PlayerInteractor : MonoBehaviour
                 continue;
             Debug.Log("Interacting with Customer");
             AiBar aiBar = hit.GetComponent<AiBar>();
-            Debug.Log(holdingManager.IsHoldingItem);
-            Debug.Log(aiBar);
-            Debug.Log($"AI Bar: {aiBar}, Holding Item: {holdingManager.HeldItem}");
             if (aiBar != null && holdingManager.IsHoldingItem)
             {
+                string payload = $"{aiBar.CustomerID}|?|{holdingManager.HeldItem}";
                 HeldItemType heldItem = holdingManager.HeldItem;
-                Debug.Log($"Serving {heldItem} to AI Bar");
+                _playroomKit.RpcCall("HandleReceiveOrder", payload, PlayroomKit.RpcMode.ALL);
                 aiBar.ReceiveOrder(heldItem);
                 holdingManager.DropItem();
                 return;

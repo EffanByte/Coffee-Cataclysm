@@ -73,9 +73,24 @@ public class PlayroomManager : MonoBehaviour
             _playroomKit.RpcRegister("HandleBlendCoffee", HandleHeldItem);
             _playroomKit.RpcRegister("HandleReceiveBlend", HandleReceiveBlend);
             _playroomKit.RpcRegister("HandleInsertBean", HandleInsertBean);
+            _playroomKit.RpcRegister("HandleReceiveOrder", HandleReceiveOrder);
         });
     }
 
+    private void HandleReceiveOrder(string data, string sender)
+    {
+        var parts = data.Split(new[] { "|?|" }, StringSplitOptions.None);
+        string customerId = parts[0];
+        HeldItemType item = (HeldItemType)Enum.Parse(typeof(HeldItemType), parts[1]);
+        AiBar aiBar = AiBar.GetByCustomerId(customerId);
+        if (aiBar != null)
+        {
+            aiBar.ReceiveOrder(item);
+            Players.TryGetValue(_playroomKit.GetPlayer(sender), out PlayerData playerData);
+            playerData.HeldItem = HeldItemType.None;
+            playerData.playerObject.GetComponentInChildren<HeldItemVisualizer>().Hide();
+        }
+    }
     private void HandleInsertBean(string data, string sender)
     {
         var parts = data.Split(new[] { "|?|" }, StringSplitOptions.None);
@@ -96,7 +111,7 @@ public class PlayroomManager : MonoBehaviour
         CoffeeMakerInteraction maker = CoffeeMakerInteraction.GetById(makerId);
         maker.insertedBeans.Clear();
         maker.isBlendReady = false;
-        
+
         HandleHeldItem(blendType.ToString(), sender);
     }
     private void HandleHeldItem(string data, string sender)

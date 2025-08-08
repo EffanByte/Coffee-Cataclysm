@@ -1,4 +1,5 @@
 using System;
+using Castle.Components.DictionaryAdapter.Xml;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -16,7 +17,7 @@ public class AiBar : MonoBehaviour
     [SerializeField] private Animator animator;
 
     HeldItemType currentOrder = HeldItemType.None;
-
+    public string CustomerID;
     [SerializeField] private GameObject orderBubblePrefab;
     public AIState currentState;
     private bool orderReceived = false;
@@ -135,7 +136,7 @@ public class AiBar : MonoBehaviour
             Debug.Log("Received correct order: " + order);
             currentOrder = HeldItemType.None; // Reset order after serving
         }
-        Debug.Log($"Received order: {currentOrder}");
+        Debug.Log($"Received order: {order}");
         orderReceived = true;
         orderBubble.SetActive(false);
     }
@@ -144,5 +145,19 @@ public class AiBar : MonoBehaviour
     {
         Transform exitWaypoint = waypointManager.GetExitWaypoint();
         agent.SetDestination(exitWaypoint.position);
+    }
+
+    public static AiBar GetByCustomerId(string customerId)
+    {
+        GameObject[] allBars = GameObject.FindGameObjectsWithTag("AiBar");
+        foreach (var bar in allBars)
+        {
+            AiBar aiBar = bar.GetComponent<AiBar>();
+            if (aiBar.CustomerID == customerId)
+            {
+                return aiBar;
+            }
+        }
+        return null;
     }
 }

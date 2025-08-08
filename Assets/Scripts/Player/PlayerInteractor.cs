@@ -9,6 +9,7 @@ public class PlayerInteractor : MonoBehaviour
     private PlayroomKit _playroomKit;
     private void Start()
     {
+        _playroomKit = PlayroomManager.Instance.GetPlayroomKit();
         holdingManager = GetComponent<HoldingManager>();
         if (holdingManager == null)
         {

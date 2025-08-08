@@ -149,13 +149,14 @@ public class AiBar : MonoBehaviour
 
     public static AiBar GetByCustomerId(string customerId)
     {
-        GameObject[] allBars = GameObject.FindGameObjectsWithTag("AiBar");
+        AiBar[] allBars = FindObjectsByType<AiBar>(FindObjectsSortMode.None);
         foreach (var bar in allBars)
         {
-            AiBar aiBar = bar.GetComponent<AiBar>();
-            if (aiBar.CustomerID == customerId)
+            Debug.Log(bar.CustomerID);
+            if (bar.CustomerID == customerId)
             {
-                return aiBar;
+                Debug.Log($"Found AiBar with CustomerID: {customerId}");
+                return bar;
             }
         }
         return null;

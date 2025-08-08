@@ -130,8 +130,8 @@ public class PlayroomManager : MonoBehaviour
     {
         Players.TryGetValue(_playroomKit.GetPlayer(sender), out PlayerData playerData);
         GameObject playerObject = playerData.playerObject;
-        playerObject.GetComponentInChildren<HeldItemVisualizer>().Hide();
         playerData.HeldItem = HeldItemType.None;
+        playerObject.GetComponent<HoldingManager>().DropItem();
     }
     void spawnPlayer(PlayroomKit.Player player)
     {

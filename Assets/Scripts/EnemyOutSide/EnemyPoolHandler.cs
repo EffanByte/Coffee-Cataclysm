@@ -24,7 +24,6 @@ public class EnemyPoolHandler : MonoBehaviour
         for (int i = 0; i < poolSize; i++)
         {
             GameObject npc = Instantiate(npcPrefabs[Random.Range(0, npcPrefabs.Length)],transform);
-            npc.GetComponent<AiBar>().CustomerID = "NPC_" + i; // Assign a unique ID to each NPC
             npc.SetActive(false);
             pool.Add(npc);
         }

@@ -187,7 +187,7 @@ public class CoffeeMakerInteraction : MonoBehaviour
 
     public void GiveBlendToPlayer()
     {
-        string payload = $"{MakerId}|?|{blendType.ToString()}";
+        string payload = $"{MakerId}|?|{blendType}";
         _playroomKit.RpcCall("HandleReceiveBlend", payload, PlayroomKit.RpcMode.ALL);
     }
 

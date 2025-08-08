@@ -1102,13 +1102,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MakerId: CoffeeMaker-A
-  brewDuration: 2
+  brewDuration: 8
   vibrationMagnitude: 0.05
   progressBar: {fileID: 382585518}
   doneColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  coffeeBlendPrefab: {fileID: 0}
+  blendType: 0
+  isBlendReady: 0
   blendTimer: 0
   blendTimeout: 7
+  insertedBeans: 
 --- !u!65 &768913316
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1330,13 +1332,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MakerId: CoffeeMaker-B
-  brewDuration: 2
+  brewDuration: 8
   vibrationMagnitude: 0.05
   progressBar: {fileID: 708616856}
   doneColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  coffeeBlendPrefab: {fileID: 0}
+  blendType: 0
+  isBlendReady: 0
   blendTimer: 0
   blendTimeout: 7
+  insertedBeans: 
 --- !u!65 &986643279
 BoxCollider:
   m_ObjectHideFlags: 0

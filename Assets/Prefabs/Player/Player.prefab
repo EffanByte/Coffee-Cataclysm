@@ -129,7 +129,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  gameInput: {fileID: 0}
 --- !u!54 &6105542955118023059
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -169,7 +168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7457b51dc87e5ac4c9e8e9e845b8fd73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visualizer: {fileID: 5089458704147027078}
   interactionRange: 3
   interactionConeAngle: 40
 --- !u!114 &6696396544442373823
@@ -276,7 +274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coffeeBeanBrownPrefab: {fileID: 958732029257513384, guid: 605a414e3dbfa234ba55b436573c50b1, type: 3}
   coffeeBeanWhitePrefab: {fileID: 567709065423979755, guid: 04a7140dcbc102241913c1be8c5ebfb4, type: 3}
-  blendBrownPrefab: {fileID: 919132149155446097, guid: 35a5b9f57925f6a4097ad19fc0d711c1, type: 3}
+  blendBrownPrefab: {fileID: 919132149155446097, guid: 9e2dfa78e38482d499055f96329e0cda, type: 3}
   blendWhitePrefab: {fileID: 919132149155446097, guid: becc220de49e44b4aa650d2da6602cec, type: 3}
   blendMixPrefab: {fileID: 919132149155446097, guid: ac31eb67be424be4ba78bf2f64436ad7, type: 3}
   cupPrefab: {fileID: 0}

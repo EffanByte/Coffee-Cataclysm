@@ -35,19 +35,16 @@ public class CoffeeMakerInteraction : MonoBehaviour
     [Header("Progress Bar UI")]
     public Slider progressBar;
     public Color doneColor = Color.yellow;
-
-    [Header("Blend Spawn")]
-    public GameObject coffeeBlendPrefab;
     private Vector3 originalPosition;
     private float timer = 0f;
     private bool isBrewing = false;
-    HeldItemType blendType = HeldItemType.None;
-    private bool isBlendReady = false;
+    public HeldItemType blendType = HeldItemType.None;
+    public bool isBlendReady = false;
     [SerializeField] private float blendTimer = 0f;
     [SerializeField] private float blendTimeout = 7f;
 
     private PlayroomKit _playroomKit;
-    private List<HeldItemType> insertedBeans = new();
+    public List<HeldItemType> insertedBeans = new();
 
     void Start()
     {
@@ -121,10 +118,9 @@ public class CoffeeMakerInteraction : MonoBehaviour
     {
         if (insertedBeans.Count == 0)
             ProcessStartBrewing();
-
         insertedBeans.Add(beanType);
         timer -= timer * 0.25f;
-        Debug.Log($"[RPC] Bean inserted: {beanType}.");
+        Debug.Log($"Inserted bean: {beanType}, total beans: {insertedBeans.Count}");
     }
 
     private void ProcessStartBrewing()
@@ -133,7 +129,6 @@ public class CoffeeMakerInteraction : MonoBehaviour
         timer = 0;
         originalPosition = transform.localPosition;
         if (progressBar != null) progressBar.gameObject.SetActive(true);
-        Debug.Log($"[RPC] Brewing with {insertedBeans.Count} bean(s).");
     }
     public void StartBrewing()
     {
@@ -146,8 +141,6 @@ public class CoffeeMakerInteraction : MonoBehaviour
             progressBar.gameObject.SetActive(true);
             progressBar.value = 0;
         }
-
-        Debug.Log($"Brewing with {insertedBeans.Count} bean(s).");
     }
 
 
@@ -165,7 +158,10 @@ public class CoffeeMakerInteraction : MonoBehaviour
         if (hasBrown && hasWhite)
             blendType = HeldItemType.MixedCoffeeBlend;
         else if (hasBrown)
+        {
             blendType = HeldItemType.CoffeeBlendBrown;
+            Debug.Log("Ayein");
+        }
         else if (hasWhite)
             blendType = HeldItemType.CoffeeBlendWhite;
 
@@ -191,7 +187,8 @@ public class CoffeeMakerInteraction : MonoBehaviour
 
     public void GiveBlendToPlayer()
     {
-        _playroomKit.RpcCall("HandleReceiveBlend", , PlayroomKit.RpcMode.ALL);
+        string payload = $"{MakerId}|?|{blendType.ToString()}";
+        _playroomKit.RpcCall("HandleReceiveBlend", payload, PlayroomKit.RpcMode.ALL);
     }
 
     // helper to find by ID

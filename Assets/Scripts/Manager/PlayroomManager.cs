@@ -83,6 +83,9 @@ public class PlayroomManager : MonoBehaviour
         HeldItemType bean = (HeldItemType)Enum.Parse(typeof(HeldItemType), parts[1]);
         var maker = CoffeeMakerInteraction.GetById(makerId);
         maker?.ProcessInsertBean(bean);
+        Players.TryGetValue(_playroomKit.GetPlayer(sender), out PlayerData playerData);
+        playerData.HeldItem = HeldItemType.None;
+        playerData.playerObject.GetComponentInChildren<HeldItemVisualizer>().Hide();
     }
 
     private void HandleReceiveBlend(string data, string sender)

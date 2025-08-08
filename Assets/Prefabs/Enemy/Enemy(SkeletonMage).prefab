@@ -158,8 +158,8 @@ MonoBehaviour:
   player: {fileID: 0}
   updateSpeed: 0.1
   animator: {fileID: 4903548255920409891}
-  chaseStartDistance: 20
-  chaseStopDistance: 22
+  chaseStartDistance: 30
+  chaseStopDistance: 32
 --- !u!4 &8105300616122632840 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6182692231960929844, guid: 95609d75852f41146944ded870260787, type: 3}

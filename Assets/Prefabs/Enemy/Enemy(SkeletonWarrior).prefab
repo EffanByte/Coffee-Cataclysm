@@ -163,5 +163,5 @@ MonoBehaviour:
   player: {fileID: 0}
   updateSpeed: 0.1
   animator: {fileID: 5474027246634416}
-  chaseStartDistance: 20
-  chaseStopDistance: 22
+  chaseStartDistance: 30
+  chaseStopDistance: 32

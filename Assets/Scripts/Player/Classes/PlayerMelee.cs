@@ -31,7 +31,7 @@ public class PlayerMelee : ClassManager
     public override void Attack()
     {
         base.Attack();
-        playerAnimatonController.ChangeAnimation("Melee",1);
+        playerAnimatonController.ChangeAnimation("Melee");
         Debug.Log("Player Melee Attacking");
     }
 

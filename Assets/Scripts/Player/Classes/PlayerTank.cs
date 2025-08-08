@@ -29,7 +29,7 @@ public class PlayerTank : ClassManager
     public override void Attack()
     {
         base.Attack();
-        playerAnimatonController.ChangeAnimation("Melee", 1);
+        playerAnimatonController.ChangeAnimation("Melee");
         Debug.Log("Player Tank Attacking");
     }
 

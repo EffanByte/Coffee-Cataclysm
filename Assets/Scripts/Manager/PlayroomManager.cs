@@ -93,15 +93,11 @@ public class PlayroomManager : MonoBehaviour
         var parts = data.Split(new[] { "|?|" }, StringSplitOptions.None);
         string makerId = parts[0];
         HeldItemType blendType = (HeldItemType)Enum.Parse(typeof(HeldItemType), parts[1]);
-        Debug.Log($"Received blend: {blendType} from maker: {makerId}");
         CoffeeMakerInteraction maker = CoffeeMakerInteraction.GetById(makerId);
-        Players.TryGetValue(_playroomKit.GetPlayer(sender), out PlayerData playerData);
-        GameObject playerObject = playerData.playerObject;
-        playerObject.GetComponentInChildren<HeldItemVisualizer>().Show(blendType);
-        playerData.HeldItem = maker.blendType;
         maker.insertedBeans.Clear();
         maker.isBlendReady = false;
-
+        
+        HandleHeldItem(blendType.ToString(), sender);
     }
     private void HandleHeldItem(string data, string sender)
     {
@@ -110,6 +106,9 @@ public class PlayroomManager : MonoBehaviour
         HeldItemType item = (HeldItemType)Enum.Parse(typeof(HeldItemType), data);
         playerObject.GetComponentInChildren<HeldItemVisualizer>().Show(item);
         playerData.HeldItem = item;
+        Debug.Log(playerData.HeldItem);
+        playerObject.GetComponent<HoldingManager>().HeldItem = item;
+        Debug.Log(playerObject.GetComponent<HoldingManager>().HeldItem);
     }
 
     private void HandleDropItem(string data, string sender)

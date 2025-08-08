@@ -41,7 +41,7 @@ public class PlayerInteractor : MonoBehaviour
             }
 
             // 2. Otherwise, try to start brewing
-            var heldItem = holdingManager.HeldItem;
+            HeldItemType heldItem = holdingManager.HeldItem;
 
             if (heldItem == HeldItemType.CoffeeBeanBrown || heldItem == HeldItemType.CoffeeBeanWhite)
             {
@@ -64,11 +64,15 @@ public class PlayerInteractor : MonoBehaviour
         {
             if (!hit.CompareTag("Customer"))
                 continue;
-
+            Debug.Log("Interacting with Customer");
             AiBar aiBar = hit.GetComponent<AiBar>();
+            Debug.Log(holdingManager.IsHoldingItem);
+            Debug.Log(aiBar);
+            Debug.Log($"AI Bar: {aiBar}, Holding Item: {holdingManager.HeldItem}");
             if (aiBar != null && holdingManager.IsHoldingItem)
             {
                 HeldItemType heldItem = holdingManager.HeldItem;
+                Debug.Log($"Serving {heldItem} to AI Bar");
                 aiBar.ReceiveOrder(heldItem);
                 holdingManager.DropItem();
                 return;

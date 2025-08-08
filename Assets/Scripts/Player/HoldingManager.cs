@@ -15,7 +15,7 @@ public enum HeldItemType
 
 public class HoldingManager : MonoBehaviour
 {
-    public HeldItemType HeldItem { get; private set; } = HeldItemType.None;
+    public HeldItemType HeldItem { get; set; } = HeldItemType.None;
     public bool IsHoldingItem => HeldItem != HeldItemType.None;
 
     private PlayroomKit _playroomKit;
@@ -73,7 +73,6 @@ public class HoldingManager : MonoBehaviour
 
     public void PickUpItem(HeldItemType item)
     {
-        HeldItem = item;
         _playroomKit.RpcCall("HandleHeldItem", item.ToString(), PlayroomKit.RpcMode.ALL);
     }
 

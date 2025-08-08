@@ -12,9 +12,9 @@ public class EnemyBarPool : MonoBehaviour
     {
         for (int i = 0; i < poolSize; i++)
         {
-            GameObject randomPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
-            randomPrefab.GetComponent<AiBar>().CustomerID = "NPC_" + i; // Assign a unique ID to each NPC
-            GameObject enemy = Instantiate(randomPrefab);
+            GameObject prefab = enemyPrefabs[i % enemyPrefabs.Length]; // Deterministic selection
+            prefab.GetComponent<AiBar>().CustomerID = "NPC_" + i; // Assign a unique ID to each NPC
+            GameObject enemy = Instantiate(prefab);
             enemy.SetActive(false);
             pool.Enqueue(enemy);
         }

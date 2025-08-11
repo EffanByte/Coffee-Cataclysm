@@ -74,9 +74,46 @@ public class PlayroomManager : MonoBehaviour
             _playroomKit.RpcRegister("HandleReceiveBlend", HandleReceiveBlend);
             _playroomKit.RpcRegister("HandleInsertBean", HandleInsertBean);
             _playroomKit.RpcRegister("HandleReceiveOrder", HandleReceiveOrder);
+            _playroomKit.RpcRegister("HandleNewOrder", HandleNewOrder);
         });
     }
 
+    private void HandleNewOrder(string data, string sender)
+    {
+        var parts = data.Split(new[] { "|?|" }, StringSplitOptions.None);
+        if (parts.Length != 2)
+        {
+            Debug.LogError($"Invalid HandleNewOrder payload: {data}");
+            return;
+        }
+
+        string customerId = parts[0];
+        HeldItemType orderType = (HeldItemType)Enum.Parse(typeof(HeldItemType), parts[1]);
+
+        if (OrderManager.Instance != null)
+        {
+            OrderManager.Instance.SyncOrderFromRPC(customerId, orderType);
+            
+            AiBar aiBar = AiBar.GetByCustomerId(customerId);
+            if (aiBar != null)
+            {
+                GameObject orderBubble = OrderManager.Instance.CreateOrderBubble(aiBar.transform, orderType);
+                
+                if (orderBubble != null)
+                {
+                    aiBar.SetOrderBubble(orderBubble);
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"Could not find AI customer with ID: {customerId}");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("OrderManager instance not found when syncing order");
+        }
+    }
     private void HandleReceiveOrder(string data, string sender)
     {
         var parts = data.Split(new[] { "|?|" }, StringSplitOptions.None);

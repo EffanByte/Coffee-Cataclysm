@@ -16,7 +16,6 @@ public class PlayerAnimatonController : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(player.currentState);
         CheckAnimation();
     }
 

@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityHFSM;
+using Playroom;
+using SimpleJSON;
+using System;
 public enum BlendState
 {
     NoBlend,
@@ -12,9 +15,17 @@ public enum BlendState
     CoffeeBlendWhite,
     MixedCoffeeBlend // 👈 new blend
 }
-public class CoffeeMakerInteraction : MonoBehaviour
-{
 
+[Serializable]
+public class InsertBeanPayload
+{
+    public string MakerId;
+    public HeldItemType BeanType;
+}
+public class CoffeeMakerInteraction : MonoBehaviour
+{   
+
+    public string MakerId;
     private StateMachine<BlendState> blendFSM;
 
     [Header("Brewing Settings")]
@@ -24,24 +35,22 @@ public class CoffeeMakerInteraction : MonoBehaviour
     [Header("Progress Bar UI")]
     public Slider progressBar;
     public Color doneColor = Color.yellow;
-
-    [Header("Blend Spawn")]
-    public GameObject coffeeBlendPrefab;
     private Vector3 originalPosition;
     private float timer = 0f;
     private bool isBrewing = false;
-    private GameObject spawnedBlend;
-    HeldItemType blendType = HeldItemType.None;
-    private bool isBlendReady = false;
+    public HeldItemType blendType = HeldItemType.None;
+    public bool isBlendReady = false;
     [SerializeField] private float blendTimer = 0f;
     [SerializeField] private float blendTimeout = 7f;
 
+    private PlayroomKit _playroomKit;
+    public List<HeldItemType> insertedBeans = new();
 
-    private List<HeldItemType> insertedBeans = new();
     void Start()
     {
-        blendFSM = new StateMachine<BlendState>();
+        _playroomKit = PlayroomManager.Instance.GetPlayroomKit();
 
+        blendFSM = new StateMachine<BlendState>();
 
         blendFSM.AddState(BlendState.NoBlend, new State<BlendState>());
         blendFSM.AddState(BlendState.LowBlend, new State<BlendState>());
@@ -75,7 +84,7 @@ public class CoffeeMakerInteraction : MonoBehaviour
             timer += Time.deltaTime;
             if (timer < brewDuration)
             {
-                transform.localPosition = originalPosition + Random.insideUnitSphere * vibrationMagnitude;
+                transform.localPosition = originalPosition + UnityEngine.Random.insideUnitSphere * vibrationMagnitude;
                 if (progressBar != null)
                     progressBar.value = percent;
             }
@@ -92,7 +101,6 @@ public class CoffeeMakerInteraction : MonoBehaviour
             if (blendTimer >= blendTimeout)
             {
                 Debug.Log("Blend burned!");
-                Destroy(spawnedBlend);
                 isBlendReady = false;
                 blendTimer = 0f;
             }
@@ -101,19 +109,27 @@ public class CoffeeMakerInteraction : MonoBehaviour
 
     public void InsertBean(HeldItemType beanType)
     {
-        if (!CanStartBrewing())
-            return;
-
-        if (insertedBeans.Count == 0)
-            StartBrewing();
-        insertedBeans.Add(beanType);
-
-        float beanCount = insertedBeans.Count;
-        timer = timer - (timer * 0.25f);
-
-        Debug.Log($"Bean inserted: {beanType}.");
+        var node = new JSONObject();
+        string payload = $"{MakerId}|?|{beanType.ToString()}";
+        _playroomKit.RpcCall("HandleInsertBean", payload, PlayroomKit.RpcMode.ALL);
     }
 
+    public void ProcessInsertBean(HeldItemType beanType)
+    {
+        if (insertedBeans.Count == 0)
+            ProcessStartBrewing();
+        insertedBeans.Add(beanType);
+        timer -= timer * 0.25f;
+        Debug.Log($"Inserted bean: {beanType}, total beans: {insertedBeans.Count}");
+    }
+
+    private void ProcessStartBrewing()
+    {
+        isBrewing = true;
+        timer = 0;
+        originalPosition = transform.localPosition;
+        if (progressBar != null) progressBar.gameObject.SetActive(true);
+    }
     public void StartBrewing()
     {
         isBrewing = true;
@@ -125,8 +141,6 @@ public class CoffeeMakerInteraction : MonoBehaviour
             progressBar.gameObject.SetActive(true);
             progressBar.value = 0;
         }
-
-        Debug.Log($"Brewing with {insertedBeans.Count} bean(s).");
     }
 
 
@@ -144,7 +158,10 @@ public class CoffeeMakerInteraction : MonoBehaviour
         if (hasBrown && hasWhite)
             blendType = HeldItemType.MixedCoffeeBlend;
         else if (hasBrown)
+        {
             blendType = HeldItemType.CoffeeBlendBrown;
+            Debug.Log("Ayein");
+        }
         else if (hasWhite)
             blendType = HeldItemType.CoffeeBlendWhite;
 
@@ -170,15 +187,24 @@ public class CoffeeMakerInteraction : MonoBehaviour
 
     public void GiveBlendToPlayer()
     {
+        string payload = $"{MakerId}|?|{blendType}";
+        _playroomKit.RpcCall("HandleReceiveBlend", payload, PlayroomKit.RpcMode.ALL);
+    }
 
-        if (Player.transformPlayer.TryGetComponent(out HoldingManager holding))
+    // helper to find by ID
+    public static CoffeeMakerInteraction GetById(string makerId)
+    {
+        var all = GameObject.FindGameObjectsWithTag("CoffeeMaker");
+        for (int i = 0; i < all.Length; i++)
         {
-            holding.PickUpItem(blendType);
-            Destroy(spawnedBlend);
-            spawnedBlend = null;
-            isBlendReady = false;
-            blendTimer = 0f;
+            Debug.Log(i.ToString() + " " + all[i].name);
+            var cm = all[i].GetComponent<CoffeeMakerInteraction>();
+            if (cm != null && cm.MakerId == makerId)
+                return cm;
         }
+
+        Debug.LogWarning($"[CoffeeMaker] no instance found with MakerId '{makerId}'");
+        return null;
     }
 }
 

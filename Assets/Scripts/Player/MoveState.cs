@@ -21,8 +21,8 @@ public class MoveState
 
                 Transform playerTransform = playerData.playerObject.transform;
 
-             //   if (playerData.player.id == _playroomKit.MyPlayer().id)
-              //  {
+                if (playerData.player.id == _playroomKit.MyPlayer().id)
+                {
                     Vector2 inputVector = input.GetMovementNormalized();
                     Vector3 moveDir = new(inputVector.x, 0f, inputVector.y);
 
@@ -36,7 +36,7 @@ public class MoveState
                         float moveDistance = Time.deltaTime * speed;
                         playerTransform.position += moveDir * moveDistance;
                     }
-             //   }
+                }
             
 
             },

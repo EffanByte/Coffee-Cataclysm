@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityHFSM;
@@ -15,9 +14,7 @@ public class AiBar : MonoBehaviour
 {
     [SerializeField] private Animator animator;
 
-    HeldItemType currentOrder = HeldItemType.None;
-
-    [SerializeField] private GameObject orderBubblePrefab;
+    public string CustomerID;
     public AIState currentState;
     private bool orderReceived = false;
     private NavMeshAgent agent;
@@ -37,6 +34,7 @@ public class AiBar : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         AssignWaypoint();
     }
+    
     private void SetupFSM()
     {
         fsm = new StateMachine<AIState>();
@@ -86,11 +84,10 @@ public class AiBar : MonoBehaviour
         fsm.Init();
     }
 
-
     private void Update()
     {
         fsm.OnLogic();
-        string currentStateName = fsm.ActiveStateName.ToString();
+        fsm.ActiveStateName.ToString();
     }
 
     private void AssignWaypoint()
@@ -113,36 +110,79 @@ public class AiBar : MonoBehaviour
         {
             waypointManager.ReleaseWaypoint(targetWaypoint);
         }
+        
+        if (!string.IsNullOrEmpty(CustomerID))
+        {
+            OrderManager.Instance?.CancelOrder(CustomerID);
+        }
     }
 
     private void OrderCoffee()
     {
-        currentOrder = (HeldItemType)UnityEngine.Random.Range(5, Enum.GetValues(typeof(HeldItemType)).Length); // Randomly select a coffee blend
-        //Debug.Log(currentOrder);
-        orderBubble = Instantiate(orderBubblePrefab, transform.position + new Vector3(1.5f, 3, 0), Quaternion.identity, transform);
-        orderBubble.GetComponent<OrderBubble>().SetIcon(currentOrder);
+        if (OrderManager.Instance != null)
+        {
+            OrderManager.Instance.CreateOrder(CustomerID);
+        }
+        else
+        {
+            Debug.LogError("OrderManager instance not found!");
+        }
     }
 
     public void ReceiveOrder(HeldItemType order)
     {
-        if (order == HeldItemType.None)
+        if (OrderManager.Instance == null)
         {
-            Debug.LogWarning("Received an empty order.");
+            Debug.LogError("OrderManager instance not found!");
             return;
         }
-        if (currentOrder == order)
+        
+        bool orderServed = OrderManager.Instance.ReceiveOrder(CustomerID, order);
+        
+        if (orderServed)
         {
-            Debug.Log("Received correct order: " + order);
-            currentOrder = HeldItemType.None; // Reset order after serving
+            Debug.Log($"Order served successfully for customer {CustomerID}");
+            orderReceived = true;
+            
+            // Hide order bubble
+            if (orderBubble != null)
+            {
+                orderBubble.SetActive(false);
+            }
         }
-        Debug.Log($"Received order: {currentOrder}");
-        orderReceived = true;
-        orderBubble.SetActive(false);
+        else
+        {
+            Debug.LogWarning($"Failed to serve order for customer {CustomerID}");
+        }
     }
 
     private void AssignExitWaypoint()
     {
         Transform exitWaypoint = waypointManager.GetExitWaypoint();
         agent.SetDestination(exitWaypoint.position);
+    }
+
+    public static AiBar GetByCustomerId(string customerId)
+    {
+        AiBar[] allBars = FindObjectsByType<AiBar>(FindObjectsSortMode.None);
+        foreach (var bar in allBars)
+        {
+            Debug.Log(bar.CustomerID);
+            if (bar.CustomerID == customerId)
+            {
+                Debug.Log($"Found AiBar with CustomerID: {customerId}");
+                return bar;
+            }
+        }
+        return null;
+    }
+    
+    /// <summary>
+    /// Sets the order bubble reference (called when bubble is created via RPC)
+    /// </summary>
+    /// <param name="bubble">The order bubble GameObject</param>
+    public void SetOrderBubble(GameObject bubble)
+    {
+        orderBubble = bubble;
     }
 }

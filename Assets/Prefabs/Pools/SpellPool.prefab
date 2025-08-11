@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3006961488111373298}
   - component: {fileID: 7599905251860722730}
   m_Layer: 0
-  m_Name: ShootPool
+  m_Name: SpellPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

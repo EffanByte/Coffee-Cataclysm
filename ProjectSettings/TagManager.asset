@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - Melee
   - Arrow
+  - Spell
   layers:
   - Default
   - TransparentFX

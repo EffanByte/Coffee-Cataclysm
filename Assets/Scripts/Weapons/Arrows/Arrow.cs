@@ -24,7 +24,11 @@ public class Arrow : MonoBehaviour
     void Update()
     {
         transform.position += moveDirection * speed * Time.deltaTime;
-        transform.rotation *= Quaternion.Euler(-90f, 0f, 0f);
+        if (moveDirection != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(moveDirection);
+            transform.rotation *= Quaternion.Euler(-90f, 0f, 0f); // model offset
+        }
         lifeTimer -= Time.deltaTime;
         if (lifeTimer <= 0f)
         {

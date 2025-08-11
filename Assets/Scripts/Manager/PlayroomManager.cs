@@ -22,7 +22,7 @@ public class PlayerData
 public class PlayroomManager : MonoBehaviour
 {
 
-    bool spawned = false;
+    public bool spawned = false;
     public static PlayroomManager Instance { get; private set; }
     private PlayroomKit _playroomKit;
     public static Dictionary<PlayroomKit.Player, PlayerData> Players = new();
@@ -179,7 +179,7 @@ public class PlayroomManager : MonoBehaviour
         Players.Add(player, new PlayerData(player, playerObject, playerScript));
         spawned = true;
         if (_playroomKit.GetPlayer(player.id) == _playroomKit.MyPlayer())
-        Debug.Log("My Player ID: " + player.id);
+            Debug.Log("My Player ID: " + player.id);
         else
         {
             Debug.Log("Other Player ID: " + player.id);

@@ -87,7 +87,7 @@ public class AiBar : MonoBehaviour
     private void Update()
     {
         fsm.OnLogic();
-        string currentStateName = fsm.ActiveStateName.ToString();
+        fsm.ActiveStateName.ToString();
     }
 
     private void AssignWaypoint()
@@ -111,7 +111,6 @@ public class AiBar : MonoBehaviour
             waypointManager.ReleaseWaypoint(targetWaypoint);
         }
         
-        // Cancel any active order when AI is disabled
         if (!string.IsNullOrEmpty(CustomerID))
         {
             OrderManager.Instance?.CancelOrder(CustomerID);
@@ -120,11 +119,9 @@ public class AiBar : MonoBehaviour
 
     private void OrderCoffee()
     {
-        // Use OrderManager to create order (this will trigger RPC call to all instances)
         if (OrderManager.Instance != null)
         {
             OrderManager.Instance.CreateOrder(CustomerID);
-            // Note: Order bubble will be created via RPC call in HandleNewOrder
         }
         else
         {
@@ -140,7 +137,6 @@ public class AiBar : MonoBehaviour
             return;
         }
         
-        // Use OrderManager to handle order reception
         bool orderServed = OrderManager.Instance.ReceiveOrder(CustomerID, order);
         
         if (orderServed)

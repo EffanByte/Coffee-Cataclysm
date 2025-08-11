@@ -37,6 +37,7 @@ public abstract class BaseEnemyMovement : MonoBehaviour
         // IDLE: Don't move
         fsm.AddState(AIState.IDLE, onEnter: s =>
         {
+            if(agent.isActiveAndEnabled)
             agent.ResetPath();
             Debug.Log("Enemy is idle.");
         },
@@ -68,6 +69,7 @@ public abstract class BaseEnemyMovement : MonoBehaviour
             {
                 if (player != null)
                     if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")) return;
+                if(agent.isActiveAndEnabled)
                 agent.SetDestination(player.position);
             }
         },
@@ -92,25 +94,18 @@ public abstract class BaseEnemyMovement : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")) return;
+        if(agent.isActiveAndEnabled)
         agent.SetDestination(player.position);
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.CompareTag("Player"))
-    //    {
-    //        var anim = other.GetComponent<PlayerAnimatonController>();
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Melee"))
+        {
+            EnemyPoolHandler.Instance.Despawn(this.gameObject);
+        }
+    }
 
-    //        if (anim.GetCurrentAnimation() == "Hit_A")
-    //        {
-    //            anim.ChangeAnimation("Hit_B");
-    //        }
-    //        else
-    //        {
-    //            anim.ChangeAnimation("Hit_A");
-    //        }
-    //    }
-    //}
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))

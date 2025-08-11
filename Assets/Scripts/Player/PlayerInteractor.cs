@@ -1,15 +1,15 @@
 using System;
 using UnityEngine;
-
+using Playroom;
 public class PlayerInteractor : MonoBehaviour
 {
     [SerializeField] private float interactionRange = 2.5f;
     [SerializeField] private float coneAngle = 45f;
     private HoldingManager holdingManager;
-
-
+    private PlayroomKit _playroomKit;
     private void Start()
     {
+        _playroomKit = PlayroomManager.Instance.GetPlayroomKit();
         holdingManager = GetComponent<HoldingManager>();
         if (holdingManager == null)
         {
@@ -33,18 +33,15 @@ public class PlayerInteractor : MonoBehaviour
             if (!hit.CompareTag("CoffeeMaker"))
                 continue;
             CoffeeMakerInteraction coffeeMaker = hit.GetComponent<CoffeeMakerInteraction>();
-            Debug.Log("Doing Check for CoffeeMakerInteraction");
             // 1. If blend is ready, give to player
-            Debug.Log(coffeeMaker.IsBlendReady());
             if (coffeeMaker.IsBlendReady())
             {
-                Debug.Log("Interacted to take blend");
                 coffeeMaker.GiveBlendToPlayer();
                 return true;
             }
 
             // 2. Otherwise, try to start brewing
-            var heldItem = holdingManager.HeldItem;
+            HeldItemType heldItem = holdingManager.HeldItem;
 
             if (heldItem == HeldItemType.CoffeeBeanBrown || heldItem == HeldItemType.CoffeeBeanWhite)
             {
@@ -67,11 +64,13 @@ public class PlayerInteractor : MonoBehaviour
         {
             if (!hit.CompareTag("Customer"))
                 continue;
-
+            Debug.Log("Interacting with Customer");
             AiBar aiBar = hit.GetComponent<AiBar>();
             if (aiBar != null && holdingManager.IsHoldingItem)
             {
+                string payload = $"{aiBar.CustomerID}|?|{holdingManager.HeldItem}";
                 HeldItemType heldItem = holdingManager.HeldItem;
+                _playroomKit.RpcCall("HandleReceiveOrder", payload, PlayroomKit.RpcMode.ALL);
                 aiBar.ReceiveOrder(heldItem);
                 holdingManager.DropItem();
                 return;

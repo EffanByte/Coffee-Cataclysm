@@ -60,4 +60,8 @@ public class HeldItemVisualizer : MonoBehaviour
             _ => null
         };
     }
+    public HeldItemType GetHeldItemTypeFromString(string itemString)
+    {
+        return (HeldItemType)System.Enum.Parse(typeof(HeldItemType), itemString);
+    }
 }

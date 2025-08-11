@@ -15,7 +15,7 @@ public enum HeldItemType
 
 public class HoldingManager : MonoBehaviour
 {
-    public HeldItemType HeldItem { get; private set; } = HeldItemType.None;
+    public HeldItemType HeldItem { get; set; } = HeldItemType.None;
     public bool IsHoldingItem => HeldItem != HeldItemType.None;
 
     private PlayroomKit _playroomKit;
@@ -23,9 +23,16 @@ public class HoldingManager : MonoBehaviour
     [SerializeField] private float interactionRange = 3f;
     [SerializeField] private float interactionConeAngle = 30f;
 
-    private void Awake()
+    private void Start()
     {
-        visualizer = GetComponentInChildren<HeldItemVisualizer>();
+        _playroomKit = PlayroomManager.Instance.GetPlayroomKit();
+        if (_playroomKit == null)
+        {
+            Debug.LogError("PlayroomKit is not initialized.");
+            return;
+        }
+        visualizer = PlayroomManager.Players[_playroomKit.MyPlayer()].playerObject.GetComponentInChildren<HeldItemVisualizer>();
+
     }
     public void TryPickupInFront()
     {
@@ -34,6 +41,7 @@ public class HoldingManager : MonoBehaviour
             Debug.Log("Already holding an item.");
             return;
         }
+
 
         Collider[] hits = Physics.OverlapSphere(transform.position, interactionRange);
 
@@ -65,9 +73,7 @@ public class HoldingManager : MonoBehaviour
 
     public void PickUpItem(HeldItemType item)
     {
-        HeldItem = item;
-        visualizer?.Show(item);
-        _playroomKit.RpcCall("HandleHeldItem", item.ToString());
+        _playroomKit.RpcCall("HandleHeldItem", item.ToString(), PlayroomKit.RpcMode.ALL);
     }
 
     public void DropItem()

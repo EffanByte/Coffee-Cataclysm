@@ -103,6 +103,42 @@ public class Player : MonoBehaviour
                 return;
             }
         }
+        transformPlayer = transform;
+
+        fsm = new StateMachine<PlayerState>();
+
+        fsm.AddState(PlayerState.IDLE, new IdleState().state);
+        fsm.AddState(PlayerState.MOVE, new MoveState(PlayroomManager.Players[_playroomKit.MyPlayer()], gameInput, moveSpeed).state);
+
+        fsm.SetStartState(PlayerState.IDLE);    
+
+        fsm.AddTransition(PlayerState.IDLE, PlayerState.MOVE, _ => gameInput.GetMovementNormalized().magnitude > 0.1f);
+        fsm.AddTransition(PlayerState.MOVE, PlayerState.IDLE, _ => gameInput.GetMovementNormalized().magnitude < 0.1f);
+    
+        fsm.Init();
     }
+    private void AssignEvents()
+    {
+        gameInput.OnInteractPlayer += InputSystem_OnInteractPlayer;
+    }
+
+    private void Awake()
+    {
+        gameInput = GetComponentInChildren<GameInput>(); 
+        AssignEvents();
+    }
+    void Update()
+    {
+        fsm.OnLogic();
+    }
+
+    public bool HasItem() => heldItemManager.IsHoldingItem;
+    public HeldItemType GetHeldItem() => heldItemManager.HeldItem;
+
+    private void InputSystem_OnInteractPlayer(object sender, System.EventArgs e)
+    {
+        playerInteractor.Interact();
+    }
+
 
 }

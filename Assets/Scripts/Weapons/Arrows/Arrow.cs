@@ -41,7 +41,8 @@ public class Arrow : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             Debug.Log("Hit enemy: " + other.name);
-            // Example: You could call enemy.TakeDamage(damage);
+           // other.gameObject.SetActive(false);
+            EnemyPoolHandler.Instance.Despawn(other.gameObject);
             ArrowPool.Instance.ReturnArrow(gameObject);
         }
     }

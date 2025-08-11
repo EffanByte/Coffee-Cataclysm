@@ -100,10 +100,8 @@ public abstract class BaseEnemyMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Melee") || other.CompareTag("Arrow"))
+        if(other.CompareTag("Melee"))
         {
-            Debug.Log("Player hit the enemey");
-            other.gameObject.SetActive(false);
             EnemyPoolHandler.Instance.Despawn(this.gameObject);
         }
     }

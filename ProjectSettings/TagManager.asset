@@ -8,11 +8,14 @@ TagManager:
   - WhiteBeanPot
   - CoffeeMaker
   - Customer
+  - Enemy
+  - Melee
+  - Arrow
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy
   - Water
   - UI
   - 

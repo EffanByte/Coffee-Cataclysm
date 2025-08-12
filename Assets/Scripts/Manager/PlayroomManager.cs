@@ -9,7 +9,7 @@ public class PlayerData
     public GameObject playerObject;
     public Player playerScript;
     public HeldItemType HeldItem;
-    public GameSceneState gameState;
+    public GameSceneState gameState = GameSceneState.GameBar;
     public PlayerData(PlayroomKit.Player player, GameObject playerObject, Player playerScript)
     {
         this.player = player;
@@ -54,7 +54,7 @@ public class PlayroomManager : MonoBehaviour
 
             foreach (var player in Players)
             {
-                if (player.Key.id != myPlayer.id)
+                if (player.Key.id != myPlayer.id && player.Value.gameState == Players[myPlayer].gameState)
                 {
                     GameObject playerObject = player.Value.playerObject;
                     playerObject.transform.position = player.Key.GetState<Vector3>("position");

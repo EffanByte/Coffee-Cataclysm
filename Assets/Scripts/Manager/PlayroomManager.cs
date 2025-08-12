@@ -203,7 +203,7 @@ public class PlayroomManager : MonoBehaviour
         {
             Debug.Log("Other Player ID: " + player.id);
         }
-    
+
     }
 
     public PlayroomKit GetPlayroomKit()

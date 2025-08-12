@@ -12,9 +12,13 @@ public class PortalTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _playroom = PlayroomManager.Instance.GetPlayroomKit();
-            // Check if this is the local player
+            PlayerData playerData = PlayroomManager.Players[_playroom.MyPlayer()];
+
             if (PlayroomManager.Players[_playroom.MyPlayer()].playerObject == other.gameObject)
+            {
+                playerData.gameState = GameSceneState.GameBar;
                 GameStateManager.Instance.GoToGameBar(LoaderScene);
+            }
         }
     }
 }

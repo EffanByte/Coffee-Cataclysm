@@ -9,6 +9,7 @@ public class PlayerData
     public GameObject playerObject;
     public Player playerScript;
     public HeldItemType HeldItem;
+    public GameSceneState gameState;
     public PlayerData(PlayroomKit.Player player, GameObject playerObject, Player playerScript)
     {
         this.player = player;

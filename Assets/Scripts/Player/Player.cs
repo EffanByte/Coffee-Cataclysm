@@ -34,11 +34,11 @@ public class Player : MonoBehaviour
     {
         if (transformPlayer != null && transformPlayer != this.transform)
         {
-            Destroy(gameObject); // Already a player exists, destroy the duplicate
+          //  Destroy(gameObject); // Already a player exists, destroy the duplicate
             return;
         }
-        transformPlayer = this.transform;
-        DontDestroyOnLoad(this.gameObject);
+        transformPlayer = transform;
+        DontDestroyOnLoad(gameObject);
 
         _playroomKit = PlayroomManager.Instance.GetPlayroomKit();
         gameInput = GetComponentInChildren<GameInput>();

@@ -25,17 +25,19 @@ public class PlayroomManager : MonoBehaviour
     public static PlayroomManager Instance { get; private set; }
     private PlayroomKit _playroomKit;
     public static Dictionary<PlayroomKit.Player, PlayerData> Players = new();
-
+    private GameStateManager gameState;
     [SerializeField] GameObject PlayerPrefab;
 
     void Awake()
     {
         _playroomKit = new PlayroomKit();
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
     void Start()
     {
         InitializePlayroom();
+        gameState = GameStateManager.Instance;
     }
     void Update()
     {
@@ -79,95 +81,112 @@ public class PlayroomManager : MonoBehaviour
 
     private void HandleNewOrder(string data, string sender)
     {
-        var parts = data.Split(new[] { "|?|" }, StringSplitOptions.None);
-        if (parts.Length != 2)
+        if (gameState.currentState == GameSceneState.GameBar)
         {
-            Debug.LogError($"Invalid HandleNewOrder payload: {data}");
-            return;
-        }
-
-        string customerId = parts[0];
-        HeldItemType orderType = (HeldItemType)Enum.Parse(typeof(HeldItemType), parts[1]);
-
-        if (OrderManager.Instance != null)
-        {
-            OrderManager.Instance.SyncOrderFromRPC(customerId, orderType);
-            
-            AiBar aiBar = AiBar.GetByCustomerId(customerId);
-            if (aiBar != null)
+            var parts = data.Split(new[] { "|?|" }, StringSplitOptions.None);
+            if (parts.Length != 2)
             {
-                GameObject orderBubble = OrderManager.Instance.CreateOrderBubble(aiBar.transform, orderType);
-                
-                if (orderBubble != null)
+                Debug.LogError($"Invalid HandleNewOrder payload: {data}");
+                return;
+            }
+
+            string customerId = parts[0];
+            HeldItemType orderType = (HeldItemType)Enum.Parse(typeof(HeldItemType), parts[1]);
+
+            if (OrderManager.Instance != null)
+            {
+                OrderManager.Instance.SyncOrderFromRPC(customerId, orderType);
+
+                AiBar aiBar = AiBar.GetByCustomerId(customerId);
+                if (aiBar != null)
                 {
-                    aiBar.SetOrderBubble(orderBubble);
+                    GameObject orderBubble = OrderManager.Instance.CreateOrderBubble(aiBar.transform, orderType);
+
+                    if (orderBubble != null)
+                    {
+                        aiBar.SetOrderBubble(orderBubble);
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning($"Could not find AI customer with ID: {customerId}");
                 }
             }
             else
             {
-                Debug.LogWarning($"Could not find AI customer with ID: {customerId}");
+                Debug.LogWarning("OrderManager instance not found when syncing order");
             }
-        }
-        else
-        {
-            Debug.LogWarning("OrderManager instance not found when syncing order");
         }
     }
     private void HandleReceiveOrder(string data, string sender)
     {
-        var parts = data.Split(new[] { "|?|" }, StringSplitOptions.None);
-        string customerId = parts[0];
-        HeldItemType item = (HeldItemType)Enum.Parse(typeof(HeldItemType), parts[1]);
-        AiBar aiBar = AiBar.GetByCustomerId(customerId);
-        if (aiBar != null)
+        if (gameState.currentState == GameSceneState.GameBar)
         {
-            aiBar.ReceiveOrder(item);
+            var parts = data.Split(new[] { "|?|" }, StringSplitOptions.None);
+            string customerId = parts[0];
+            HeldItemType item = (HeldItemType)Enum.Parse(typeof(HeldItemType), parts[1]);
+            AiBar aiBar = AiBar.GetByCustomerId(customerId);
+            if (aiBar != null)
+            {
+                aiBar.ReceiveOrder(item);
+                Players.TryGetValue(_playroomKit.GetPlayer(sender), out PlayerData playerData);
+                playerData.HeldItem = HeldItemType.None;
+                playerData.playerObject.GetComponentInChildren<HeldItemVisualizer>().Hide();
+            }
+        }
+    }
+    private void HandleInsertBean(string data, string sender)
+    {
+        if (gameState.currentState == GameSceneState.GameBar)
+        {
+            var parts = data.Split(new[] { "|?|" }, StringSplitOptions.None);
+            string makerId = parts[0];
+            HeldItemType bean = (HeldItemType)Enum.Parse(typeof(HeldItemType), parts[1]);
+            var maker = CoffeeMakerInteraction.GetById(makerId);
+            maker?.ProcessInsertBean(bean);
             Players.TryGetValue(_playroomKit.GetPlayer(sender), out PlayerData playerData);
             playerData.HeldItem = HeldItemType.None;
             playerData.playerObject.GetComponentInChildren<HeldItemVisualizer>().Hide();
         }
     }
-    private void HandleInsertBean(string data, string sender)
-    {
-        var parts = data.Split(new[] { "|?|" }, StringSplitOptions.None);
-        string makerId = parts[0];
-        HeldItemType bean = (HeldItemType)Enum.Parse(typeof(HeldItemType), parts[1]);
-        var maker = CoffeeMakerInteraction.GetById(makerId);
-        maker?.ProcessInsertBean(bean);
-        Players.TryGetValue(_playroomKit.GetPlayer(sender), out PlayerData playerData);
-        playerData.HeldItem = HeldItemType.None;
-        playerData.playerObject.GetComponentInChildren<HeldItemVisualizer>().Hide();
-    }
 
     private void HandleReceiveBlend(string data, string sender)
     {
-        var parts = data.Split(new[] { "|?|" }, StringSplitOptions.None);
-        string makerId = parts[0];
-        HeldItemType blendType = (HeldItemType)Enum.Parse(typeof(HeldItemType), parts[1]);
-        CoffeeMakerInteraction maker = CoffeeMakerInteraction.GetById(makerId);
-        maker.insertedBeans.Clear();
-        maker.isBlendReady = false;
+        if (gameState.currentState == GameSceneState.GameBar)
+        {
+            var parts = data.Split(new[] { "|?|" }, StringSplitOptions.None);
+            string makerId = parts[0];
+            HeldItemType blendType = (HeldItemType)Enum.Parse(typeof(HeldItemType), parts[1]);
+            CoffeeMakerInteraction maker = CoffeeMakerInteraction.GetById(makerId);
+            maker.insertedBeans.Clear();
+            maker.isBlendReady = false;
 
-        HandleHeldItem(blendType.ToString(), sender);
+            HandleHeldItem(blendType.ToString(), sender);
+        }
     }
     private void HandleHeldItem(string data, string sender)
     {
-        Players.TryGetValue(_playroomKit.GetPlayer(sender), out PlayerData playerData);
-        GameObject playerObject = playerData.playerObject;
-        HeldItemType item = (HeldItemType)Enum.Parse(typeof(HeldItemType), data);
-        playerObject.GetComponentInChildren<HeldItemVisualizer>().Show(item);
-        playerData.HeldItem = item;
-        Debug.Log(playerData.HeldItem);
-        playerObject.GetComponent<HoldingManager>().HeldItem = item;
-        Debug.Log(playerObject.GetComponent<HoldingManager>().HeldItem);
+        if (gameState.currentState == GameSceneState.GameBar)
+        {
+            Players.TryGetValue(_playroomKit.GetPlayer(sender), out PlayerData playerData);
+            GameObject playerObject = playerData.playerObject;
+            HeldItemType item = (HeldItemType)Enum.Parse(typeof(HeldItemType), data);
+            playerObject.GetComponentInChildren<HeldItemVisualizer>().Show(item);
+            playerData.HeldItem = item;
+            Debug.Log(playerData.HeldItem);
+            playerObject.GetComponent<HoldingManager>().HeldItem = item;
+            Debug.Log(playerObject.GetComponent<HoldingManager>().HeldItem);
+        }
     }
-
     private void HandleDropItem(string data, string sender)
     {
-        Players.TryGetValue(_playroomKit.GetPlayer(sender), out PlayerData playerData);
-        GameObject playerObject = playerData.playerObject;
-        playerData.HeldItem = HeldItemType.None;
-        playerObject.GetComponent<HoldingManager>().DropItem();
+        if (gameState.currentState == GameSceneState.GameBar)
+        {
+            Players.TryGetValue(_playroomKit.GetPlayer(sender), out PlayerData playerData);
+            GameObject playerObject = playerData.playerObject;
+            playerData.HeldItem = HeldItemType.None;
+            playerObject.GetComponent<HoldingManager>().DropItem();
+        }
     }
     void SpawnPlayer(PlayroomKit.Player player)
     {

@@ -1,21 +1,18 @@
 using Cinemachine;
 using UnityEngine;
-
+using Playroom;
 public class OutSideCamera : MonoBehaviour
 {
     private CinemachineVirtualCamera virtualCamera;
-
+    PlayroomKit _playroom;
     private void Start()
     {
+        _playroom = PlayroomManager.Instance.GetPlayroomKit();
         virtualCamera = GetComponent<CinemachineVirtualCamera>();
-        if(Player.transformPlayer != null)
+        foreach (var player in PlayroomManager.Players)
         {
-            virtualCamera.Follow = Player.transformPlayer;
-        }
-        else
-        {
-            Debug.LogWarning("transformPlayer is null — cannot set camera follow.");
+            if (player.Key.id == _playroom.MyPlayer().id)
+                virtualCamera.Follow = player.Value.playerObject.transform;
         }
     }
-
 }

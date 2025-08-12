@@ -4,11 +4,9 @@ using UnityHFSM;
 
 public abstract class BaseEnemyMovement : MonoBehaviour
 {
-    [SerializeField] private Transform player;
     [SerializeField] private float updateSpeed = 0.1f;
     [SerializeField] private Animator animator;
     private NavMeshAgent agent;
-
 
     private StateMachine<AIState> fsm;
     [SerializeField] private float chaseStartDistance = 10f;
@@ -20,14 +18,32 @@ public abstract class BaseEnemyMovement : MonoBehaviour
     protected virtual void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-
         SetupFSM();
     }
+    
     protected virtual void Update()
     {
         fsm.OnLogic();
+    }
+
+    // Find the closest player with the "Player" tag
+    private Transform FindClosestPlayer()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        Transform closestPlayer = null;
+        float closestDistance = Mathf.Infinity;
+
+        foreach (GameObject player in players)
+        {
+            float distance = Vector3.Distance(transform.position, player.transform.position);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestPlayer = player.transform;
+            }
+        }
+
+        return closestPlayer;
     }
 
     protected virtual void SetupFSM()
@@ -43,8 +59,10 @@ public abstract class BaseEnemyMovement : MonoBehaviour
         },
         onLogic: s =>
         {
-            if (Player.transformPlayer == null) return;
-            float distance = Vector3.Distance(transform.position, Player.transformPlayer.position);
+            Transform closestPlayer = FindClosestPlayer();
+            if (closestPlayer == null) return;
+            
+            float distance = Vector3.Distance(transform.position, closestPlayer.position);
             if (distance < 3f)
             {
                 animator.SetTrigger("Attack");
@@ -59,18 +77,19 @@ public abstract class BaseEnemyMovement : MonoBehaviour
         // MOVE: Chase player
         fsm.AddState(AIState.MOVE, onLogic: s =>
         {
-            if (Player.transformPlayer == null) return;
-            float distance = Vector3.Distance(transform.position, Player.transformPlayer.position);
+            Transform closestPlayer = FindClosestPlayer();
+            if (closestPlayer == null) return;
+            
+            float distance = Vector3.Distance(transform.position, closestPlayer.position);
             if (distance < agent.stoppingDistance)
             {
                 animator.SetTrigger("Attack");
             }
             else
             {
-                if (player != null)
-                    if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")) return;
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")) return;
                 if(agent.isActiveAndEnabled)
-                agent.SetDestination(player.position);
+                agent.SetDestination(closestPlayer.position);
             }
         },
         onExit: s =>
@@ -81,11 +100,19 @@ public abstract class BaseEnemyMovement : MonoBehaviour
 
         // Transition: IDLE ? MOVE
         fsm.AddTransition(AIState.IDLE, AIState.MOVE, condition: s =>
-            Vector3.Distance(transform.position, player.position) <= chaseStartDistance);
+        {
+            Transform closestPlayer = FindClosestPlayer();
+            if (closestPlayer == null) return false;
+            return Vector3.Distance(transform.position, closestPlayer.position) <= chaseStartDistance;
+        });
 
         // Transition: MOVE ? IDLE
         fsm.AddTransition(AIState.MOVE, AIState.IDLE, condition: s =>
-            Vector3.Distance(transform.position, player.position) >= chaseStopDistance);
+        {
+            Transform closestPlayer = FindClosestPlayer();
+            if (closestPlayer == null) return true;
+            return Vector3.Distance(transform.position, closestPlayer.position) >= chaseStopDistance;
+        });
 
         fsm.SetStartState(AIState.IDLE);
         fsm.Init();
@@ -94,8 +121,12 @@ public abstract class BaseEnemyMovement : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")) return;
-        if(agent.isActiveAndEnabled)
-        agent.SetDestination(player.position);
+        
+        Transform closestPlayer = FindClosestPlayer();
+        if (closestPlayer != null && agent.isActiveAndEnabled)
+        {
+            agent.SetDestination(closestPlayer.position);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

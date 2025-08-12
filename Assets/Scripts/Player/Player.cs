@@ -13,7 +13,7 @@ public enum PlayerState
 
 public class Player : MonoBehaviour
 {
-    public static Transform transformPlayer;
+    public Transform transformPlayer;
 
     [Header("Player Character Speed")]
     [SerializeField] protected float moveSpeed;
@@ -32,9 +32,9 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        if (transformPlayer != null && transformPlayer != this.transform)
+        if (transformPlayer != null && transformPlayer != transform)
         {
-          //  Destroy(gameObject); // Already a player exists, destroy the duplicate
+          //Destroy(gameObject); // Already a player exists, destroy the duplicate
             return;
         }
         transformPlayer = transform;

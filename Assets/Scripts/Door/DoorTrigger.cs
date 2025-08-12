@@ -13,7 +13,7 @@ public class DoorTrigger : MonoBehaviour
             _playroom = PlayroomManager.Instance.GetPlayroomKit();
             // Check if this is the local player
             if (PlayroomManager.Players[_playroom.MyPlayer()].playerObject == other.gameObject)
-                GameStateManager.Instance.GoToGameBar(LoaderScene);
+                GameStateManager.Instance.GoToOutSide(LoaderScene);
         }
     }
 }

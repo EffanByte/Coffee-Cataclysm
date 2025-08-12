@@ -437,7 +437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawned: 0
-  PlayerPrefab: {fileID: 4934345334803734085, guid: dca94be2f5a1aa14c8866d24da0603d0, type: 3}
+  PlayerPrefab: {fileID: 2532126462605091857, guid: f9b3458d1d8147941987273abb00dc20, type: 3}
 --- !u!4 &345020088
 Transform:
   m_ObjectHideFlags: 0

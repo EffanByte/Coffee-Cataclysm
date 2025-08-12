@@ -61,11 +61,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5abdc3b65d7122540aeb6a53ea8097cb, type: 3}
---- !u!1 &4014893890905882461 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2197630572252168623, guid: 5abdc3b65d7122540aeb6a53ea8097cb, type: 3}
-  m_PrefabInstance: {fileID: 3010737596460809970}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8428971394980022340 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6715413739241420470, guid: 5abdc3b65d7122540aeb6a53ea8097cb, type: 3}
@@ -158,6 +153,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 304402105776927948, guid: 0098f86c3bab3a54cb1259428083cedf, type: 3}
+    - {fileID: 2050617638766076942, guid: 0098f86c3bab3a54cb1259428083cedf, type: 3}
+    - {fileID: 6724302248841140631, guid: 0098f86c3bab3a54cb1259428083cedf, type: 3}
+    - {fileID: 6699565502990954801, guid: 0098f86c3bab3a54cb1259428083cedf, type: 3}
+    - {fileID: 7702015458930393965, guid: 0098f86c3bab3a54cb1259428083cedf, type: 3}
+    - {fileID: 6473650869716704502, guid: 0098f86c3bab3a54cb1259428083cedf, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4944238876131669594, guid: 0098f86c3bab3a54cb1259428083cedf, type: 3}
       insertIndex: -1
@@ -174,9 +174,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4944238876131669594, guid: 0098f86c3bab3a54cb1259428083cedf, type: 3}
   m_PrefabInstance: {fileID: 5429934067822024024}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5606236382057053794 stripped
+--- !u!1 &1908232641400546705 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 474665823910456122, guid: 0098f86c3bab3a54cb1259428083cedf, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5845785832869261513, guid: 0098f86c3bab3a54cb1259428083cedf, type: 3}
+  m_PrefabInstance: {fileID: 5429934067822024024}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3324100656952800885 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7312319309869654829, guid: 0098f86c3bab3a54cb1259428083cedf, type: 3}
   m_PrefabInstance: {fileID: 5429934067822024024}
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &8409358115010877963 stripped
@@ -239,11 +244,11 @@ PrefabInstance:
     - target: {fileID: 4101904792092552111, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       propertyPath: 'weapons.Array.data[0]'
       value: 
-      objectReference: {fileID: 5606236382057053794}
+      objectReference: {fileID: 1908232641400546705}
     - target: {fileID: 4101904792092552111, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       propertyPath: 'weapons.Array.data[1]'
       value: 
-      objectReference: {fileID: 4014893890905882461}
+      objectReference: {fileID: 3324100656952800885}
     - target: {fileID: 5513266505007367429, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       propertyPath: m_Name
       value: Player(Melee)

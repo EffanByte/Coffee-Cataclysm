@@ -683,10 +683,13 @@ PrefabInstance:
       value: 0.0000016356348
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5634911282064945445, guid: 8ac162277565a7a41af8510dddace31e, type: 3}
+    - {fileID: 1452458825849482828, guid: 8ac162277565a7a41af8510dddace31e, type: 3}
+    - {fileID: 1276247010353081740, guid: 8ac162277565a7a41af8510dddace31e, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8244932101728400213, guid: 8ac162277565a7a41af8510dddace31e, type: 3}
-      insertIndex: 1
+      insertIndex: -1
       addedObject: {fileID: 7145490568849225154}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7405451812838852627, guid: 8ac162277565a7a41af8510dddace31e, type: 3}
@@ -698,14 +701,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3599308567600596915, guid: 8ac162277565a7a41af8510dddace31e, type: 3}
   m_PrefabInstance: {fileID: 3252330868406469867}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &3799318267584733456 stripped
+--- !u!1 &3206420170145148606 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 1845203045599520251, guid: 8ac162277565a7a41af8510dddace31e, type: 3}
+  m_CorrespondingSourceObject: {fileID: 98489413289503317, guid: 8ac162277565a7a41af8510dddace31e, type: 3}
   m_PrefabInstance: {fileID: 3252330868406469867}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4110293504373320359 stripped
+--- !u!1 &4794677674565282176 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 1452458825849482828, guid: 8ac162277565a7a41af8510dddace31e, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8045826146380705131, guid: 8ac162277565a7a41af8510dddace31e, type: 3}
   m_PrefabInstance: {fileID: 3252330868406469867}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &5469598113694977272 stripped
@@ -790,11 +793,11 @@ PrefabInstance:
     - target: {fileID: 4101904792092552111, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       propertyPath: 'weapons.Array.data[0]'
       value: 
-      objectReference: {fileID: 3799318267584733456}
+      objectReference: {fileID: 4794677674565282176}
     - target: {fileID: 4101904792092552111, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       propertyPath: 'weapons.Array.data[1]'
       value: 
-      objectReference: {fileID: 4110293504373320359}
+      objectReference: {fileID: 3206420170145148606}
     - target: {fileID: 5513266505007367429, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       propertyPath: m_Name
       value: Player(Healer)

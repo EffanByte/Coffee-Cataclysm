@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9112791400190056238}
   m_Layer: 0
-  m_Name: Vfx_Arrow
+  m_Name: Vfx_Axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914713802313034128}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1400,8 +1400,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0, g: 0.31925917, b: 1, a: 1}
-        key1: {r: 0.16470587, g: 0.6094787, b: 1, a: 0}
+        key0: {r: 1, g: 0.35346314, b: 0, a: 1}
+        key1: {r: 1, g: 0.6609775, b: 0.1641509, a: 0}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -5041,8 +5041,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.8
-      minScalar: 0.4
+      scalar: 1.6
+      minScalar: 0.8
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5676,7 +5676,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.45
+      value: 0.74
       mode: 0
       spread: 0
       speed:
@@ -6291,8 +6291,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.20188677, g: 0.5451937, b: 1, a: 1}
-        key1: {r: 0.2396226, g: 0.7530305, b: 1, a: 0}
+        key0: {r: 1, g: 0.35346314, b: 0, a: 1}
+        key1: {r: 1, g: 0.6609775, b: 0.1641509, a: 0}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -10039,8 +10039,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.109803915, g: 0.7292752, b: 1, a: 1}
-      maxColor: {r: 0.24840862, g: 0.5233831, b: 0.94716984, a: 1}
+      minColor: {r: 1, g: 0.65091, b: 0.111320674, a: 1}
+      maxColor: {r: 1, g: 0.5362394, b: 0.13396227, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

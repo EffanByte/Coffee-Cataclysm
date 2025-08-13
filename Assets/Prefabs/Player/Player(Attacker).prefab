@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 959765240157831346, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 5561288471388566354}
     - target: {fileID: 2436261690270933856, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -50,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4101904792092552111, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       propertyPath: weapons.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4101904792092552111, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       propertyPath: 'weapons.Array.data[0]'
@@ -60,6 +64,10 @@ PrefabInstance:
       propertyPath: 'weapons.Array.data[1]'
       value: 
       objectReference: {fileID: 5347486343150246081}
+    - target: {fileID: 4101904792092552111, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
+      propertyPath: 'weapons.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1497331144591956133}
     - target: {fileID: 5513266505007367429, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       propertyPath: m_Name
       value: Player(Attacker)
@@ -83,6 +91,11 @@ PrefabInstance:
       insertIndex: 4
       addedObject: {fileID: 5708627711062758827}
   m_SourcePrefab: {fileID: 100100000, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
+--- !u!1 &1497331144591956133 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2035284956881306597, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
+  m_PrefabInstance: {fileID: 646651773671643968}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2969571199936296992 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2436261690270933856, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}

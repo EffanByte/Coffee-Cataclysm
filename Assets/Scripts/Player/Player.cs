@@ -77,6 +77,7 @@ public class Player : MonoBehaviour
     {
         currentState = fsm.ActiveState.name;
         fsm.OnLogic();
+
     }
     public bool HasItem() => heldItemManager.IsHoldingItem;
     public HeldItemType GetHeldItem() => heldItemManager.HeldItem;

@@ -1,0 +1,147 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SpiderAttackMask
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Bug
+    m_Weight: 0
+  - m_Path: bug_
+    m_Weight: 0
+  - m_Path: bug_body
+    m_Weight: 0
+  - m_Path: bug_body/bug_LLeg11
+    m_Weight: 0
+  - m_Path: bug_body/bug_LLeg11/bug_LLeg12
+    m_Weight: 0
+  - m_Path: bug_body/bug_LLeg11/bug_LLeg12/bug_LLeg13
+    m_Weight: 0
+  - m_Path: bug_body/bug_LLeg11/bug_LLeg12/bug_LLeg13/bug_LLeg1Ankle
+    m_Weight: 0
+  - m_Path: bug_body/bug_LLeg11/bug_LLeg12/bug_LLeg13/bug_LLeg1Ankle/bug_LLeg1Digit11
+    m_Weight: 0
+  - m_Path: bug_body/bug_LLeg11/bug_LLeg12/bug_LLeg13/bug_LLeg1Ankle/bug_LLeg1Digit21
+    m_Weight: 0
+  - m_Path: bug_body/bug_LLeg21
+    m_Weight: 0
+  - m_Path: bug_body/bug_LLeg21/bug_LLeg22
+    m_Weight: 0
+  - m_Path: bug_body/bug_LLeg21/bug_LLeg22/bug_LLeg23
+    m_Weight: 0
+  - m_Path: bug_body/bug_LLeg21/bug_LLeg22/bug_LLeg23/bug_LLeg2Ankle
+    m_Weight: 0
+  - m_Path: bug_body/bug_LLeg21/bug_LLeg22/bug_LLeg23/bug_LLeg2Ankle/bug_LLeg2Digit11
+    m_Weight: 0
+  - m_Path: bug_body/bug_LLeg21/bug_LLeg22/bug_LLeg23/bug_LLeg2Ankle/bug_LLeg2Digit21
+    m_Weight: 0
+  - m_Path: bug_body/bug_LLeg31
+    m_Weight: 0
+  - m_Path: bug_body/bug_LLeg31/bug_LLeg32
+    m_Weight: 0
+  - m_Path: bug_body/bug_LLeg31/bug_LLeg32/bug_LLeg33
+    m_Weight: 0
+  - m_Path: bug_body/bug_LLeg31/bug_LLeg32/bug_LLeg33/bug_LLeg3Ankle
+    m_Weight: 0
+  - m_Path: bug_body/bug_LLeg31/bug_LLeg32/bug_LLeg33/bug_LLeg3Ankle/bug_LLeg3Digit11
+    m_Weight: 0
+  - m_Path: bug_body/bug_LLeg31/bug_LLeg32/bug_LLeg33/bug_LLeg3Ankle/bug_LLeg3Digit21
+    m_Weight: 0
+  - m_Path: bug_body/bug_neck1
+    m_Weight: 0
+  - m_Path: bug_body/bug_neck1/bug_neck2
+    m_Weight: 0
+  - m_Path: bug_body/bug_neck1/bug_neck2/bug_head
+    m_Weight: 0
+  - m_Path: bug_body/bug_neck1/bug_neck2/bug_head/bug_attenaL1
+    m_Weight: 0
+  - m_Path: bug_body/bug_neck1/bug_neck2/bug_head/bug_attenaL1/bug_attenaL2
+    m_Weight: 0
+  - m_Path: bug_body/bug_neck1/bug_neck2/bug_head/bug_attenaL1/bug_attenaL2/bug_attenaL3
+    m_Weight: 0
+  - m_Path: bug_body/bug_neck1/bug_neck2/bug_head/bug_attenaL1/bug_attenaL2/bug_attenaL3/bug_attenaL4
+    m_Weight: 0
+  - m_Path: bug_body/bug_neck1/bug_neck2/bug_head/bug_attenaL1/bug_attenaL2/bug_attenaL3/bug_attenaL4/bug_attenaL5
+    m_Weight: 0
+  - m_Path: bug_body/bug_neck1/bug_neck2/bug_head/bug_attenaL1/bug_attenaL2/bug_attenaL3/bug_attenaL4/bug_attenaL5/bug_attenaL6
+    m_Weight: 0
+  - m_Path: bug_body/bug_neck1/bug_neck2/bug_head/bug_attenaL1/bug_attenaL2/bug_attenaL3/bug_attenaL4/bug_attenaL5/bug_attenaL6/bug_attenaL7
+    m_Weight: 0
+  - m_Path: bug_body/bug_neck1/bug_neck2/bug_head/bug_attenaR1
+    m_Weight: 0
+  - m_Path: bug_body/bug_neck1/bug_neck2/bug_head/bug_attenaR1/bug_attenaR2
+    m_Weight: 0
+  - m_Path: bug_body/bug_neck1/bug_neck2/bug_head/bug_attenaR1/bug_attenaR2/bug_attenaR3
+    m_Weight: 0
+  - m_Path: bug_body/bug_neck1/bug_neck2/bug_head/bug_attenaR1/bug_attenaR2/bug_attenaR3/bug_attenaR4
+    m_Weight: 0
+  - m_Path: bug_body/bug_neck1/bug_neck2/bug_head/bug_attenaR1/bug_attenaR2/bug_attenaR3/bug_attenaR4/bug_attenaR5
+    m_Weight: 0
+  - m_Path: bug_body/bug_neck1/bug_neck2/bug_head/bug_attenaR1/bug_attenaR2/bug_attenaR3/bug_attenaR4/bug_attenaR5/bug_attenaR6
+    m_Weight: 0
+  - m_Path: bug_body/bug_neck1/bug_neck2/bug_head/bug_attenaR1/bug_attenaR2/bug_attenaR3/bug_attenaR4/bug_attenaR5/bug_attenaR6/bug_attenaR7
+    m_Weight: 0
+  - m_Path: bug_body/bug_neck1/bug_neck2/bug_head/bug_mandible_L
+    m_Weight: 0
+  - m_Path: bug_body/bug_neck1/bug_neck2/bug_head/bug_mandible_R
+    m_Weight: 0
+  - m_Path: bug_body/bug_RLeg11
+    m_Weight: 1
+  - m_Path: bug_body/bug_RLeg11/bug_RLeg12
+    m_Weight: 1
+  - m_Path: bug_body/bug_RLeg11/bug_RLeg12/bug_RLeg13
+    m_Weight: 1
+  - m_Path: bug_body/bug_RLeg11/bug_RLeg12/bug_RLeg13/bug_RLeg1Ankle
+    m_Weight: 1
+  - m_Path: bug_body/bug_RLeg11/bug_RLeg12/bug_RLeg13/bug_RLeg1Ankle/bug_RLeg1Digit11
+    m_Weight: 1
+  - m_Path: bug_body/bug_RLeg11/bug_RLeg12/bug_RLeg13/bug_RLeg1Ankle/bug_RLeg1Digit21
+    m_Weight: 1
+  - m_Path: bug_body/bug_RLeg21
+    m_Weight: 1
+  - m_Path: bug_body/bug_RLeg21/bug_RLeg22
+    m_Weight: 1
+  - m_Path: bug_body/bug_RLeg21/bug_RLeg22/bug_RLeg23
+    m_Weight: 1
+  - m_Path: bug_body/bug_RLeg21/bug_RLeg22/bug_RLeg23/bug_RLeg2Ankle
+    m_Weight: 1
+  - m_Path: bug_body/bug_RLeg21/bug_RLeg22/bug_RLeg23/bug_RLeg2Ankle/bug_RLeg2Digit11
+    m_Weight: 1
+  - m_Path: bug_body/bug_RLeg21/bug_RLeg22/bug_RLeg23/bug_RLeg2Ankle/bug_RLeg2Digit21
+    m_Weight: 1
+  - m_Path: bug_body/bug_RLeg31
+    m_Weight: 1
+  - m_Path: bug_body/bug_RLeg31/bug_RLeg32
+    m_Weight: 1
+  - m_Path: bug_body/bug_RLeg31/bug_RLeg32/bug_RLeg33
+    m_Weight: 1
+  - m_Path: bug_body/bug_RLeg31/bug_RLeg32/bug_RLeg33/bug_RLeg3Ankle
+    m_Weight: 1
+  - m_Path: bug_body/bug_RLeg31/bug_RLeg32/bug_RLeg33/bug_RLeg3Ankle/bug_RLeg3Digit11
+    m_Weight: 1
+  - m_Path: bug_body/bug_RLeg31/bug_RLeg32/bug_RLeg33/bug_RLeg3Ankle/bug_RLeg3Digit21
+    m_Weight: 1
+  - m_Path: bug_body/bug_thorax1
+    m_Weight: 1
+  - m_Path: bug_body/bug_thorax1/bug_thorax2
+    m_Weight: 1
+  - m_Path: bug_body/bug_thorax1/bug_thorax2/bug_thorax3
+    m_Weight: 1
+  - m_Path: bug_LLeg1Platform
+    m_Weight: 0
+  - m_Path: bug_LLeg2Platform
+    m_Weight: 0
+  - m_Path: bug_LLeg3Platform
+    m_Weight: 0
+  - m_Path: bug_RLeg1Platform
+    m_Weight: 0
+  - m_Path: bug_RLeg2Platform
+    m_Weight: 0
+  - m_Path: bug_RLeg3Platform
+    m_Weight: 0

@@ -1350,6 +1350,7 @@ GameObject:
   - component: {fileID: 7932693024983412588}
   - component: {fileID: 462509958987524112}
   - component: {fileID: 2476259218303614408}
+  - component: {fileID: 7855854447094447657}
   m_Layer: 0
   m_Name: Sloth
   m_TagString: Untagged
@@ -1427,6 +1428,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05ec998df3fc3964b9075d5771e7e74d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &7855854447094447657
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6820714270710963284}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.5683646, y: 1, z: 3.0077462}
+  m_Center: {x: -0.08143258, y: 1, z: 0.27500582}
 --- !u!1 &6853136553766023875
 GameObject:
   m_ObjectHideFlags: 0

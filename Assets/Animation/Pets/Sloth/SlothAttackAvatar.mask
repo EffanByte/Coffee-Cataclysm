@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SlothAttackAvatar
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: sloth
+    m_Weight: 1
+  - m_Path: sloth_
+    m_Weight: 1
+  - m_Path: sloth_LArmIKTarget
+    m_Weight: 1
+  - m_Path: sloth_LLegPlatform
+    m_Weight: 1
+  - m_Path: sloth_pelvis
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_LLeg1
+    m_Weight: 0
+  - m_Path: sloth_pelvis/sloth_LLeg1/sloth_LLeg2
+    m_Weight: 0
+  - m_Path: sloth_pelvis/sloth_LLeg1/sloth_LLeg2/sloth_LLegAnkle
+    m_Weight: 0
+  - m_Path: sloth_pelvis/sloth_LLeg1/sloth_LLeg2/sloth_LLegAnkle/sloth_LLegDigit11
+    m_Weight: 0
+  - m_Path: sloth_pelvis/sloth_LLeg1/sloth_LLeg2/sloth_LLegAnkle/sloth_LLegDigit21
+    m_Weight: 0
+  - m_Path: sloth_pelvis/sloth_LLeg1/sloth_LLeg2/sloth_LLegAnkle/sloth_LLegDigit31
+    m_Weight: 0
+  - m_Path: sloth_pelvis/sloth_RLeg1
+    m_Weight: 0
+  - m_Path: sloth_pelvis/sloth_RLeg1/sloth_RLeg2
+    m_Weight: 0
+  - m_Path: sloth_pelvis/sloth_RLeg1/sloth_RLeg2/sloth_RLegAnkle
+    m_Weight: 0
+  - m_Path: sloth_pelvis/sloth_RLeg1/sloth_RLeg2/sloth_RLegAnkle/sloth_RLegDigit11
+    m_Weight: 0
+  - m_Path: sloth_pelvis/sloth_RLeg1/sloth_RLeg2/sloth_RLegAnkle/sloth_RLegDigit21
+    m_Weight: 0
+  - m_Path: sloth_pelvis/sloth_RLeg1/sloth_RLeg2/sloth_RLegAnkle/sloth_RLegDigit31
+    m_Weight: 0
+  - m_Path: sloth_pelvis/sloth_Spine1
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_LArmCollarbone
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_LArmCollarbone/sloth_LArm1
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_LArmCollarbone/sloth_LArm1/sloth_LArm2
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_LArmCollarbone/sloth_LArm1/sloth_LArm2/sloth_LArmPalm
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_LArmCollarbone/sloth_LArm1/sloth_LArm2/sloth_LArmPalm/sloth_LArmDigit11
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_LArmCollarbone/sloth_LArm1/sloth_LArm2/sloth_LArmPalm/sloth_LArmDigit11/sloth_LArmDigit12
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_LArmCollarbone/sloth_LArm1/sloth_LArm2/sloth_LArmPalm/sloth_LArmDigit11/sloth_LArmDigit12/sloth_LArmDigit13
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_LArmCollarbone/sloth_LArm1/sloth_LArm2/sloth_LArmPalm/sloth_LArmDigit21
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_LArmCollarbone/sloth_LArm1/sloth_LArm2/sloth_LArmPalm/sloth_LArmDigit21/sloth_LArmDigit22
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_LArmCollarbone/sloth_LArm1/sloth_LArm2/sloth_LArmPalm/sloth_LArmDigit21/sloth_LArmDigit22/sloth_LArmDigit23
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_LArmCollarbone/sloth_LArm1/sloth_LArm2/sloth_LArmPalm/sloth_LArmDigit31
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_LArmCollarbone/sloth_LArm1/sloth_LArm2/sloth_LArmPalm/sloth_LArmDigit31/sloth_LArmDigit32
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_LArmCollarbone/sloth_LArm1/sloth_LArm2/sloth_LArmPalm/sloth_LArmDigit31/sloth_LArmDigit32/sloth_LArmDigit33
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_LArmCollarbone/sloth_LArm1/sloth_LArm2/sloth_LArmPalm/sloth_LArmDigit41
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_LArmCollarbone/sloth_LArm1/sloth_LArm2/sloth_LArmPalm/sloth_LArmDigit41/sloth_LArmDigit42
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_LArmCollarbone/sloth_LArm1/sloth_LArm2/sloth_LArmPalm/sloth_LArmDigit41/sloth_LArmDigit42/sloth_LArmDigit43
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_Neck1
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_Neck1/sloth_Neck2
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_Neck1/sloth_Neck2/sloth_Neck3
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_Neck1/sloth_Neck2/sloth_Neck3/sloth_head
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_Neck1/sloth_Neck2/sloth_Neck3/sloth_head/sloth_earL
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_Neck1/sloth_Neck2/sloth_Neck3/sloth_head/sloth_earR
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_Neck1/sloth_Neck2/sloth_Neck3/sloth_head/sloth_jaw
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_Neck1/sloth_Neck2/sloth_Neck3/sloth_head/sloth_jaw/sloth_tongue01
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_Neck1/sloth_Neck2/sloth_Neck3/sloth_head/sloth_jaw/sloth_tongue01/sloth_tongue02
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_Neck1/sloth_Neck2/sloth_Neck3/sloth_head/sloth_jaw/sloth_tongue01/sloth_tongue02/sloth_tongue03
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_Neck1/sloth_Neck2/sloth_Neck3/sloth_head/sloth_jaw/sloth_tongue01/sloth_tongue02/sloth_tongue03/sloth_tongue04
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_RArmCollarbone
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_RArmCollarbone/sloth_RArm1
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_RArmCollarbone/sloth_RArm1/sloth_RArm2
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_RArmCollarbone/sloth_RArm1/sloth_RArm2/sloth_RArmPalm
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_RArmCollarbone/sloth_RArm1/sloth_RArm2/sloth_RArmPalm/sloth_RArmDigit11
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_RArmCollarbone/sloth_RArm1/sloth_RArm2/sloth_RArmPalm/sloth_RArmDigit11/sloth_RArmDigit12
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_RArmCollarbone/sloth_RArm1/sloth_RArm2/sloth_RArmPalm/sloth_RArmDigit11/sloth_RArmDigit12/sloth_RArmDigit13
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_RArmCollarbone/sloth_RArm1/sloth_RArm2/sloth_RArmPalm/sloth_RArmDigit21
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_RArmCollarbone/sloth_RArm1/sloth_RArm2/sloth_RArmPalm/sloth_RArmDigit21/sloth_RArmDigit22
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_RArmCollarbone/sloth_RArm1/sloth_RArm2/sloth_RArmPalm/sloth_RArmDigit21/sloth_RArmDigit22/sloth_RArmDigit23
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_RArmCollarbone/sloth_RArm1/sloth_RArm2/sloth_RArmPalm/sloth_RArmDigit31
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_RArmCollarbone/sloth_RArm1/sloth_RArm2/sloth_RArmPalm/sloth_RArmDigit31/sloth_RArmDigit32
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_RArmCollarbone/sloth_RArm1/sloth_RArm2/sloth_RArmPalm/sloth_RArmDigit31/sloth_RArmDigit32/sloth_RArmDigit33
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_RArmCollarbone/sloth_RArm1/sloth_RArm2/sloth_RArmPalm/sloth_RArmDigit41
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_RArmCollarbone/sloth_RArm1/sloth_RArm2/sloth_RArmPalm/sloth_RArmDigit41/sloth_RArmDigit42
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Spine1/sloth_Spine2/sloth_Spine3/sloth_ribs/sloth_RArmCollarbone/sloth_RArm1/sloth_RArm2/sloth_RArmPalm/sloth_RArmDigit41/sloth_RArmDigit42/sloth_RArmDigit43
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Tail1
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Tail1/sloth_Tail2
+    m_Weight: 1
+  - m_Path: sloth_pelvis/sloth_Tail1/sloth_Tail2/sloth_Tail3
+    m_Weight: 1
+  - m_Path: sloth_RArmIKTarget
+    m_Weight: 1
+  - m_Path: sloth_RLegPlatform
+    m_Weight: 1

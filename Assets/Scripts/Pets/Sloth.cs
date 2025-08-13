@@ -5,6 +5,10 @@ public class Sloth : MonoBehaviour
     [SerializeField] PetsAnimationController petsAnimationController;
     [SerializeField] Player player;
 
+
+    private float attackCooldown = 0f;
+    private float attackDuration = 0.8f;
+
     private void Awake()
     {
         petsAnimationController = GetComponent<PetsAnimationController>();
@@ -25,6 +29,31 @@ public class Sloth : MonoBehaviour
         else if (player.currentState == PlayerState.IDLE)
         {
             petsAnimationController.ChangeAnimation(petsAnimationController.SlothIdle);
+        }
+
+        if (attackCooldown > 0f)
+        {
+            attackCooldown -= Time.deltaTime;
+        }
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Enemy"))
+        {
+            petsAnimationController.ChangeAnimation(petsAnimationController.SlothAttack);
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            if (attackCooldown <= 0f)
+            {
+                petsAnimationController.ChangeAnimation(petsAnimationController.SlothAttack);
+                attackCooldown = attackDuration;
+            }
         }
     }
 }

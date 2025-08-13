@@ -792,7 +792,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4101904792092552111, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       propertyPath: weapons.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4101904792092552111, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       propertyPath: 'weapons.Array.data[0]'
@@ -802,6 +802,10 @@ PrefabInstance:
       propertyPath: 'weapons.Array.data[1]'
       value: 
       objectReference: {fileID: 3206420170145148606}
+    - target: {fileID: 4101904792092552111, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
+      propertyPath: 'weapons.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8331146750872789745}
     - target: {fileID: 5513266505007367429, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       propertyPath: m_Name
       value: Player(Healer)
@@ -845,5 +849,10 @@ MonoBehaviour:
 --- !u!4 &5651931974765019764 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2436261690270933856, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
+  m_PrefabInstance: {fileID: 8043680958449672468}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8331146750872789745 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2035284956881306597, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
   m_PrefabInstance: {fileID: 8043680958449672468}
   m_PrefabAsset: {fileID: 0}

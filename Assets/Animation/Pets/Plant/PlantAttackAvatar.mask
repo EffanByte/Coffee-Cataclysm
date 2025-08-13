@@ -1,0 +1,303 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PlantAttackAvatar
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: plant_
+    m_Weight: 0
+  - m_Path: plant_base
+    m_Weight: 1
+  - m_Path: plant_base/plant_LLeg01_1
+    m_Weight: 1
+  - m_Path: plant_base/plant_LLeg01_1/plant_LLeg01_2
+    m_Weight: 1
+  - m_Path: plant_base/plant_LLeg01_1/plant_LLeg01_2/plant_LLeg01_3
+    m_Weight: 1
+  - m_Path: plant_base/plant_LLeg01_1/plant_LLeg01_2/plant_LLeg01_3/plant_LLeg01_Ankle
+    m_Weight: 1
+  - m_Path: plant_base/plant_LLeg01_1/plant_LLeg01_2/plant_LLeg01_3/plant_LLeg01_Ankle/plant_LLeg01_Digit11
+    m_Weight: 1
+  - m_Path: plant_base/plant_LLeg01_1/plant_LLeg01_2/plant_LLeg01_3/plant_LLeg01_Ankle/plant_LLeg01_Digit11/plant_LLeg01_Digit12
+    m_Weight: 1
+  - m_Path: plant_base/plant_LLeg02_1
+    m_Weight: 1
+  - m_Path: plant_base/plant_LLeg02_1/plant_LLeg02_2
+    m_Weight: 1
+  - m_Path: plant_base/plant_LLeg02_1/plant_LLeg02_2/plant_LLeg02_3
+    m_Weight: 1
+  - m_Path: plant_base/plant_LLeg02_1/plant_LLeg02_2/plant_LLeg02_3/plant_LLeg02_Ankle
+    m_Weight: 1
+  - m_Path: plant_base/plant_LLeg02_1/plant_LLeg02_2/plant_LLeg02_3/plant_LLeg02_Ankle/plant_LLeg02_Digit11
+    m_Weight: 1
+  - m_Path: plant_base/plant_LLeg02_1/plant_LLeg02_2/plant_LLeg02_3/plant_LLeg02_Ankle/plant_LLeg02_Digit11/plant_LLeg02_Digit12
+    m_Weight: 1
+  - m_Path: plant_base/plant_LLeg03_1
+    m_Weight: 1
+  - m_Path: plant_base/plant_LLeg03_1/plant_LLeg03_2
+    m_Weight: 1
+  - m_Path: plant_base/plant_LLeg03_1/plant_LLeg03_2/plant_LLeg03_3
+    m_Weight: 1
+  - m_Path: plant_base/plant_LLeg03_1/plant_LLeg03_2/plant_LLeg03_3/plant_LLeg03_Ankle
+    m_Weight: 1
+  - m_Path: plant_base/plant_LLeg03_1/plant_LLeg03_2/plant_LLeg03_3/plant_LLeg03_Ankle/plant_LLeg03_Digit11
+    m_Weight: 1
+  - m_Path: plant_base/plant_LLeg03_1/plant_LLeg03_2/plant_LLeg03_3/plant_LLeg03_Ankle/plant_LLeg03_Digit11/plant_LLeg03_Digit12
+    m_Weight: 1
+  - m_Path: plant_base/plant_RLeg01_1
+    m_Weight: 1
+  - m_Path: plant_base/plant_RLeg01_1/plant_RLeg01_2
+    m_Weight: 1
+  - m_Path: plant_base/plant_RLeg01_1/plant_RLeg01_2/plant_RLeg01_3
+    m_Weight: 1
+  - m_Path: plant_base/plant_RLeg01_1/plant_RLeg01_2/plant_RLeg01_3/plant_RLeg01_Ankle
+    m_Weight: 1
+  - m_Path: plant_base/plant_RLeg01_1/plant_RLeg01_2/plant_RLeg01_3/plant_RLeg01_Ankle/plant_RLeg01_Digit11
+    m_Weight: 1
+  - m_Path: plant_base/plant_RLeg01_1/plant_RLeg01_2/plant_RLeg01_3/plant_RLeg01_Ankle/plant_RLeg01_Digit11/plant_RLeg01_Digit12
+    m_Weight: 1
+  - m_Path: plant_base/plant_RLeg02_1
+    m_Weight: 1
+  - m_Path: plant_base/plant_RLeg02_1/plant_RLeg02_2
+    m_Weight: 1
+  - m_Path: plant_base/plant_RLeg02_1/plant_RLeg02_2/plant_RLeg02_3
+    m_Weight: 1
+  - m_Path: plant_base/plant_RLeg02_1/plant_RLeg02_2/plant_RLeg02_3/plant_RLeg02_Ankle
+    m_Weight: 1
+  - m_Path: plant_base/plant_RLeg02_1/plant_RLeg02_2/plant_RLeg02_3/plant_RLeg02_Ankle/plant_RLeg02_Digit11
+    m_Weight: 1
+  - m_Path: plant_base/plant_RLeg02_1/plant_RLeg02_2/plant_RLeg02_3/plant_RLeg02_Ankle/plant_RLeg02_Digit11/plant_RLeg02_Digit12
+    m_Weight: 1
+  - m_Path: plant_base/plant_RLeg03_1
+    m_Weight: 1
+  - m_Path: plant_base/plant_RLeg03_1/plant_RLeg03_2
+    m_Weight: 1
+  - m_Path: plant_base/plant_RLeg03_1/plant_RLeg03_2/plant_RLeg03_3
+    m_Weight: 1
+  - m_Path: plant_base/plant_RLeg03_1/plant_RLeg03_2/plant_RLeg03_3/plant_RLeg03_Ankle
+    m_Weight: 1
+  - m_Path: plant_base/plant_RLeg03_1/plant_RLeg03_2/plant_RLeg03_3/plant_RLeg03_Ankle/plant_RLeg03_Digit11
+    m_Weight: 1
+  - m_Path: plant_base/plant_RLeg03_1/plant_RLeg03_2/plant_RLeg03_3/plant_RLeg03_Ankle/plant_RLeg03_Digit11/plant_RLeg03_Digit12
+    m_Weight: 1
+  - m_Path: plant_base/plant_Spine
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_LArm01_1
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_LArm01_1/plant_LArm01_2
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_LArm01_1/plant_LArm01_2/plant_LArm01_3
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_LArm01_1/plant_LArm01_2/plant_LArm01_3/plant_LArm01_Palm
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_LArm01_1/plant_LArm01_2/plant_LArm01_3/plant_LArm01_Palm/plant_LArm01_Digit11
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_LArm02_1
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_LArm02_1/plant_LArm02_2
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_LArm02_1/plant_LArm02_2/plant_LArm02_3
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_LArm02_1/plant_LArm02_2/plant_LArm02_3/plant_LArm02_Palm
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_LArm02_1/plant_LArm02_2/plant_LArm02_3/plant_LArm02_Palm/plant_LArm02_Digit11
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_LArm03_1
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_LArm03_1/plant_LArm03_2
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_LArm03_1/plant_LArm03_2/plant_LArm03_3
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_LArm03_1/plant_LArm03_2/plant_LArm03_3/plant_LArm03_Palm
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_LArm03_1/plant_LArm03_2/plant_LArm03_3/plant_LArm03_Palm/plant_LArm03_Digit11
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_LArm04_1
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_LArm04_1/plant_LArm04_2
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_LArm04_1/plant_LArm04_2/plant_LArm04_3
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_LArm04_1/plant_LArm04_2/plant_LArm04_3/plant_LArm04_Palm
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_LArm04_1/plant_LArm04_2/plant_LArm04_3/plant_LArm04_Palm/plant_LArm04_Digit11
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_RArm01_1
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_RArm01_1/plant_RArm01_2
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_RArm01_1/plant_RArm01_2/plant_RArm01_3
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_RArm01_1/plant_RArm01_2/plant_RArm01_3/plant_RArm01_Palm
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_RArm01_1/plant_RArm01_2/plant_RArm01_3/plant_RArm01_Palm/plant_RArm01_Digit11
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_RArm02_1
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_RArm02_1/plant_RArm02_2
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_RArm02_1/plant_RArm02_2/plant_RArm02_3
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_RArm02_1/plant_RArm02_2/plant_RArm02_3/plant_RArm02_Palm
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_RArm02_1/plant_RArm02_2/plant_RArm02_3/plant_RArm02_Palm/plant_RArm02_Digit11
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_RArm03_1
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_RArm03_1/plant_RArm03_2
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_RArm03_1/plant_RArm03_2/plant_RArm03_3
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_RArm03_1/plant_RArm03_2/plant_RArm03_3/plant_RArm03_Palm
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_RArm03_1/plant_RArm03_2/plant_RArm03_3/plant_RArm03_Palm/plant_RArm03_Digit11
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_RArm04_1
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_RArm04_1/plant_RArm04_2
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_RArm04_1/plant_RArm04_2/plant_RArm04_3
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_RArm04_1/plant_RArm04_2/plant_RArm04_3/plant_RArm04_Palm
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_RArm04_1/plant_RArm04_2/plant_RArm04_3/plant_RArm04_Palm/plant_RArm04_Digit11
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_head_Ltentacle01_1
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_head_Ltentacle01_1/plant_head_Ltentacle01_2
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_head_Ltentacle01_1/plant_head_Ltentacle01_2/plant_head_Ltentacle01_3
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_head_Ltentacle01_1/plant_head_Ltentacle01_2/plant_head_Ltentacle01_3/plant_head_Ltentacle01_4
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_head_Ltentacle01_1/plant_head_Ltentacle01_2/plant_head_Ltentacle01_3/plant_head_Ltentacle01_4/plant_head_Ltentacle01_5
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_head_Ltentacle02_1
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_head_Ltentacle02_1/plant_head_Ltentacle02_2
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_head_Ltentacle02_1/plant_head_Ltentacle02_2/plant_head_Ltentacle02_3
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_head_Ltentacle02_1/plant_head_Ltentacle02_2/plant_head_Ltentacle02_3/plant_head_Ltentacle02_4
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_head_Ltentacle02_1/plant_head_Ltentacle02_2/plant_head_Ltentacle02_3/plant_head_Ltentacle02_4/plant_head_Ltentacle02_5
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_head_Rtentacle01_1
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_head_Rtentacle01_1/plant_head_Rtentacle01_2
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_head_Rtentacle01_1/plant_head_Rtentacle01_2/plant_head_Rtentacle01_3
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_head_Rtentacle01_1/plant_head_Rtentacle01_2/plant_head_Rtentacle01_3/plant_head_Rtentacle01_4
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_head_Rtentacle01_1/plant_head_Rtentacle01_2/plant_head_Rtentacle01_3/plant_head_Rtentacle01_4/plant_head_Rtentacle01_5
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_head_Rtentacle02_1
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_head_Rtentacle02_1/plant_head_Rtentacle02_2
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_head_Rtentacle02_1/plant_head_Rtentacle02_2/plant_head_Rtentacle02_3
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_head_Rtentacle02_1/plant_head_Rtentacle02_2/plant_head_Rtentacle02_3/plant_head_Rtentacle02_4
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_head_Rtentacle02_1/plant_head_Rtentacle02_2/plant_head_Rtentacle02_3/plant_head_Rtentacle02_4/plant_head_Rtentacle02_5
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_head_Ltentacle03_1
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_head_Ltentacle03_1/plant_head_Ltentacle03_2
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_head_Ltentacle03_1/plant_head_Ltentacle03_2/plant_head_Ltentacle03_3
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_head_Ltentacle03_1/plant_head_Ltentacle03_2/plant_head_Ltentacle03_3/plant_head_Ltentacle03_4
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_head_Ltentacle03_1/plant_head_Ltentacle03_2/plant_head_Ltentacle03_3/plant_head_Ltentacle03_4/plant_head_Ltentacle03_5
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_head_Ltentacle04_1
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_head_Ltentacle04_1/plant_head_Ltentacle04_2
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_head_Ltentacle04_1/plant_head_Ltentacle04_2/plant_head_Ltentacle04_3
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_head_Ltentacle04_1/plant_head_Ltentacle04_2/plant_head_Ltentacle04_3/plant_head_Ltentacle04_4
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_head_Ltentacle05_1
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_head_Ltentacle05_1/plant_head_Ltentacle05_2
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_head_Ltentacle05_1/plant_head_Ltentacle05_2/plant_head_Ltentacle05_3
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_head_Ltentacle05_1/plant_head_Ltentacle05_2/plant_head_Ltentacle05_3/plant_head_Ltentacle05_4
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_head_Rtentacle03_1
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_head_Rtentacle03_1/plant_head_Rtentacle03_2
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_head_Rtentacle03_1/plant_head_Rtentacle03_2/plant_head_Rtentacle03_3
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_head_Rtentacle03_1/plant_head_Rtentacle03_2/plant_head_Rtentacle03_3/plant_head_Rtentacle03_4
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_head_Rtentacle03_1/plant_head_Rtentacle03_2/plant_head_Rtentacle03_3/plant_head_Rtentacle03_4/plant_head_Rtentacle03_5
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_head_Rtentacle04_1
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_head_Rtentacle04_1/plant_head_Rtentacle04_2
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_head_Rtentacle04_1/plant_head_Rtentacle04_2/plant_head_Rtentacle04_3
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_head_Rtentacle04_1/plant_head_Rtentacle04_2/plant_head_Rtentacle04_3/plant_head_Rtentacle04_4
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_head_Rtentacle05_1
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_head_Rtentacle05_1/plant_head_Rtentacle05_2
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_head_Rtentacle05_1/plant_head_Rtentacle05_2/plant_head_Rtentacle05_3
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_head_Rtentacle05_1/plant_head_Rtentacle05_2/plant_head_Rtentacle05_3/plant_head_Rtentacle05_4
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_tongue_01
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_tongue_01/plant_tongue_02
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_tongue_01/plant_tongue_02/plant_tongue_03
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_tongue_01/plant_tongue_02/plant_tongue_03/plant_tongue_04
+    m_Weight: 0
+  - m_Path: plant_base/plant_Spine/plant_ribs/plant_Spine1/plant_Spine2/plant_Spine3/plant_Spine4/plant_Spine5/plant_head/plant_jaw/plant_tongue_01/plant_tongue_02/plant_tongue_03/plant_tongue_04/plant_tongue_05
+    m_Weight: 0
+  - m_Path: plant_LLeg01_Platform
+    m_Weight: 1
+  - m_Path: plant_LLeg02_Platform
+    m_Weight: 1
+  - m_Path: plant_LLeg03_Platform
+    m_Weight: 1
+  - m_Path: plant_monster
+    m_Weight: 0
+  - m_Path: plant_RLeg01_Platform
+    m_Weight: 1
+  - m_Path: plant_RLeg02_Platform
+    m_Weight: 1
+  - m_Path: plant_RLeg03_Platform
+    m_Weight: 1

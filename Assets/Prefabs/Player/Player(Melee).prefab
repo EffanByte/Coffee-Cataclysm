@@ -243,7 +243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4101904792092552111, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       propertyPath: weapons.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4101904792092552111, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       propertyPath: 'weapons.Array.data[0]'
@@ -253,6 +253,10 @@ PrefabInstance:
       propertyPath: 'weapons.Array.data[1]'
       value: 
       objectReference: {fileID: 3324100656952800885}
+    - target: {fileID: 4101904792092552111, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
+      propertyPath: 'weapons.Array.data[2]'
+      value: 
+      objectReference: {fileID: 7081141464784256452}
     - target: {fileID: 5513266505007367429, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       propertyPath: m_Name
       value: Player(Melee)
@@ -296,5 +300,10 @@ MonoBehaviour:
 --- !u!4 &6896378130465267009 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2436261690270933856, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
+  m_PrefabInstance: {fileID: 9114032509822860833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7081141464784256452 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2035284956881306597, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
   m_PrefabInstance: {fileID: 9114032509822860833}
   m_PrefabAsset: {fileID: 0}

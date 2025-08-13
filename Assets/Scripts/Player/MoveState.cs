@@ -1,11 +1,11 @@
 ﻿using UnityHFSM;
 using UnityEngine;
 using Playroom;
+using System;
 
 public class MoveState
 {
     public State<PlayerState> state;
-
 
     PlayroomKit _playroomKit = PlayroomManager.Instance.GetPlayroomKit();
     public MoveState(PlayerData playerData, GameInput input, float speed,Animator animator)

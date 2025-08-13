@@ -4292,8 +4292,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2664823853026729898}
   - component: {fileID: 2542482492329362248}
+  - component: {fileID: 2766993614931712241}
+  - component: {fileID: 827715136915548926}
   m_Layer: 0
-  m_Name: plant
+  m_Name: Plant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4333,7 +4335,7 @@ Animator:
   m_GameObject: {fileID: 8455313359732726139}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 8afaaddeaf6221341a4db43fb691c072, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ed22d2acf9160904d9a87da1a152d1c5, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4345,6 +4347,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2766993614931712241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8455313359732726139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3c53eabff8c43f4d87f8cdf6257d5c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  petsAnimationController: {fileID: 0}
+  player: {fileID: 0}
+--- !u!114 &827715136915548926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8455313359732726139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05ec998df3fc3964b9075d5771e7e74d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!1 &8480106953736569873
 GameObject:
   m_ObjectHideFlags: 0

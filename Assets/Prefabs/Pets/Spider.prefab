@@ -388,8 +388,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2567364657863865547}
   - component: {fileID: 8545203493426039763}
+  - component: {fileID: 2042059957320189163}
+  - component: {fileID: 2582788395652227169}
   m_Layer: 0
-  m_Name: bug
+  m_Name: Spider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -429,7 +431,7 @@ Animator:
   m_GameObject: {fileID: 1307603479318578433}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 9402238d7da884d438de7cc5b71e735d, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ed22d2acf9160904d9a87da1a152d1c5, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -441,6 +443,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2042059957320189163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307603479318578433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50821b1ca2c394c47b01f6258f4af0ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  petsAnimationController: {fileID: 0}
+  player: {fileID: 0}
+--- !u!114 &2582788395652227169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307603479318578433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05ec998df3fc3964b9075d5771e7e74d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!1 &1349646175739798247
 GameObject:
   m_ObjectHideFlags: 0

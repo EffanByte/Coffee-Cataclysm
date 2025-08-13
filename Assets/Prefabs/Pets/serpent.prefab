@@ -504,8 +504,10 @@ GameObject:
   m_Component:
   - component: {fileID: 541569931892164830}
   - component: {fileID: 7547033000318036818}
+  - component: {fileID: 4831937380987717900}
+  - component: {fileID: 7875572673708616174}
   m_Layer: 0
-  m_Name: serpent
+  m_Name: Serpent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -539,7 +541,7 @@ Animator:
   m_GameObject: {fileID: 3616716127420421949}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: fb73d4779ec65c8449670a5ff7e59612, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ed22d2acf9160904d9a87da1a152d1c5, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -551,6 +553,32 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4831937380987717900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3616716127420421949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0261a9e1eb36d14b9a1c7531fca6055, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  petsAnimationController: {fileID: 0}
+--- !u!114 &7875572673708616174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3616716127420421949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05ec998df3fc3964b9075d5771e7e74d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!1 &3887611837481959099
 GameObject:
   m_ObjectHideFlags: 0

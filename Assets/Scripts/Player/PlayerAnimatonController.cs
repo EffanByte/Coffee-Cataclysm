@@ -3,7 +3,7 @@ using System.Collections;
 using System.Linq;
 public class PlayerAnimatonController : MonoBehaviour
 {
-    Animator animator;
+   [SerializeField] Animator animator;
     Player player;
     private string currentAnimation = "";
     readonly string[] blockAnimations = { "Shoot", "Melee", "Mage_Shoot","Hit_A","Hit_B" };
@@ -11,6 +11,7 @@ public class PlayerAnimatonController : MonoBehaviour
     private void Awake()
     {
         player = GetComponent<Player>();
+        if(animator == null)
         animator = GetComponentInChildren<Animator>();
     }
 

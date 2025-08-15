@@ -1,11 +1,9 @@
 using UnityEngine;
 
-public class Sloth : MonoBehaviour
+public class Dragon : MonoBehaviour
 {
     [SerializeField] PetsAnimationController petsAnimationController;
-    [SerializeField] Player player;
-
-
+    [SerializeField] ParticleSystem fireParticle;
     private float attackCooldown = 0f;
     private float attackDuration = 0.8f;
 
@@ -13,54 +11,38 @@ public class Sloth : MonoBehaviour
     {
         petsAnimationController = GetComponent<PetsAnimationController>();
     }
-
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        petsAnimationController.ChangeAnimation(petsAnimationController.SlothIdle);
+        petsAnimationController.ChangeAnimation(petsAnimationController.DragonFly);
     }
-
-    private void Update()
-    {
-        if (player.currentState == PlayerState.MOVE)
-        {
-            petsAnimationController.ChangeAnimation(petsAnimationController.SlothWalk);
-        }
-        else if (player.currentState == PlayerState.IDLE)
-        {
-            petsAnimationController.ChangeAnimation(petsAnimationController.SlothIdle);
-        }
-
-        if (attackCooldown > 0f)
-        {
-            attackCooldown -= Time.deltaTime;
-        }
-    }
-
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if(other.CompareTag("Enemy"))
         {
             FaceEnemy(other.gameObject);
-            petsAnimationController.ChangeAnimation(petsAnimationController.SlothAttack);
+            fireParticle.Play();
+            petsAnimationController.ChangeAnimation(petsAnimationController.DragonAttack);
         }
     }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
             FaceEnemy(other.gameObject);
+            fireParticle.Play();
             if (attackCooldown <= 0f)
             {
-                petsAnimationController.ChangeAnimation(petsAnimationController.SlothAttack);
+                petsAnimationController.ChangeAnimation(petsAnimationController.PlantAttack);
                 attackCooldown = attackDuration;
             }
         }
     }
+
     private void OnTriggerExit(Collider other)
     {
-        if(other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy"))
         {
             transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
@@ -72,4 +54,5 @@ public class Sloth : MonoBehaviour
         currentRotation.y = other.transform.eulerAngles.y;
         transform.rotation = Quaternion.Euler(currentRotation);
     }
+
 }

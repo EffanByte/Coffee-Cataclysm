@@ -1,0 +1,209 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DragonAttackAvatar
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: dragon_LLegIKTarget
+    m_Weight: 0
+  - m_Path: dragon_LWingIKTarget
+    m_Weight: 0
+  - m_Path: dragon_pelvis
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_LLeg1
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_LLeg1/dragon_LLeg2
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_LLeg1/dragon_LLeg2/dragon_LLegPalm
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_LLeg1/dragon_LLeg2/dragon_LLegPalm/dragon_LLegDigit11
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_LLeg1/dragon_LLeg2/dragon_LLegPalm/dragon_LLegDigit11/dragon_LLegDigit12
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_LLeg1/dragon_LLeg2/dragon_LLegPalm/dragon_LLegDigit11/dragon_LLegDigit12/dragon_LLegDigit13
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_LLeg1/dragon_LLeg2/dragon_LLegPalm/dragon_LLegDigit21
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_LLeg1/dragon_LLeg2/dragon_LLegPalm/dragon_LLegDigit21/dragon_LLegDigit22
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_LLeg1/dragon_LLeg2/dragon_LLegPalm/dragon_LLegDigit21/dragon_LLegDigit22/dragon_LLegDigit23
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_LLeg1/dragon_LLeg2/dragon_LLegPalm/dragon_LLegDigit31
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_LLeg1/dragon_LLeg2/dragon_LLegPalm/dragon_LLegDigit31/dragon_LLegDigit32
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_LLeg1/dragon_LLeg2/dragon_LLegPalm/dragon_LLegDigit31/dragon_LLegDigit32/dragon_LLegDigit33
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_RArm1
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_RArm1/dragon_RArm2
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_RArm1/dragon_RArm2/dragon_RArmPalm
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_RArm1/dragon_RArm2/dragon_RArmPalm/dragon_RArmDigit11
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_RArm1/dragon_RArm2/dragon_RArmPalm/dragon_RArmDigit11/dragon_RArmDigit12
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_RArm1/dragon_RArm2/dragon_RArmPalm/dragon_RArmDigit11/dragon_RArmDigit12/dragon_RArmDigit13
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_RArm1/dragon_RArm2/dragon_RArmPalm/dragon_RArmDigit21
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_RArm1/dragon_RArm2/dragon_RArmPalm/dragon_RArmDigit21/dragon_RArmDigit22
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_RArm1/dragon_RArm2/dragon_RArmPalm/dragon_RArmDigit21/dragon_RArmDigit22/dragon_RArmDigit23
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_RArm1/dragon_RArm2/dragon_RArmPalm/dragon_RArmDigit31
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_RArm1/dragon_RArm2/dragon_RArmPalm/dragon_RArmDigit31/dragon_RArmDigit32
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_RArm1/dragon_RArm2/dragon_RArmPalm/dragon_RArmDigit31/dragon_RArmDigit32/dragon_RArmDigit33
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_spike08
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_spike09
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_spike10
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_spike06
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_spike07
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_spike05
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_LWing1
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_LWing1/dragon_LWing2
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_LWing1/dragon_LWing2/dragon_LWingPalm
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_LWing1/dragon_LWing2/dragon_LWingPalm/dragon_LWingDigit11
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_LWing1/dragon_LWing2/dragon_LWingPalm/dragon_LWingDigit11/dragon_LWingDigit12
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_LWing1/dragon_LWing2/dragon_LWingPalm/dragon_LWingDigit11/dragon_LWingDigit12/dragon_LWingDigit13
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_LWing1/dragon_LWing2/dragon_LWingPalm/dragon_LWingDigit21
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_LWing1/dragon_LWing2/dragon_LWingPalm/dragon_LWingDigit21/dragon_LWingDigit22
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_LWing1/dragon_LWing2/dragon_LWingPalm/dragon_LWingDigit21/dragon_LWingDigit22/dragon_LWingDigit23
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_LWing1/dragon_LWing2/dragon_LWingPalm/dragon_LWingDigit31
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_LWing1/dragon_LWing2/dragon_LWingPalm/dragon_LWingDigit31/dragon_LWingDigit32
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_LWing1/dragon_LWing2/dragon_LWingPalm/dragon_LWingDigit31/dragon_LWingDigit32/dragon_LWingDigit33
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_LWing1/dragon_LWing2/dragon_LWingPalm/dragon_LWingDigit41
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_LWing1/dragon_LWing2/dragon_LWingPalm/dragon_LWingDigit41/dragon_LWingDigit42
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_LWing1/dragon_LWing2/dragon_LWingPalm/dragon_LWingDigit41/dragon_LWingDigit42/dragon_LWingDigit43
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_LWing1/dragon_LWing2/dragon_LWingPalm/dragon_LWingDigit51
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_LWing1/dragon_LWing2/dragon_LWingPalm/dragon_LWingDigit51/dragon_LWingDigit52
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_LWing1/dragon_LWing2/dragon_LWingPalm/dragon_LWingDigit51/dragon_LWingDigit52/dragon_LWingDigit53
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_neck1
+    m_Weight: 1
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_neck1/dragon_neck2
+    m_Weight: 1
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_neck1/dragon_neck2/dragon_head
+    m_Weight: 1
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_neck1/dragon_neck2/dragon_head/dragon_jaw
+    m_Weight: 1
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_neck1/dragon_neck2/dragon_head/dragon_jaw/dragon_tongue_01
+    m_Weight: 1
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_neck1/dragon_neck2/dragon_head/dragon_jaw/dragon_tongue_01/dragon_tongue_02
+    m_Weight: 1
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_neck1/dragon_neck2/dragon_head/dragon_jaw/dragon_tongue_01/dragon_tongue_02/dragon_tongue_03
+    m_Weight: 1
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_neck1/dragon_neck2/dragon_head/dragon_jaw/dragon_tongue_01/dragon_tongue_02/dragon_tongue_03/dragon_tongue_04
+    m_Weight: 1
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_neck1/dragon_spike01
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_RWing1
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_RWing1/dragon_RWing2
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_RWing1/dragon_RWing2/dragon_RWingPalm
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_RWing1/dragon_RWing2/dragon_RWingPalm/dragon_RWingDigit11
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_RWing1/dragon_RWing2/dragon_RWingPalm/dragon_RWingDigit11/dragon_RWingDigit12
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_RWing1/dragon_RWing2/dragon_RWingPalm/dragon_RWingDigit11/dragon_RWingDigit12/dragon_RWingDigit13
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_RWing1/dragon_RWing2/dragon_RWingPalm/dragon_RWingDigit21
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_RWing1/dragon_RWing2/dragon_RWingPalm/dragon_RWingDigit21/dragon_RWingDigit22
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_RWing1/dragon_RWing2/dragon_RWingPalm/dragon_RWingDigit21/dragon_RWingDigit22/dragon_RWingDigit23
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_RWing1/dragon_RWing2/dragon_RWingPalm/dragon_RWingDigit31
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_RWing1/dragon_RWing2/dragon_RWingPalm/dragon_RWingDigit31/dragon_RWingDigit32
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_RWing1/dragon_RWing2/dragon_RWingPalm/dragon_RWingDigit31/dragon_RWingDigit32/dragon_RWingDigit33
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_RWing1/dragon_RWing2/dragon_RWingPalm/dragon_RWingDigit41
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_RWing1/dragon_RWing2/dragon_RWingPalm/dragon_RWingDigit41/dragon_RWingDigit42
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_RWing1/dragon_RWing2/dragon_RWingPalm/dragon_RWingDigit41/dragon_RWingDigit42/dragon_RWingDigit43
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_RWing1/dragon_RWing2/dragon_RWingPalm/dragon_RWingDigit51
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_RWing1/dragon_RWing2/dragon_RWingPalm/dragon_RWingDigit51/dragon_RWingDigit52
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_RWing1/dragon_RWing2/dragon_RWingPalm/dragon_RWingDigit51/dragon_RWingDigit52/dragon_RWingDigit53
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_spike02
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_ribs/dragon_spike03
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Spine1/dragon_Spine2/dragon_Spine3/dragon_spike04
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Tail1
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Tail1/dragon_Tail2
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Tail1/dragon_Tail2/dragon_Tail3
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Tail1/dragon_Tail2/dragon_Tail3/dragon_Tail4
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Tail1/dragon_Tail2/dragon_Tail3/dragon_Tail4/dragon_Tail5
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Tail1/dragon_Tail2/dragon_Tail3/dragon_Tail4/dragon_Tail5/dragon_Tail6
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Tail1/dragon_Tail2/dragon_Tail3/dragon_Tail4/dragon_Tail5/dragon_Tail6/dragon_Tail7
+    m_Weight: 0
+  - m_Path: dragon_pelvis/dragon_Tail1/dragon_Tail2/dragon_Tail3/dragon_Tail4/dragon_Tail5/dragon_Tail6/dragon_Tail7/dragon_Tail8
+    m_Weight: 0
+  - m_Path: dragon_RArmIKTarget
+    m_Weight: 0
+  - m_Path: dragon_RWingIKTarget
+    m_Weight: 0
+  - m_Path: mini_wyvern
+    m_Weight: 1
+  - m_Path: mini_wyvern_
+    m_Weight: 1
+  - m_Path: wings_backface
+    m_Weight: 1

@@ -54,6 +54,7 @@ public class PlayroomManager : MonoBehaviour
             {
                 // Broadcast only position
                 myPlayer.SetState("position", localPlayerData.playerObject.transform.position);
+                myPlayer.SetState("rotation", localPlayerData.playerObject.transform.rotation);
 
                 // Apply remote positions only when both players are in the same game state/scene
                 foreach (var entry in Players)
@@ -66,6 +67,7 @@ public class PlayroomManager : MonoBehaviour
 
                     GameObject playerObject = entry.Value.playerObject;
                     playerObject.transform.position = entry.Key.GetState<Vector3>("position");
+                    playerObject.transform.rotation = entry.Key.GetState<Quaternion>("rotation");
                 }
             }
         }

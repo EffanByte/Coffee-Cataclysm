@@ -87,6 +87,8 @@ public class PlayroomManager : MonoBehaviour
             _playroomKit.RpcRegister("HandleNewOrder", HandleNewOrder);
             _playroomKit.RpcRegister("SyncPlayerStateChange", HandleSyncPlayerStateChange);
             _playroomKit.RpcRegister("SyncPlayerAnim", HandleSyncPlayerAnim);
+            _playroomKit.RpcRegister("HandleAnimChange", HandleAnimChange);
+            _playroomKit.RpcRegister("HandleActionAnim", HandleActionAnim);
         });
     }
 
@@ -134,6 +136,15 @@ public class PlayroomManager : MonoBehaviour
             if (gameState == null || entry.Value.gameState != gameState.currentState)
                 return;
 
+            // Do not apply walking toggles while an action animation is active
+            var pac = entry.Value.playerObject.GetComponent<PlayerAnimatonController>();
+            if (pac != null)
+            {
+                string current = pac.GetCurrentAnimation();
+                if (IsActionAnimation(current))
+                    return;
+            }
+
             var animator = entry.Value.playerObject.GetComponentInChildren<Animator>();
             if (animator == null)
                 return;
@@ -146,6 +157,93 @@ public class PlayroomManager : MonoBehaviour
                 animator.SetBool("IsWalking", boolValue);
             }
             return;
+        }
+    }
+
+    private void HandleAnimChange(string animation, string sender)
+    {
+        foreach (var entry in Players)
+        {
+            if (entry.Key.id != sender)
+                continue;
+
+            if (gameState == null || entry.Value.gameState != gameState.currentState)
+                return;
+
+            var pac = entry.Value.playerObject.GetComponent<PlayerAnimatonController>();
+            if (pac != null)
+            {
+                // Route action animations to action flow (duration-aware)
+                if (IsActionAnimation(animation))
+                {
+                    float duration = pac.GetClipLength(animation);
+                    pac.PlayActionRemote(animation, duration);
+                }
+                else
+                {
+                    // Use controller API so it updates its internal state and avoids flicker
+                    pac.ChangeAnimation(animation);
+                }
+                return;
+            }
+
+            // Fallback: direct crossfade
+            var animator = entry.Value.playerObject.GetComponentInChildren<Animator>();
+            if (animator != null)
+            {
+                animator.CrossFade(animation, 0.2f);
+            }
+            return;
+        }
+    }
+
+    private void HandleActionAnim(string data, string sender)
+    {
+        // data format: "<name>|?|<duration>"
+        var parts = data.Split(new[] { "|?|" }, StringSplitOptions.None);
+        if (parts.Length != 2)
+        {
+            Debug.LogError($"Invalid HandleActionAnim payload: {data}");
+            return;
+        }
+
+        string name = parts[0];
+        if (!float.TryParse(parts[1], out float duration))
+        {
+            Debug.LogError($"Invalid duration in HandleActionAnim payload: {data}");
+            return;
+        }
+
+        foreach (var entry in Players)
+        {
+            if (entry.Key.id != sender)
+                continue;
+
+            if (gameState == null || entry.Value.gameState != gameState.currentState)
+                return;
+
+            var pac = entry.Value.playerObject.GetComponent<PlayerAnimatonController>();
+            if (pac != null)
+            {
+                pac.PlayActionRemote(name, duration);
+                return;
+            }
+        }
+    }
+
+    private bool IsActionAnimation(string current)
+    {
+        if (string.IsNullOrEmpty(current)) return false;
+        switch (current)
+        {
+            case "Shoot":
+            case "Melee":
+            case "Mage_Shoot":
+            case "Hit_A":
+            case "Hit_B":
+                return true;
+            default:
+                return false;
         }
     }
     private void HandleNewOrder(string data, string sender)

@@ -17,6 +17,7 @@ public class PlayerAnimatonController : MonoBehaviour
     [SerializeField] private float minAnimStateDuration = 0.2f; // seconds before switching states
     private float lastAnimChangeTime = 0f;
     private bool isMovingState = false;
+    private bool isInAction = false;
 
     private void Awake()
     {
@@ -30,6 +31,8 @@ public class PlayerAnimatonController : MonoBehaviour
 
     private void Update()
     {
+        if (isInAction)
+            return; // lock out movement-driven changes during action
         // Exponential smoothing of speed (based on position delta)
         float dt = Mathf.Max(Time.deltaTime, 0.0001f);
         float instantaneousSpeed = (transform.position - lastPosition).magnitude / dt;
@@ -42,7 +45,7 @@ public class PlayerAnimatonController : MonoBehaviour
 
     private void CheckAnimation()
     {
-        if (blockAnimations.Contains(currentAnimation))
+        if (isInAction || blockAnimations.Contains(currentAnimation))
             return;
 
         // Hysteresis: different thresholds for entering vs exiting move state
@@ -109,5 +112,48 @@ public class PlayerAnimatonController : MonoBehaviour
     public string GetCurrentAnimation()
     {
         return currentAnimation;
+    }
+
+    public float GetClipLength(string name)
+    {
+        if (animator == null || animator.runtimeAnimatorController == null)
+            return 0.5f;
+        var clips = animator.runtimeAnimatorController.animationClips;
+        foreach (var c in clips)
+            if (c != null && c.name == name)
+                return Mathf.Max(c.length, 0.05f);
+        return 0.5f;
+    }
+
+    public void PlayActionLocal(string name)
+    {
+        float duration = GetClipLength(name);
+        PlayActionInternal(name, duration, true);
+        // Broadcast to others
+        var playroom = PlayroomManager.Instance.GetPlayroomKit();
+        playroom.RpcCall("HandleActionAnim", name + "|?|" + duration.ToString(), PlayroomKit.RpcMode.ALL);
+    }
+
+    public void PlayActionRemote(string name, float duration)
+    {
+        PlayActionInternal(name, duration, false);
+    }
+
+    private void PlayActionInternal(string name, float duration, bool isLocal)
+    {
+        StopAllCoroutines();
+        StartCoroutine(ActionRoutine(name, duration));
+    }
+
+    private IEnumerator ActionRoutine(string name, float duration)
+    {
+        isInAction = true;
+        currentAnimation = name;
+        animator.CrossFade(name, 0.1f);
+        yield return new WaitForSeconds(duration);
+        isInAction = false;
+        // Reset to movement-driven state
+        currentAnimation = "";
+        CheckAnimation();
     }
 }

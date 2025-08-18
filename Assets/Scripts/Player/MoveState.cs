@@ -17,9 +17,7 @@ public class MoveState
                 animator.SetBool("IsWalking", true);
                 // Sync animation for this player to others only when it's my player
                 if (playerData.player.id == _playroomKit.MyPlayer().id)
-                {
                     PlayroomManager.Instance.SyncPlayerAnimBool("IsWalking", true);
-                }
             },
             onLogic: s =>
             {

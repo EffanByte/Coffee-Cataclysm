@@ -168,6 +168,16 @@ public class PlayroomManager : MonoBehaviour
         if (_playroomKit.MyPlayer().id != targetId)
             return;
 
+        // Clear current active enemies before applying snapshot to avoid duplicates
+        var existing = GameObject.FindObjectsOfType<EnemyMeta>();
+        foreach (var m in existing)
+        {
+            if (m.gameObject.activeInHierarchy)
+            {
+                m.gameObject.SetActive(false);
+            }
+        }
+
         var entries = snapshot.Split(';');
         foreach (var entry in entries)
         {

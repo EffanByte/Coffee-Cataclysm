@@ -92,6 +92,17 @@ public class EnemyPoolHandler : MonoBehaviour
         return created;
     }
 
+    public int GetPrefabIndexByName(string prefabName)
+    {
+        if (npcPrefabs == null) return 0;
+        for (int i = 0; i < npcPrefabs.Length; i++)
+        {
+            if (npcPrefabs[i] != null && npcPrefabs[i].name == prefabName)
+                return i;
+        }
+        return 0;
+    }
+
     /// <summary>
     /// Despawns a specific enemy and returns it to the pool.
     /// </summary>

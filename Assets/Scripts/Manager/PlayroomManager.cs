@@ -9,6 +9,7 @@ public class PlayerData
     public GameObject playerObject;
     public Player playerScript;
     public HeldItemType HeldItem;
+    public GameSceneState gameState = GameSceneState.GameBar;
     public PlayerData(PlayroomKit.Player player, GameObject playerObject, Player playerScript)
     {
         this.player = player;
@@ -49,14 +50,22 @@ public class PlayroomManager : MonoBehaviour
         if (spawned)
         {
             var myPlayer = _playroomKit.MyPlayer();
-            myPlayer.SetState("position", Players[myPlayer].playerObject.transform.position);
-
-            foreach (var player in Players)
+            if (Players.TryGetValue(myPlayer, out PlayerData localPlayerData))
             {
-                if (player.Key.id != myPlayer.id)
+                // Broadcast only position
+                myPlayer.SetState("position", localPlayerData.playerObject.transform.position);
+
+                // Apply remote positions only when both players are in the same game state/scene
+                foreach (var entry in Players)
                 {
-                    GameObject playerObject = player.Value.playerObject;
-                    playerObject.transform.position = player.Key.GetState<Vector3>("position");
+                    if (entry.Key.id == myPlayer.id)
+                        continue;
+
+                    if (entry.Value.gameState != localPlayerData.gameState)
+                        continue;
+
+                    GameObject playerObject = entry.Value.playerObject;
+                    playerObject.transform.position = entry.Key.GetState<Vector3>("position");
                 }
             }
         }
@@ -76,9 +85,31 @@ public class PlayroomManager : MonoBehaviour
             _playroomKit.RpcRegister("HandleInsertBean", HandleInsertBean);
             _playroomKit.RpcRegister("HandleReceiveOrder", HandleReceiveOrder);
             _playroomKit.RpcRegister("HandleNewOrder", HandleNewOrder);
+            _playroomKit.RpcRegister("SyncPlayerStateChange", HandleSyncPlayerStateChange);
         });
     }
 
+    private void HandleSyncPlayerStateChange(string data, string sender)
+    {
+
+        GameSceneState newState = (GameSceneState)Enum.Parse(typeof(GameSceneState), data);
+
+        // Find the player and update their state
+        foreach (var player in Players)
+        {
+            if (player.Key.id == sender)
+            {
+                player.Value.gameState = newState;
+                
+                // Update visibility based on current game state (guard against early calls)
+                if (gameState != null && gameState.currentState == newState)
+                    player.Value.playerObject.SetActive(true);
+                else
+                    player.Value.playerObject.SetActive(false);
+                break;
+            }
+        }
+    }
     private void HandleNewOrder(string data, string sender)
     {
         if (gameState.currentState == GameSceneState.GameBar)
@@ -202,7 +233,7 @@ public class PlayroomManager : MonoBehaviour
         {
             Debug.Log("Other Player ID: " + player.id);
         }
-    
+
     }
 
     public PlayroomKit GetPlayroomKit()

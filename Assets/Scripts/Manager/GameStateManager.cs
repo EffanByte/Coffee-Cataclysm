@@ -67,6 +67,7 @@ public class GameStateManager : MonoBehaviour
         if (PlayroomManager.Players.TryGetValue(_playroom.MyPlayer(), out PlayerData myPlayerData_Out))
         {
             myPlayerData_Out.gameState = currentState;
+            PlayroomManager.Instance.UpdateOutsideQueue(_playroom.MyPlayer().id, currentState);
         }
         
         // Now activate/deactivate players based on updated state
@@ -95,6 +96,7 @@ public class GameStateManager : MonoBehaviour
         if (PlayroomManager.Players.TryGetValue(_playroom.MyPlayer(), out PlayerData myPlayerData_In))
         {
             myPlayerData_In.gameState = currentState;
+            PlayroomManager.Instance.UpdateOutsideQueue(_playroom.MyPlayer().id, currentState);
         }
         
         // Now activate/deactivate players based on updated state

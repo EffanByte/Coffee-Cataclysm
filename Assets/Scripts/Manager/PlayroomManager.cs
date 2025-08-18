@@ -28,6 +28,8 @@ public class PlayroomManager : MonoBehaviour
     public static Dictionary<PlayroomKit.Player, PlayerData> Players = new();
     private GameStateManager gameState;
     [SerializeField] GameObject PlayerPrefab;
+    // Tracks order players arrived in the Outside scene. Earliest stays host until they leave.
+    private readonly List<string> outsideQueue = new List<string>();
 
     void Awake()
     {
@@ -91,9 +93,98 @@ public class PlayroomManager : MonoBehaviour
             _playroomKit.RpcRegister("SyncPlayerAnim", HandleSyncPlayerAnim);
             _playroomKit.RpcRegister("HandleAnimChange", HandleAnimChange);
             _playroomKit.RpcRegister("HandleActionAnim", HandleActionAnim);
+            _playroomKit.RpcRegister("HandleEnemySpawn", HandleEnemySpawn);
+            _playroomKit.RpcRegister("RequestEnemySnapshot", HandleRequestEnemySnapshot);
+            _playroomKit.RpcRegister("ApplyEnemySnapshot", HandleApplyEnemySnapshot);
         });
     }
 
+    private void HandleEnemySpawn(string data, string sender)
+    {
+        // only apply outside
+        if (gameState == null || gameState.currentState != GameSceneState.OutSide)
+            return;
+
+        // data: "<prefabIndex>|?|<x>|<y>|<z>"
+        var parts = data.Split(new[] { "|?|" }, StringSplitOptions.None);
+        if (parts.Length != 4)
+        {
+            Debug.LogError($"Invalid HandleEnemySpawn payload: {data}");
+            return;
+        }
+        if (!int.TryParse(parts[0], out int prefabIndex)) prefabIndex = 0;
+        float.TryParse(parts[1], out float x);
+        float.TryParse(parts[2], out float y);
+        float.TryParse(parts[3], out float z);
+
+        Vector3 pos = new Vector3(x, y, z);
+        var enemy = EnemyPoolHandler.Instance != null ? EnemyPoolHandler.Instance.GetNPC(prefabIndex) : null;
+        if (enemy != null)
+        {
+            enemy.transform.position = pos;
+        }
+    }
+
+    private void HandleRequestEnemySnapshot(string data, string sender)
+    {
+        // Only host should respond with snapshot; determine host by queue[0]
+        var queue = GetOutsideQueue();
+        if (queue.Count == 0 || queue[0] != _playroomKit.MyPlayer().id)
+            return;
+
+        if (gameState == null || gameState.currentState != GameSceneState.OutSide)
+            return;
+
+        // Build snapshot: semicolon-separated entries: idx,x,y,z
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        var metas = GameObject.FindObjectsOfType<EnemyMeta>();
+        for (int i = 0; i < metas.Length; i++)
+        {
+            var m = metas[i];
+            if (!m.gameObject.activeInHierarchy) continue;
+            Vector3 p = m.transform.position;
+            if (sb.Length > 0) sb.Append(";");
+            sb.Append(m.PrefabIndex).Append("|?|").Append(p.x).Append("|?|").Append(p.y).Append("|?|").Append(p.z);
+        }
+
+        // Send snapshot addressed to requesterId; broadcast to OTHERS, receivers will filter
+        string payload = sender + "#" + sb.ToString();
+        _playroomKit.RpcCall("ApplyEnemySnapshot", payload, PlayroomKit.RpcMode.OTHERS);
+    }
+
+    private void HandleApplyEnemySnapshot(string data, string sender)
+    {
+        if (gameState == null || gameState.currentState != GameSceneState.OutSide)
+            return;
+
+        if (string.IsNullOrEmpty(data)) return;
+
+        int hashIdx = data.IndexOf('#');
+        if (hashIdx < 0) return;
+        string targetId = data.Substring(0, hashIdx);
+        string snapshot = data.Substring(hashIdx + 1);
+
+        // Only apply if this client is the intended recipient
+        if (_playroomKit.MyPlayer().id != targetId)
+            return;
+
+        var entries = snapshot.Split(';');
+        foreach (var entry in entries)
+        {
+            var parts = entry.Split(new[] { "|?|" }, StringSplitOptions.None);
+            if (parts.Length != 4) continue;
+            if (!int.TryParse(parts[0], out int idx)) idx = 0;
+            float.TryParse(parts[1], out float x);
+            float.TryParse(parts[2], out float y);
+            float.TryParse(parts[3], out float z);
+            Vector3 pos = new Vector3(x, y, z);
+            var enemy = EnemyPoolHandler.Instance != null ? EnemyPoolHandler.Instance.GetNPC(idx) : null;
+            if (enemy != null)
+            {
+                enemy.transform.position = pos;
+            }
+        }
+    }
     private void HandleSyncPlayerStateChange(string data, string sender)
     {
 
@@ -105,12 +196,14 @@ public class PlayroomManager : MonoBehaviour
             if (player.Key.id == sender)
             {
                 player.Value.gameState = newState;
-                
+
                 // Update visibility based on current game state
                 if (gameState.currentState == newState)
                     player.Value.playerObject.SetActive(true);
                 else
                     player.Value.playerObject.SetActive(false);
+
+                UpdateOutsideQueue(sender, newState);
                 break;
             }
         }
@@ -382,5 +475,29 @@ public class PlayroomManager : MonoBehaviour
     public void SyncPlayerAnimBool(string parameterName, bool value)
     {
         _playroomKit.RpcCall("SyncPlayerAnim", $"{parameterName}|?|{value}", PlayroomKit.RpcMode.ALL);
+    }
+
+    public IReadOnlyList<string> GetOutsideQueue()
+    {
+        return outsideQueue;
+    }
+
+    public void UpdateOutsideQueue(string playerId, GameSceneState newState)
+    {
+        bool contains = outsideQueue.Contains(playerId);
+        if (newState == GameSceneState.OutSide)
+        {
+            if (!contains)
+            {
+                outsideQueue.Add(playerId);
+            }
+        }
+        else
+        {
+            if (contains)
+            {
+                outsideQueue.Remove(playerId);
+            }
+        }
     }
 }

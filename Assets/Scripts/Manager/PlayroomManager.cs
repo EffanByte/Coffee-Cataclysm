@@ -54,7 +54,7 @@ public class PlayroomManager : MonoBehaviour
             {
                 // Broadcast only position
                 myPlayer.SetState("position", localPlayerData.playerObject.transform.position);
-                myPlayer.SetState("rotation", localPlayerData.playerObject.transform.rotation); // update this later so it interpolates
+
                 // Apply remote positions only when both players are in the same game state/scene
                 foreach (var entry in Players)
                 {
@@ -66,7 +66,6 @@ public class PlayroomManager : MonoBehaviour
 
                     GameObject playerObject = entry.Value.playerObject;
                     playerObject.transform.position = entry.Key.GetState<Vector3>("position");
-                    playerObject.transform.rotation = entry.Key.GetState<Quaternion>("rotation");
                 }
             }
         }
@@ -87,21 +86,24 @@ public class PlayroomManager : MonoBehaviour
             _playroomKit.RpcRegister("HandleReceiveOrder", HandleReceiveOrder);
             _playroomKit.RpcRegister("HandleNewOrder", HandleNewOrder);
             _playroomKit.RpcRegister("SyncPlayerStateChange", HandleSyncPlayerStateChange);
-            _playroomKit.RpcRegister("HandleAnimChange", HandleAnimChange);
+            _playroomKit.RpcRegister("SyncPlayerAnim", HandleSyncPlayerAnim);
         });
     }
 
     private void HandleSyncPlayerStateChange(string data, string sender)
     {
+
         GameSceneState newState = (GameSceneState)Enum.Parse(typeof(GameSceneState), data);
+
         // Find the player and update their state
         foreach (var player in Players)
         {
             if (player.Key.id == sender)
             {
                 player.Value.gameState = newState;
+                
                 // Update visibility based on current game state
-                if (gameState != null && gameState.currentState == newState)
+                if (gameState.currentState == newState)
                     player.Value.playerObject.SetActive(true);
                 else
                     player.Value.playerObject.SetActive(false);
@@ -110,24 +112,40 @@ public class PlayroomManager : MonoBehaviour
         }
     }
 
-    private void HandleAnimChange(string data, string sender)
+    private void HandleSyncPlayerAnim(string data, string sender)
     {
-        // data: animation name
-        var senderPlayer = _playroomKit.GetPlayer(sender);
-        if (senderPlayer == null)
-            return;
-
-        if (Players.TryGetValue(senderPlayer, out PlayerData playerData))
+        // data format: "<param>|?|<value>"; example: "IsWalking|?|True"
+        var parts = data.Split(new[] { "|?|" }, StringSplitOptions.None);
+        if (parts.Length != 2)
         {
-            // Only apply if the sender's scene matches our current scene
-            if (gameState == null || playerData.gameState != gameState.currentState)
+            Debug.LogError($"Invalid SyncPlayerAnim payload: {data}");
+            return;
+        }
+
+        string param = parts[0];
+        string value = parts[1];
+
+        foreach (var entry in Players)
+        {
+            if (entry.Key.id != sender)
+                continue;
+
+            // Only apply if the remote player's scene matches this client's current scene
+            if (gameState == null || entry.Value.gameState != gameState.currentState)
                 return;
 
-            var animator = playerData.playerObject.GetComponentInChildren<Animator>();
-            if (animator != null)
+            var animator = entry.Value.playerObject.GetComponentInChildren<Animator>();
+            if (animator == null)
+                return;
+
+            // Currently only syncing bool params; extend as needed
+            if (param == "IsWalking")
             {
-                animator.CrossFade(data, 0.2f);
+                bool boolValue = false;
+                bool.TryParse(value, out boolValue);
+                animator.SetBool("IsWalking", boolValue);
             }
+            return;
         }
     }
     private void HandleNewOrder(string data, string sender)
@@ -259,5 +277,10 @@ public class PlayroomManager : MonoBehaviour
     public PlayroomKit GetPlayroomKit()
     {
         return _playroomKit;
+    }
+
+    public void SyncPlayerAnimBool(string parameterName, bool value)
+    {
+        _playroomKit.RpcCall("SyncPlayerAnim", $"{parameterName}|?|{value}", PlayroomKit.RpcMode.ALL);
     }
 }

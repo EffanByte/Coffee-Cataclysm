@@ -15,6 +15,11 @@ public class MoveState
             onEnter: s =>
             {
                 animator.SetBool("IsWalking", true);
+                // Sync animation for this player to others only when it's my player
+                if (playerData.player.id == _playroomKit.MyPlayer().id)
+                {
+                    PlayroomManager.Instance.SyncPlayerAnimBool("IsWalking", true);
+                }
             },
             onLogic: s =>
             {
@@ -40,8 +45,12 @@ public class MoveState
             
 
             },
-            onExit: s => { 
+            onExit: s => {
                 animator.SetBool("IsWalking", false);
+                if (playerData.player.id == _playroomKit.MyPlayer().id)
+                {
+                    PlayroomManager.Instance.SyncPlayerAnimBool("IsWalking", false);
+                }
             }
         );
     }

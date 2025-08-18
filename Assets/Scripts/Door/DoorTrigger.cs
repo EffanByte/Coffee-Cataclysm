@@ -14,7 +14,7 @@ public class DoorTrigger : MonoBehaviour
         {
             _playroom = PlayroomManager.Instance.GetPlayroomKit();
 
-            // Find the PlayerData for the player that entered the trigger (do not mutate remote state here)
+            // Find the PlayerData for the player that entered the trigger
             PlayerData playerData = null;
             foreach (var kvp in PlayroomManager.Players) // can be improved by trygetvalue I guess
             {
@@ -27,10 +27,10 @@ public class DoorTrigger : MonoBehaviour
 
             if (playerData.player == _playroom.MyPlayer()) 
             {
-                #if !UNITY_EDITOR // movement breaks in editor for some reason
+                // Update only local player's state; remotes will update via RPC handler
+                playerData.gameState = GameSceneState.OutSide;
                 // Sync state change to all players via RPC
                 _playroom.RpcCall("SyncPlayerStateChange", GameSceneState.OutSide.ToString(), PlayroomKit.RpcMode.ALL);
-                #endif
                 GameStateManager.Instance.GoToOutSide(LoaderScene);
             }
             else

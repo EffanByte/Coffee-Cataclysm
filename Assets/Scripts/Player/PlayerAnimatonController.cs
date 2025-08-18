@@ -98,7 +98,7 @@ public class PlayerAnimatonController : MonoBehaviour
                 // If this is my local player, broadcast to others
                 var playroom = PlayroomManager.Instance.GetPlayroomKit();
                 var my = playroom.MyPlayer();
-                if (PlayroomManager.Players.TryGetValue(my, out var myData) && myData.playerObject == this.gameObject)
+                if (PlayroomManager.Players.TryGetValue(my, out var myData) && myData.playerObject == gameObject)
                 {
                     playroom.RpcCall("HandleAnimChange", animation, PlayroomKit.RpcMode.ALL);
                 }

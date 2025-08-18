@@ -20,15 +20,18 @@ public class PortalTrigger : MonoBehaviour
                 if (kvp.Value.playerObject == other.gameObject)
                 {
                     playerData = kvp.Value;
-                    break;
+                    break;  
                 }
             }
             // Only do it for local player
             if (playerData.player == _playroom.MyPlayer())
             {
-                playerData.gameState = GameSceneState.GameBar;
+                // Sync state change to all players via RPC
+                _playroom.RpcCall("SyncPlayerStateChange", GameSceneState.GameBar.ToString(), PlayroomKit.RpcMode.ALL);
                 GameStateManager.Instance.GoToGameBar(LoaderScene);
             }
+            else
+                playerData.playerObject.SetActive(false);
         }
     }
 }

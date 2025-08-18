@@ -1,6 +1,7 @@
 using System;
 using Playroom;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityHFSM;
 
 public enum BeanType { none, brown, white }
@@ -18,6 +19,7 @@ public class Player : MonoBehaviour
     [Header("Player Character Speed")]
     [SerializeField] protected float moveSpeed;
     [SerializeField] private Animator animator;
+    [SerializeField] private Image healthBar;   
 
     private StateMachine<PlayerState> fsm;
     private PlayroomKit _playroomKit;
@@ -48,6 +50,7 @@ public class Player : MonoBehaviour
     }
     protected virtual void Start()
     {
+        UIManager.Instance.SetPlayerHealthBar(healthBar);
         AssignEvents();
         GetPlayerComponent();
         transformPlayer = transform;

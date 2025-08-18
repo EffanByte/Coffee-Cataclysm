@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 5177882772117081393}
   - component: {fileID: 338596255577475568}
   m_Layer: 5
-  m_Name: HealthLine
+  m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -406,6 +406,7 @@ MonoBehaviour:
   transformPlayer: {fileID: 0}
   moveSpeed: 0
   animator: {fileID: 0}
+  healthBar: {fileID: 338596255577475568}
   currentState: 0
   currentAttackState: 0
 --- !u!114 &4101904792092552111
@@ -566,7 +567,7 @@ GameObject:
   - component: {fileID: 6590132200786558064}
   - component: {fileID: 2311237863286219117}
   m_Layer: 5
-  m_Name: HealthBar
+  m_Name: HealthOutLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

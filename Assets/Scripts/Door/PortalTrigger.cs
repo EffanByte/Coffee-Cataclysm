@@ -27,8 +27,10 @@ public class PortalTrigger : MonoBehaviour
             if (playerData.player == _playroom.MyPlayer())
             {
                 playerData.gameState = GameSceneState.GameBar;
+                #if !UNITY_EDITOR
                 // Sync state change to all players via RPC
                 _playroom.RpcCall("SyncPlayerStateChange", GameSceneState.GameBar.ToString(), PlayroomKit.RpcMode.ALL);
+                #endif
                 GameStateManager.Instance.GoToGameBar(LoaderScene);
             }
             else

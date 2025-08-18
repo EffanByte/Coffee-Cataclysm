@@ -29,8 +29,10 @@ public class DoorTrigger : MonoBehaviour
             {
                 // Update only local player's state; remotes will update via RPC handler
                 playerData.gameState = GameSceneState.OutSide;
+                #if !UNITY_EDITOR
                 // Sync state change to all players via RPC
                 _playroom.RpcCall("SyncPlayerStateChange", GameSceneState.OutSide.ToString(), PlayroomKit.RpcMode.ALL);
+                #endif
                 GameStateManager.Instance.GoToOutSide(LoaderScene);
             }
             else

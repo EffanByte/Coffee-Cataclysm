@@ -197,10 +197,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 338596255577475568, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300028, guid: 34ecf51bcd3f4424eafda7dafd885bd0, type: 3}
     - target: {fileID: 959765240157831346, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       propertyPath: animator
       value: 
       objectReference: {fileID: 8409358115010877963}
+    - target: {fileID: 2311237863286219117, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300026, guid: 34ecf51bcd3f4424eafda7dafd885bd0, type: 3}
     - target: {fileID: 2436261690270933856, guid: 0bf56523dc3fdc14a8281c1db7d37743, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

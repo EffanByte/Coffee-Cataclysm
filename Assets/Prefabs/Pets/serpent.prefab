@@ -506,6 +506,7 @@ GameObject:
   - component: {fileID: 7547033000318036818}
   - component: {fileID: 4831937380987717900}
   - component: {fileID: 7875572673708616174}
+  - component: {fileID: 3713013327183079038}
   m_Layer: 0
   m_Name: Serpent
   m_TagString: Untagged
@@ -578,6 +579,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05ec998df3fc3964b9075d5771e7e74d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &3713013327183079038
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3616716127420421949}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3.5
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &3887611837481959099
 GameObject:
   m_ObjectHideFlags: 0

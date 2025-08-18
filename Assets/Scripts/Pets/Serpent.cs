@@ -12,6 +12,14 @@ public class Serpent : MonoBehaviour
     private void Start()
     {
         petsAnimationController.ChangeAnimation(petsAnimationController.SerpentFly);
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Enemy"))
+        {
+            petsAnimationController.ChangeAnimation(petsAnimationController.SerpentAttack);
+            Debug.Log("SerpentAttacking");
+        }
     }
 }

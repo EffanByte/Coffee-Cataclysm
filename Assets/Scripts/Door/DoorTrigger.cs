@@ -27,8 +27,10 @@ public class DoorTrigger : MonoBehaviour
 
             if (playerData.player == _playroom.MyPlayer()) 
             {
+                #if !UNITY_EDITOR // movement breaks in editor for some reason
                 // Sync state change to all players via RPC
                 _playroom.RpcCall("SyncPlayerStateChange", GameSceneState.OutSide.ToString(), PlayroomKit.RpcMode.ALL);
+                #endif
                 GameStateManager.Instance.GoToOutSide(LoaderScene);
             }
             else

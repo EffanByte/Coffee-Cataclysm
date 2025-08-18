@@ -54,7 +54,7 @@ public class PlayroomManager : MonoBehaviour
             {
                 // Broadcast only position
                 myPlayer.SetState("position", localPlayerData.playerObject.transform.position);
-
+                myPlayer.SetState("rotation", localPlayerData.playerObject.transform.rotation); // update this later so it interpolates
                 // Apply remote positions only when both players are in the same game state/scene
                 foreach (var entry in Players)
                 {
@@ -66,6 +66,7 @@ public class PlayroomManager : MonoBehaviour
 
                     GameObject playerObject = entry.Value.playerObject;
                     playerObject.transform.position = entry.Key.GetState<Vector3>("position");
+                    playerObject.transform.rotation = entry.Key.GetState<Quaternion>("rotation");
                 }
             }
         }
@@ -86,27 +87,46 @@ public class PlayroomManager : MonoBehaviour
             _playroomKit.RpcRegister("HandleReceiveOrder", HandleReceiveOrder);
             _playroomKit.RpcRegister("HandleNewOrder", HandleNewOrder);
             _playroomKit.RpcRegister("SyncPlayerStateChange", HandleSyncPlayerStateChange);
+            _playroomKit.RpcRegister("HandleAnimChange", HandleAnimChange);
         });
     }
 
     private void HandleSyncPlayerStateChange(string data, string sender)
     {
-
         GameSceneState newState = (GameSceneState)Enum.Parse(typeof(GameSceneState), data);
-
         // Find the player and update their state
         foreach (var player in Players)
         {
             if (player.Key.id == sender)
             {
                 player.Value.gameState = newState;
-                
-                // Update visibility based on current game state (guard against early calls)
+                // Update visibility based on current game state
                 if (gameState != null && gameState.currentState == newState)
                     player.Value.playerObject.SetActive(true);
                 else
                     player.Value.playerObject.SetActive(false);
                 break;
+            }
+        }
+    }
+
+    private void HandleAnimChange(string data, string sender)
+    {
+        // data: animation name
+        var senderPlayer = _playroomKit.GetPlayer(sender);
+        if (senderPlayer == null)
+            return;
+
+        if (Players.TryGetValue(senderPlayer, out PlayerData playerData))
+        {
+            // Only apply if the sender's scene matches our current scene
+            if (gameState == null || playerData.gameState != gameState.currentState)
+                return;
+
+            var animator = playerData.playerObject.GetComponentInChildren<Animator>();
+            if (animator != null)
+            {
+                animator.CrossFade(data, 0.2f);
             }
         }
     }

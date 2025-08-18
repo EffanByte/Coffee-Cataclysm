@@ -40,22 +40,30 @@ public class EnemySpawner : MonoBehaviour
             if (!isOutsideHost)
                 continue; // non-host does nothing; will receive spawn RPCs
 
-            // If only one outside client (me), we still spawn locally without broadcasting
-            Vector3 spawnPos = GetRandomPositionNearHost();
-            int prefabIndex = Random.Range(0, EnemyPoolHandler.Instance.npcPrefabs.Length);
+            // Spawn around every outside player's position once per interval
+            int outsideCount = CountOutsidePlayers();
+            if (EnemyPoolHandler.Instance == null || EnemyPoolHandler.Instance.npcPrefabs == null || EnemyPoolHandler.Instance.npcPrefabs.Length == 0)
+                continue;
 
-            // Spawn locally
-            GameObject enemy = EnemyPoolHandler.Instance.GetNPC(prefabIndex);
-            if (enemy != null)
+            bool shouldBroadcast = outsideCount > 1;
+            foreach (var anchor in GetOutsidePlayerPositions())
             {
-                enemy.transform.position = spawnPos;
-            }
+                Vector3 spawnPos = GetRandomPositionNear(anchor);
+                int prefabIndex = Random.Range(0, EnemyPoolHandler.Instance.npcPrefabs.Length);
 
-            // If there is more than one outside player, broadcast
-            if (CountOutsidePlayers() > 1)
-            {
-                string payload = prefabIndex + "|?|" + spawnPos.x + "|?|" + spawnPos.y + "|?|" + spawnPos.z;
-                _playroom.RpcCall("HandleEnemySpawn", payload, PlayroomKit.RpcMode.OTHERS);
+                // Spawn locally
+                GameObject enemy = EnemyPoolHandler.Instance.GetNPC(prefabIndex);
+                if (enemy != null)
+                {
+                    enemy.transform.position = spawnPos;
+                }
+
+                // Broadcast to other outside clients so they mirror this spawn
+                if (shouldBroadcast)
+                {
+                    string payload = prefabIndex + "|?|" + spawnPos.x + "|?|" + spawnPos.y + "|?|" + spawnPos.z;
+                    _playroom.RpcCall("HandleEnemySpawn", payload, PlayroomKit.RpcMode.OTHERS);
+                }
             }
         }
     }
@@ -64,6 +72,12 @@ public class EnemySpawner : MonoBehaviour
     {
         Vector2 randomCircle = Random.insideUnitCircle * spawnRadius;
         return player.position + new Vector3(randomCircle.x, 0f, randomCircle.y);
+    }
+
+    private Vector3 GetRandomPositionNear(Vector3 center)
+    {
+        Vector2 randomCircle = Random.insideUnitCircle * spawnRadius;
+        return center + new Vector3(randomCircle.x, 0f, randomCircle.y);
     }
 
     private IEnumerator RequestSnapshotIfNeeded()
@@ -104,5 +118,18 @@ public class EnemySpawner : MonoBehaviour
         var queue = (System.Collections.Generic.IReadOnlyList<string>)PlayroomManager.Instance.GetOutsideQueue();
         outsideHostId = queue.Count > 0 ? queue[0] : null;
         isOutsideHost = outsideHostId != null && _playroom.MyPlayer().id == outsideHostId;
+    }
+
+    private System.Collections.Generic.List<Vector3> GetOutsidePlayerPositions()
+    {
+        var list = new System.Collections.Generic.List<Vector3>();
+        foreach (var kv in PlayroomManager.Players)
+        {
+            if (kv.Value.gameState == GameSceneState.OutSide && kv.Value.playerObject != null)
+            {
+                list.Add(kv.Value.playerObject.transform.position);
+            }
+        }
+        return list;
     }
 }

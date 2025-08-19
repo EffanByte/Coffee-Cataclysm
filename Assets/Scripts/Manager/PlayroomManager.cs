@@ -77,7 +77,7 @@ public class PlayroomManager : MonoBehaviour
             maxPlayersPerRoom = 4,
         }, () =>
         {
-            _playroomKit.OnPlayerJoin(SpawnPlayer);
+            //_playroomKit.OnPlayerJoin(SpawnPlayer);
             _playroomKit.RpcRegister("HandleHeldItem", HandleHeldItem);
             _playroomKit.RpcRegister("HandleDropItem", HandleDropItem);
             _playroomKit.RpcRegister("HandleBlendCoffee", HandleHeldItem);
@@ -100,7 +100,7 @@ public class PlayroomManager : MonoBehaviour
             if (player.Key.id == sender)
             {
                 player.Value.gameState = newState;
-                
+
                 // Update visibility based on current game state (guard against early calls)
                 if (gameState != null && gameState.currentState == newState)
                     player.Value.playerObject.SetActive(true);
@@ -219,7 +219,7 @@ public class PlayroomManager : MonoBehaviour
             playerObject.GetComponent<HoldingManager>().DropItem();
         }
     }
-    void SpawnPlayer(PlayroomKit.Player player)
+    public void SpawnPlayer(PlayroomKit.Player player)
     {
         GameObject playerObject;
         playerObject = Instantiate(PlayerPrefab, new Vector3(0, 1, 2), Quaternion.identity); // using default position for now   
@@ -240,4 +240,10 @@ public class PlayroomManager : MonoBehaviour
     {
         return _playroomKit;
     }
+
+    public void SetPlayerPrefab(GameObject playerCharacter)
+    {
+        PlayerPrefab = playerCharacter;
+    }
+
 }

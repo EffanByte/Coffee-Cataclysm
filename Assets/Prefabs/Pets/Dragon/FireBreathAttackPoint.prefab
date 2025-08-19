@@ -67,7 +67,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb026c13982da8741a0ba6f92168ca1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireParticle: {fileID: 4155882497290697745}
 --- !u!1001 &7413496383063443274
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -79,6 +78,18 @@ PrefabInstance:
     - target: {fileID: 1515382232107118905, guid: 7ed804d7bcff8c141a737a3327ae13a5, type: 3}
       propertyPath: m_Name
       value: Fx_DragonBreath
+      objectReference: {fileID: 0}
+    - target: {fileID: 6867618562713172827, guid: 7ed804d7bcff8c141a737a3327ae13a5, type: 3}
+      propertyPath: InitialModule.size3D
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6867618562713172827, guid: 7ed804d7bcff8c141a737a3327ae13a5, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6867618562713172827, guid: 7ed804d7bcff8c141a737a3327ae13a5, type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8936173513562205970, guid: 7ed804d7bcff8c141a737a3327ae13a5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -128,10 +139,5 @@ PrefabInstance:
 --- !u!4 &1937020459833026648 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8936173513562205970, guid: 7ed804d7bcff8c141a737a3327ae13a5, type: 3}
-  m_PrefabInstance: {fileID: 7413496383063443274}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &4155882497290697745 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6867618562713172827, guid: 7ed804d7bcff8c141a737a3327ae13a5, type: 3}
   m_PrefabInstance: {fileID: 7413496383063443274}
   m_PrefabAsset: {fileID: 0}

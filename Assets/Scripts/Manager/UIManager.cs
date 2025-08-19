@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +7,11 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance { get; private set; }
 
     [SerializeField] private Image playerHealthBarUI;
+    [SerializeField] private TextMeshProUGUI scoreText;
+
+
+    private bool playerSelected;
+    private int score;
 
     private void Awake()
     {
@@ -18,6 +24,8 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        score = 0;
     }
 
 
@@ -35,4 +43,24 @@ public class UIManager : MonoBehaviour
         playerHealthBarUI = image;
     }
 
+    public void ScoreUp()
+    {
+        score++;
+        scoreText.text = "Score : " + score.ToString();
+    }
+
+    public void SetScoreText(TextMeshProUGUI text)
+    {
+        scoreText = text;
+    }
+
+    public void SetPlayerSelectedBool(bool Selected)
+    {
+        playerSelected = Selected;
+    }
+
+    public bool GetPlayerSelectedBool()
+    {
+        return playerSelected;
+    }
 }

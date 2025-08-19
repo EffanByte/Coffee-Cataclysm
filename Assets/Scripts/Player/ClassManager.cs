@@ -14,10 +14,10 @@ public enum PlayerAttackState
     UseItem,
 }
 
-public abstract class ClassManager : MonoBehaviour, IPlayer  
+public abstract class ClassManager : MonoBehaviour, IPlayer
 {
     protected float speed;
-    [SerializeField]protected int maxHealth = 5;
+    [SerializeField] protected int maxHealth = 5;
     protected int currentHealth;
     protected PlayerType _playerType;
     protected PlayerAttackState _playerAttackState;
@@ -49,10 +49,10 @@ public abstract class ClassManager : MonoBehaviour, IPlayer
     public virtual void Damage()
     {
         Debug.Log("Player is being Damage");
-        if(currentHealth > 0)
+        if (currentHealth > 0)
         {
             currentHealth--;
-            UIManager.Instance.UpdatePlayerHealthUI(currentHealth,maxHealth);
+            UIManager.Instance.UpdatePlayerHealthUI(currentHealth, maxHealth);
         }
         else if (currentHealth <= 0)
         {
@@ -63,10 +63,11 @@ public abstract class ClassManager : MonoBehaviour, IPlayer
 
     public virtual void Health()
     {
-        
+
     }
     public virtual void UseAbility()
     {
 
     }
+
 }

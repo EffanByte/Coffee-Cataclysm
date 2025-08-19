@@ -19,12 +19,14 @@ public class PlayerCharacterSelection : MonoBehaviour
         {
             PlayroomManager.Instance.SetPlayerPrefab(playerRanged);
             PlayroomManager.Instance.GetPlayroomKit().OnPlayerJoin(PlayroomManager.Instance.SpawnPlayer);
+            UIManager.Instance.SetPlayerSelectedBool(true);
             Hide();
         });
         playerMeleeButton.onClick.AddListener(() =>
         {
             PlayroomManager.Instance.SetPlayerPrefab(playerMelee);
             PlayroomManager.Instance.GetPlayroomKit().OnPlayerJoin(PlayroomManager.Instance.SpawnPlayer);
+            UIManager.Instance.SetPlayerSelectedBool(true);
             Hide();
 
         });
@@ -32,14 +34,28 @@ public class PlayerCharacterSelection : MonoBehaviour
         {
             PlayroomManager.Instance.SetPlayerPrefab(playerTank);
             PlayroomManager.Instance.GetPlayroomKit().OnPlayerJoin(PlayroomManager.Instance.SpawnPlayer);
+            UIManager.Instance.SetPlayerSelectedBool(true);
             Hide();
         });
         playerHealerButton.onClick.AddListener(() =>
         {
             PlayroomManager.Instance.SetPlayerPrefab(playerHealer);
             PlayroomManager.Instance.GetPlayroomKit().OnPlayerJoin(PlayroomManager.Instance.SpawnPlayer);
+            UIManager.Instance.SetPlayerSelectedBool(true);
             Hide();
         });
+    }
+
+    private void Start()
+    {
+        if (UIManager.Instance.GetPlayerSelectedBool() == false)
+        {
+            Show();
+        }
+        else
+        {
+            Hide();
+        }
     }
 
     private void Show()

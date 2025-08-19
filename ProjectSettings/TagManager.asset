@@ -12,6 +12,7 @@ TagManager:
   - Melee
   - Arrow
   - Spell
+  - PlayerHit
   layers:
   - Default
   - TransparentFX

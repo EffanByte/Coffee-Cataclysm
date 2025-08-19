@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 186978877696240249}
   m_Layer: 0
   m_Name: sword_2handed
-  m_TagString: Melee
+  m_TagString: PlayerHit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

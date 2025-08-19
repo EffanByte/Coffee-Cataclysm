@@ -1,18 +1,23 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
+    public event EventHandler OnXpBarLevelUp;
+
     [SerializeField] private Image playerHealthBarUI;
-    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI orePointText;
+    [SerializeField] private Image xpProgressionBar;
 
-
+    private int currentLevel = 1;
+    private int scoreNeeded = 10;
     private bool playerSelected;
     private int score;
-
+    private int orePoints;
     private void Awake()
     {
         if (Instance == null)
@@ -41,17 +46,41 @@ public class UIManager : MonoBehaviour
     public void SetPlayerHealthBar(Image image)
     {
         playerHealthBarUI = image;
+    }  
+    public void SetXpProgressionBar(Image image)
+    {
+        xpProgressionBar = image;
     }
 
     public void ScoreUp()
     {
         score++;
-        scoreText.text = "Score : " + score.ToString();
+        orePoints++;
+        orePointText.text =  orePoints.ToString();
+        
+        float progress = (float)score / scoreNeeded;
+        xpProgressionBar.fillAmount = Mathf.Clamp01(progress);
+
+        if (score >= scoreNeeded)
+        {
+            LevelUp();
+            OnXpBarLevelUp?.Invoke(this,EventArgs.Empty);
+        }
+    }
+    private void LevelUp()
+    {
+        score -= scoreNeeded;
+
+        currentLevel++;
+        scoreNeeded = currentLevel * 10;
+
+        //scoreText.text = "Score : " + score;
+        xpProgressionBar.fillAmount = (float)score / scoreNeeded;
     }
 
-    public void SetScoreText(TextMeshProUGUI text)
+    public void SetOrePointText(TextMeshProUGUI text)
     {
-        scoreText = text;
+        orePointText = text;
     }
 
     public void SetPlayerSelectedBool(bool Selected)

@@ -12,6 +12,39 @@ public class PlayerPets : MonoBehaviour
     {
         HidePets();
     }
+    private void Start()
+    {
+        OutsideCanvas.OnSlothActive += OutsideCanvas_OnSlothActive;
+        OutsideCanvas.OnDragonActive += OutsideCanvas_OnDragonActive;
+        OutsideCanvas.OnPlantActive += OutsideCanvas_OnPlantActive;
+        OutsideCanvas.OnSerpentActive += OutsideCanvas_OnSerpentActive;
+        OutsideCanvas.OnSpiderActive += OutsideCanvas_OnSpiderActive;
+    }
+
+    private void OutsideCanvas_OnSpiderActive()
+    {
+        spiderPrefab.SetActive(true);
+    }
+
+    private void OutsideCanvas_OnSerpentActive()
+    {
+       serpentrefab.SetActive(true);
+    }
+
+    private void OutsideCanvas_OnPlantActive()
+    {
+        plantPrefab.SetActive(true);
+    }
+
+    private void OutsideCanvas_OnDragonActive()
+    {
+        dragonPrefab.SetActive(true);
+    }
+
+    private void OutsideCanvas_OnSlothActive()
+    {
+        slothPrefab.SetActive(true);
+    }
 
     void HidePets()
     {

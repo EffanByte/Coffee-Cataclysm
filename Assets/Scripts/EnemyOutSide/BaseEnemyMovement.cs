@@ -131,7 +131,7 @@ public abstract class BaseEnemyMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Melee"))
+        if(other.CompareTag("PlayerHit"))
         {
             EnemyPoolHandler.Instance.Despawn(this.gameObject);
             UIManager.Instance.ScoreUp();

@@ -31,9 +31,12 @@ public class PlayroomManager : MonoBehaviour
 
     void Awake()
     {
-        _playroomKit = new PlayroomKit();
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
+        if (Instance == null)
+        {
+            _playroomKit = new PlayroomKit();
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
     void Start()
     {

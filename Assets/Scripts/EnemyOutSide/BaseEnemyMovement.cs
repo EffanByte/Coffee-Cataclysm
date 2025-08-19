@@ -134,6 +134,7 @@ public abstract class BaseEnemyMovement : MonoBehaviour
         if(other.CompareTag("Melee"))
         {
             EnemyPoolHandler.Instance.Despawn(this.gameObject);
+            UIManager.Instance.ScoreUp();
         }
     }
 

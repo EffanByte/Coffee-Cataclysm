@@ -27,7 +27,7 @@ public class PortalTrigger : MonoBehaviour
             if (playerData.player == _playroom.MyPlayer())
             {
                 // Sync state change to all players via RPC
-                _playroom.RpcCall("SyncPlayerStateChange", GameSceneState.GameBar.ToString(), PlayroomKit.RpcMode.ALL);
+                //_playroom.RpcCall("SyncPlayerStateChange", GameSceneState.GameBar.ToString(), PlayroomKit.RpcMode.ALL);
                 GameStateManager.Instance.GoToGameBar(LoaderScene);
             }
             else

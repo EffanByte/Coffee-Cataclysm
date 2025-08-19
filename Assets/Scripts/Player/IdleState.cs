@@ -11,6 +11,7 @@ public class IdleState
         state = new State<PlayerState>(onEnter: state =>
         {
             //Do nothing
+            
         });
     }
 }

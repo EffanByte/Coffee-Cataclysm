@@ -1,10 +1,13 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
+
+    public event EventHandler OnXpBarLevelUp;
 
     [SerializeField] private Image playerHealthBarUI;
     [SerializeField] private TextMeshProUGUI orePointText;
@@ -61,6 +64,7 @@ public class UIManager : MonoBehaviour
         if (score >= scoreNeeded)
         {
             LevelUp();
+            OnXpBarLevelUp?.Invoke(this,EventArgs.Empty);
         }
     }
     private void LevelUp()

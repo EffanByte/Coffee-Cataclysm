@@ -152,6 +152,7 @@ public abstract class BaseEnemyMovement : MonoBehaviour
                 else
                     anim.ChangeAnimation("Hit_A");
 
+                other.GetComponent<ClassManager>().Damage();
                 hitTimer = 0f; // reset timer
             }
         }

@@ -30,7 +30,6 @@ public class DoorTrigger : MonoBehaviour
             {
                 // Sync state change to all players via RPC
                 _playroom.RpcCall("SyncPlayerStateChange", GameSceneState.OutSide.ToString(), PlayroomKit.RpcMode.ALL);
-
                 GameStateManager.Instance.GoToOutSide(LoaderScene);
             }
             else

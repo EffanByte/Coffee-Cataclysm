@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using DG.Tweening;
+using System.Collections;
 
 public class OutsideCanvas : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class OutsideCanvas : MonoBehaviour
     [SerializeField] private Button plantButton;
     [SerializeField] private Button serpentButton;
 
+    private Vector3 shopPanelCenter = Vector3.zero;
 
     private void Awake()
     {
@@ -49,12 +51,22 @@ public class OutsideCanvas : MonoBehaviour
 
     public void ShopPanelShow()
     {
+        float animationDuration = 2.0f;
         shopPanel.SetActive(true);
-        shopPanel.transform.DOMoveY(0, 5f);
+        shopPanel.GetComponent<RectTransform>().DOAnchorPosY(shopPanelCenter.y, animationDuration);
     }
 
     void ShopPanelHide()
     {
+        float animationDuration = 2.0f;
+        float panelOffScreen = 1200f;
+        shopPanel.GetComponent<RectTransform>().DOAnchorPosY(panelOffScreen, animationDuration);
+        StartCoroutine(WaitForHidingPanel());
+    }
+
+    IEnumerator WaitForHidingPanel()
+    {
+        yield return new WaitForSeconds(5.0f);
         shopPanel.SetActive(false);
     }
 }

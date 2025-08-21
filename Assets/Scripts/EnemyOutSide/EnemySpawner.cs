@@ -84,18 +84,17 @@ public class EnemySpawner : MonoBehaviour
     {
         // Wait a short time for scene transitions/state to settle
         yield return new WaitForSeconds(0.5f);
+        
         while (true)
         {
-            // Only in Outside and only if I'm not the host and there is at least one outside player
             if (GameStateManager.Instance != null && GameStateManager.Instance.currentState == GameSceneState.OutSide)
             {
                 UpdateOutsideHost();
-                Debug.Log("Outside host updated: " + isOutsideHost + ", Host ID: " + outsideHostId);
 
                 if (!isOutsideHost && CountOutsidePlayers() > 0)
                 {
                     _playroom.RpcCall("RequestEnemySnapshot", string.Empty, PlayroomKit.RpcMode.OTHERS);
-                    yield break; // request once; routine ends. It will be restarted next OnEnable.
+                    yield break; // request once; routine ends. It will be restarted when player joins scene again
                 }
             }
             yield return new WaitForSeconds(0.5f);

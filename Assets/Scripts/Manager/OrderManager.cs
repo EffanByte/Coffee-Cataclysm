@@ -47,9 +47,6 @@ public class OrderManager : MonoBehaviour
         ActiveOrders.Clear();
         OrderHistory.Clear();
     }
-    
-    /// <param name="customerID">Unique identifier for the customer</param>
-    /// <returns>The generated order type</returns>
     public void CreateOrder(string customerID)
     {
         if (string.IsNullOrEmpty(customerID))

@@ -503,6 +503,5 @@ public class PlayroomManager : MonoBehaviour
         }
         else
             outsideQueue[playerId] = false;                     // leaving OutSide
-        Debug.Log("Updated Outside Queue: " + string.Join(", ", outsideQueue));
     }
 }

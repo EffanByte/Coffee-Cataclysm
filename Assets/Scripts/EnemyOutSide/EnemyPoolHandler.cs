@@ -22,25 +22,38 @@ public class EnemyPoolHandler : MonoBehaviour
 
     private void Start()
     {
-        if (npcPrefabs == null || npcPrefabs.Length == 0) return;
         poolByPrefabIndex.Clear();
-        for (int idx = 0; idx < npcPrefabs.Length; idx++)
+        pool.Clear();
+
+        // Find all pooled enemies under this handler (include inactive children)
+        var metas = GetComponentsInChildren<EnemyMeta>(includeInactive: true);
+
+        foreach (var meta in metas)
         {
-            poolByPrefabIndex[idx] = new Queue<GameObject>();
+            var go = meta.gameObject;
+
+            // Ensure pooled objects start disabled
+            if (go.activeSelf) go.SetActive(false);
+
+            pool.Add(go);
+
+            // Group by PrefabIndex (must be set on each child in the editor or beforehand)
+            int prefabIndex = meta.PrefabIndex;
+            if (!poolByPrefabIndex.TryGetValue(prefabIndex, out var q))
+            {
+                q = new Queue<GameObject>();
+                poolByPrefabIndex[prefabIndex] = q;
+            }
+            q.Enqueue(go);
         }
 
-        for (int i = 0; i < poolSize; i++)
+        if (pool.Count == 0)
         {
-            int prefabIndex = i % npcPrefabs.Length;
-            GameObject npc = Instantiate(npcPrefabs[prefabIndex], transform);
-            var meta = npc.GetComponent<EnemyMeta>();
-            if (meta == null) meta = npc.AddComponent<EnemyMeta>();
-            meta.PrefabIndex = prefabIndex;
-            npc.SetActive(false);
-            pool.Add(npc);
-            poolByPrefabIndex[prefabIndex].Enqueue(npc);
+            Debug.LogWarning($"{nameof(EnemyPoolHandler)}: No pooled enemies found under '{name}'. " +
+                             "Place inactive child objects with EnemyMeta (PrefabIndex set) to use as the pool.");
         }
     }
+
 
     public GameObject GetNPC()
     {
@@ -62,34 +75,31 @@ public class EnemyPoolHandler : MonoBehaviour
         if (npcPrefabs == null || npcPrefabs.Length == 0) return null;
         if (prefabIndex < 0 || prefabIndex >= npcPrefabs.Length) prefabIndex = 0;
 
-        if (!poolByPrefabIndex.ContainsKey(prefabIndex))
+        // Ensure a queue exists for this index
+        if (!poolByPrefabIndex.TryGetValue(prefabIndex, out var queue) || queue.Count == 0)
         {
-            poolByPrefabIndex[prefabIndex] = new Queue<GameObject>();
+            Debug.LogWarning($"[EnemyPoolHandler] No pooled NPCs available for prefabIndex={prefabIndex}.");
+            return null;
         }
 
-        // Try to find an inactive of this type
-        Queue<GameObject> queue = poolByPrefabIndex[prefabIndex];
+        // Round-robin scan for an inactive instance
         int count = queue.Count;
         for (int i = 0; i < count; i++)
         {
-            GameObject npc = queue.Dequeue();
-            queue.Enqueue(npc);
+            var npc = queue.Dequeue();
+            queue.Enqueue(npc); // keep order
+
+            if (npc == null) continue;                 // skip destroyed entries
             if (!npc.activeInHierarchy)
             {
                 npc.SetActive(true);
                 return npc;
             }
         }
-
-        // Expand pool for this prefab type if needed
-        GameObject created = Instantiate(npcPrefabs[prefabIndex], transform);
-        var metaCreated = created.GetComponent<EnemyMeta>();
-        if (metaCreated == null) metaCreated = created.AddComponent<EnemyMeta>();
-        metaCreated.PrefabIndex = prefabIndex;
-        created.SetActive(true);
-        pool.Add(created);
-        queue.Enqueue(created);
-        return created;
+        
+        Debug.LogWarning($"[EnemyPoolHandler] Pool exhausted for prefabIndex={prefabIndex}. " +
+                         $"Increase pool size or release an active NPC.");
+        return null;
     }
 
     public int GetPrefabIndexByName(string prefabName)

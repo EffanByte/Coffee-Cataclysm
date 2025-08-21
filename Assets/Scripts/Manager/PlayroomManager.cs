@@ -19,6 +19,7 @@ public class PlayerData
     }
 }
 
+
 public class PlayroomManager : MonoBehaviour
 {
 
@@ -30,20 +31,30 @@ public class PlayroomManager : MonoBehaviour
     [SerializeField] GameObject PlayerPrefab;
     // Tracks order players arrived in the Outside scene. Earliest stays host until they leave.
     private Dictionary<string, bool> outsideQueue = new Dictionary<string, bool>();
-
+    private bool initialized = false;
     void Awake()
     {
-        if (Instance == null)
+        // ✅ Hard singleton: destroy duplicates before Start() runs
+        if (Instance != null && Instance != this)
         {
-            _playroomKit = new PlayroomKit();
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            Destroy(gameObject);
+            return;
         }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        // Create the kit once
+        if (_playroomKit == null)
+            _playroomKit = new PlayroomKit();
     }
     void Start()
     {
-        InitializePlayroom();
         gameState = GameStateManager.Instance;
+        if (initialized)
+            return;
+        InitializePlayroom();
+        initialized = true;
+
     }
     void Update()
     {

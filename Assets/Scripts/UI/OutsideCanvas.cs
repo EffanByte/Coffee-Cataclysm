@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using DG.Tweening;
 
 public class OutsideCanvas : MonoBehaviour
 {
@@ -49,6 +50,7 @@ public class OutsideCanvas : MonoBehaviour
     public void ShopPanelShow()
     {
         shopPanel.SetActive(true);
+        shopPanel.transform.DOMoveY(0, 5f);
     }
 
     void ShopPanelHide()

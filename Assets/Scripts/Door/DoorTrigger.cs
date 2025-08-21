@@ -25,6 +25,7 @@ public class DoorTrigger : MonoBehaviour
                 }
             }
 
+
             if (playerData.player == _playroom.MyPlayer()) 
             {
                 // Update only local player's state; remotes will update via RPC handler

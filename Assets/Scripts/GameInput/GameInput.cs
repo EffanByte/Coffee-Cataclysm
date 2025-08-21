@@ -37,6 +37,7 @@ public class GameInput : MonoBehaviour
 
     public Vector2 GetMovementNormalized()
     {
+        Debug.Log("PlayerMoving");
         Vector2 InputVector = PlayerInputSystem.Player.Move.ReadValue<Vector2>();
         return InputVector.normalized;
     }

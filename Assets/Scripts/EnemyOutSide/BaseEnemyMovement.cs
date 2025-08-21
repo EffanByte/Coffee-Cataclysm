@@ -131,9 +131,10 @@ public abstract class BaseEnemyMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Melee"))
+        if(other.CompareTag("PlayerHit"))
         {
             EnemyPoolHandler.Instance.Despawn(this.gameObject);
+            UIManager.Instance.ScoreUp();
         }
     }
 
@@ -152,6 +153,7 @@ public abstract class BaseEnemyMovement : MonoBehaviour
                 else
                     anim.ChangeAnimation("Hit_A");
 
+                other.GetComponent<ClassManager>().Damage();
                 hitTimer = 0f; // reset timer
             }
         }

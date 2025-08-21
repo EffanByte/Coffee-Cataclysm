@@ -14,10 +14,11 @@ public enum PlayerAttackState
     UseItem,
 }
 
-public abstract class ClassManager : MonoBehaviour, IPlayer  
+public abstract class ClassManager : MonoBehaviour, IPlayer
 {
     protected float speed;
-    protected int maxHealth;
+    [SerializeField] protected int maxHealth = 5;
+    protected int currentHealth;
     protected PlayerType _playerType;
     protected PlayerAttackState _playerAttackState;
     protected GameInput gameInput;
@@ -35,6 +36,9 @@ public abstract class ClassManager : MonoBehaviour, IPlayer
         gameInput = GetComponentInChildren<GameInput>();
         animator = GetComponentInChildren<Animator>();
         playerAnimatonController = GetComponent<PlayerAnimatonController>();
+
+        currentHealth = maxHealth;
+        UIManager.Instance.UpdatePlayerHealthUI(currentHealth, maxHealth);
     }
 
     public virtual void Attack()
@@ -44,7 +48,16 @@ public abstract class ClassManager : MonoBehaviour, IPlayer
 
     public virtual void Damage()
     {
-
+        Debug.Log("Player is being Damage");
+        if (currentHealth > 0)
+        {
+            currentHealth--;
+            UIManager.Instance.UpdatePlayerHealthUI(currentHealth, maxHealth);
+        }
+        else if (currentHealth <= 0)
+        {
+            //Die Command here
+        }
     }
 
 
@@ -56,4 +69,5 @@ public abstract class ClassManager : MonoBehaviour, IPlayer
     {
 
     }
+
 }

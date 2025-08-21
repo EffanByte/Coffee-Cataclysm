@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1623686015162057344}
   m_Layer: 0
   m_Name: axe_2handed
-  m_TagString: Melee
+  m_TagString: PlayerHit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

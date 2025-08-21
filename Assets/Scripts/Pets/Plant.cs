@@ -32,6 +32,7 @@ public class Plant : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            FaceEnemy(other.gameObject);
             petsAnimationController.ChangeAnimation(petsAnimationController.PlantAttack);
         }
     }
@@ -39,11 +40,26 @@ public class Plant : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            FaceEnemy(other.gameObject);
             if (attackCooldown <= 0f)
             {
                 petsAnimationController.ChangeAnimation(petsAnimationController.PlantAttack);
                 attackCooldown = attackDuration;
             }
         }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        }
+    }
+
+    void FaceEnemy(GameObject other)
+    {
+        Vector3 currentRotation = transform.eulerAngles;
+        currentRotation.y = other.transform.eulerAngles.y;
+        transform.rotation = Quaternion.Euler(currentRotation);
     }
 }

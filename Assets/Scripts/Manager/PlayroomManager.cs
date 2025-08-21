@@ -33,9 +33,12 @@ public class PlayroomManager : MonoBehaviour
 
     void Awake()
     {
-        _playroomKit = new PlayroomKit();
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
+        if (Instance == null)
+        {
+            _playroomKit = new PlayroomKit();
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
     void Start()
     {
@@ -81,7 +84,7 @@ public class PlayroomManager : MonoBehaviour
             maxPlayersPerRoom = 4,
         }, () =>
         {
-            _playroomKit.OnPlayerJoin(SpawnPlayer);
+            //_playroomKit.OnPlayerJoin(SpawnPlayer);
             _playroomKit.RpcRegister("HandleHeldItem", HandleHeldItem);
             _playroomKit.RpcRegister("HandleDropItem", HandleDropItem);
             _playroomKit.RpcRegister("HandleBlendCoffee", HandleHeldItem);
@@ -207,8 +210,8 @@ public class PlayroomManager : MonoBehaviour
             {
                 player.Value.gameState = newState;
 
-                // Update visibility based on current game state
-                if (gameState.currentState == newState)
+                // Update visibility based on current game state (guard against early calls)
+                if (gameState != null && gameState.currentState == newState)
                     player.Value.playerObject.SetActive(true);
                 else
                     player.Value.playerObject.SetActive(false);
@@ -462,7 +465,7 @@ public class PlayroomManager : MonoBehaviour
             playerObject.GetComponent<HoldingManager>().DropItem();
         }
     }
-    void SpawnPlayer(PlayroomKit.Player player)
+    public void SpawnPlayer(PlayroomKit.Player player)
     {
         GameObject playerObject;
         playerObject = Instantiate(PlayerPrefab, new Vector3(0, 1, 2), Quaternion.identity); // using default position for now   
@@ -498,10 +501,16 @@ public class PlayroomManager : MonoBehaviour
     {
         if (newState == GameSceneState.OutSide)
         {
-            bool hostExists = outsideQueue.ContainsValue(true); 
+            bool hostExists = outsideQueue.ContainsValue(true);
             outsideQueue[playerId] = !hostExists;               // true only if no host yet
         }
         else
             outsideQueue[playerId] = false;                     // leaving OutSide
     }
+
+    public void SetPlayerPrefab(GameObject playerCharacter)
+    {
+        PlayerPrefab = playerCharacter;
+    }
+
 }

@@ -26,6 +26,7 @@ public class MoveState
 
                 if (playerData.player.id == _playroomKit.MyPlayer().id)
                 {
+                    Debug.Log("Player moving through move state");
                     Vector2 inputVector = input.GetMovementNormalized();
                     Vector3 moveDir = new(inputVector.x, 0f, inputVector.y);
 

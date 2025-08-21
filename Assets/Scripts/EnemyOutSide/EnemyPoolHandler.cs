@@ -22,6 +22,13 @@ public class EnemyPoolHandler : MonoBehaviour
 
     private void Start()
     {
+
+        for (int i = 0; i < poolSize; i++)
+        {
+            GameObject npc = Instantiate(npcPrefabs[Random.Range(0, npcPrefabs.Length)], transform);
+            npc.SetActive(false);
+            pool.Add(npc);
+        }
         poolByPrefabIndex.Clear();
         pool.Clear();
 
@@ -31,12 +38,7 @@ public class EnemyPoolHandler : MonoBehaviour
         foreach (var meta in metas)
         {
             var go = meta.gameObject;
-
-            // Ensure pooled objects start disabled
-            if (go.activeSelf) go.SetActive(false);
-
-            pool.Add(go);
-
+            
             // Group by PrefabIndex (must be set on each child in the editor or beforehand)
             int prefabIndex = meta.PrefabIndex;
             if (!poolByPrefabIndex.TryGetValue(prefabIndex, out var q))
@@ -71,36 +73,37 @@ public class EnemyPoolHandler : MonoBehaviour
     }
 
     public GameObject GetNPC(int prefabIndex)
+{
+    if (npcPrefabs == null || npcPrefabs.Length == 0) return null;
+    if (prefabIndex < 0 || prefabIndex >= npcPrefabs.Length) prefabIndex = 0;
+
+    // Ensure a queue exists for this index
+    if (!poolByPrefabIndex.TryGetValue(prefabIndex, out var queue) || queue.Count == 0)
     {
-        if (npcPrefabs == null || npcPrefabs.Length == 0) return null;
-        if (prefabIndex < 0 || prefabIndex >= npcPrefabs.Length) prefabIndex = 0;
-
-        // Ensure a queue exists for this index
-        if (!poolByPrefabIndex.TryGetValue(prefabIndex, out var queue) || queue.Count == 0)
-        {
-            Debug.LogWarning($"[EnemyPoolHandler] No pooled NPCs available for prefabIndex={prefabIndex}.");
-            return null;
-        }
-
-        // Round-robin scan for an inactive instance
-        int count = queue.Count;
-        for (int i = 0; i < count; i++)
-        {
-            var npc = queue.Dequeue();
-            queue.Enqueue(npc); // keep order
-
-            if (npc == null) continue;                 // skip destroyed entries
-            if (!npc.activeInHierarchy)
-            {
-                npc.SetActive(true);
-                return npc;
-            }
-        }
-        
-        Debug.LogWarning($"[EnemyPoolHandler] Pool exhausted for prefabIndex={prefabIndex}. " +
-                         $"Increase pool size or release an active NPC.");
+        Debug.LogWarning($"[EnemyPoolHandler] No pooled NPCs available for prefabIndex={prefabIndex}.");
         return null;
     }
+
+    // Round-robin scan for an inactive instance
+    int count = queue.Count;
+    for (int i = 0; i < count; i++)
+    {
+        var npc = queue.Dequeue();
+        queue.Enqueue(npc); // keep order
+
+        if (npc == null) continue;                 // skip destroyed entries
+        if (!npc.activeInHierarchy)
+        {
+            npc.SetActive(true);
+            return npc;
+        }
+    }
+
+    // Pool exhausted: do NOT instantiate, just return null
+    Debug.LogWarning($"[EnemyPoolHandler] Pool exhausted for prefabIndex={prefabIndex}. " +
+                     $"Increase pool size or release an active NPC.");
+    return null;
+}
 
     public int GetPrefabIndexByName(string prefabName)
     {

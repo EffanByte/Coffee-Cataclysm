@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 using UnityHFSM;
 using Playroom;
 using System.Collections.Generic;
-using System.Numerics;
 public enum GameSceneState
 {
     GameBar,
@@ -62,14 +61,7 @@ public class GameStateManager : MonoBehaviour
         fsm.Trigger("OutSide"); // Updates local game state
         OnStateOutSide?.Invoke(this, EventArgs.Empty);
         currentState = GameSceneState.OutSide;
-        
-        // Update ONLY local player's game state BEFORE scene change
-        if (PlayroomManager.Players.TryGetValue(_playroom.MyPlayer(), out PlayerData myPlayerData_Out))
-        {
-            myPlayerData_Out.gameState = currentState;
-            PlayroomManager.Instance.UpdateOutsideQueue(_playroom.MyPlayer().id, currentState);
-        }
-        
+
         // Now activate/deactivate players based on updated state
         foreach (KeyValuePair<PlayroomKit.Player, PlayerData> entry in PlayroomManager.Players)
         {
@@ -81,9 +73,10 @@ public class GameStateManager : MonoBehaviour
 
         // Reset local player position
         PlayroomManager.Players[_playroom.MyPlayer()].playerObject.transform.position = new UnityEngine.Vector3(0, 1, 2);
-        
+
         // Load scene after state management
         SceneManager.LoadScene(SceneIndex);
+
     }
 
     public void GoToGameBar(int SceneIndex)
@@ -91,13 +84,6 @@ public class GameStateManager : MonoBehaviour
         fsm.Trigger("GameBar");
         OnStateGameBar?.Invoke(this, EventArgs.Empty);
         currentState = GameSceneState.GameBar;
-        
-        // Update ONLY local player's game state BEFORE scene change
-        if (PlayroomManager.Players.TryGetValue(_playroom.MyPlayer(), out PlayerData myPlayerData_In))
-        {
-            myPlayerData_In.gameState = currentState;
-            PlayroomManager.Instance.UpdateOutsideQueue(_playroom.MyPlayer().id, currentState);
-        }
         
         // Now activate/deactivate players based on updated state
         foreach (KeyValuePair<PlayroomKit.Player, PlayerData> entry in PlayroomManager.Players)

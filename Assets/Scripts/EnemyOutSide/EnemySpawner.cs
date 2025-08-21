@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using Playroom;
+using System.Linq;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -15,9 +16,14 @@ public class EnemySpawner : MonoBehaviour
     private bool isOutsideHost = false;
     private string outsideHostId = null;
 
+    private void Awake()
+    {
+        // Grab PlayroomKit as early as possible
+        _playroom = PlayroomManager.Instance.GetPlayroomKit();
+    }
+
     private void Start()
     {
-        _playroom = PlayroomManager.Instance.GetPlayroomKit();
         StartCoroutine(SpawnEnemiesRoutine());
         StartCoroutine(RequestSnapshotIfNeeded());
     }
@@ -68,12 +74,6 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private Vector3 GetRandomPositionNearHost()
-    {
-        Vector2 randomCircle = Random.insideUnitCircle * spawnRadius;
-        return player.position + new Vector3(randomCircle.x, 0f, randomCircle.y);
-    }
-
     private Vector3 GetRandomPositionNear(Vector3 center)
     {
         Vector2 randomCircle = Random.insideUnitCircle * spawnRadius;
@@ -84,17 +84,18 @@ public class EnemySpawner : MonoBehaviour
     {
         // Wait a short time for scene transitions/state to settle
         yield return new WaitForSeconds(0.5f);
-
         while (true)
         {
             // Only in Outside and only if I'm not the host and there is at least one outside player
             if (GameStateManager.Instance != null && GameStateManager.Instance.currentState == GameSceneState.OutSide)
             {
                 UpdateOutsideHost();
+                Debug.Log("Outside host updated: " + isOutsideHost + ", Host ID: " + outsideHostId);
+
                 if (!isOutsideHost && CountOutsidePlayers() > 0)
                 {
                     _playroom.RpcCall("RequestEnemySnapshot", string.Empty, PlayroomKit.RpcMode.OTHERS);
-                    yield break; // request once
+                    yield break; // request once; routine ends. It will be restarted next OnEnable.
                 }
             }
             yield return new WaitForSeconds(0.5f);
@@ -114,10 +115,27 @@ public class EnemySpawner : MonoBehaviour
 
     private void UpdateOutsideHost()
     {
-        // Elect earliest-arrived outside client as host using PlayroomManager's queue
-        var queue = (System.Collections.Generic.IReadOnlyList<string>)PlayroomManager.Instance.GetOutsideQueue();
-        outsideHostId = queue.Count > 0 ? queue[0] : null;
-        isOutsideHost = outsideHostId != null && _playroom.MyPlayer().id == outsideHostId;
+        var queue = PlayroomManager.Instance.GetOutsideQueue();
+
+        outsideHostId = null;
+        foreach (var kv in queue)
+        {
+            if (kv.Value) // true means this player is the outside host
+            {
+                outsideHostId = kv.Key; // first true is the host
+                break;
+            }
+        }
+
+        if (outsideHostId == null)
+        {
+            var me = _playroom?.MyPlayer().id;
+            queue[me] = true;                   //no host found, mark me as host
+            outsideHostId = me;
+        }
+
+        isOutsideHost = _playroom != null && _playroom.MyPlayer() != null &&
+                        _playroom.MyPlayer().id == outsideHostId;
     }
 
     private System.Collections.Generic.List<Vector3> GetOutsidePlayerPositions()

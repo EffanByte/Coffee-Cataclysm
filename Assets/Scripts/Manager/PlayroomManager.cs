@@ -29,7 +29,7 @@ public class PlayroomManager : MonoBehaviour
     private GameStateManager gameState;
     [SerializeField] GameObject PlayerPrefab;
     // Tracks order players arrived in the Outside scene. Earliest stays host until they leave.
-    private readonly List<string> outsideQueue = new List<string>();
+    private Dictionary<string, bool> outsideQueue = new Dictionary<string, bool>();
 
     void Awake()
     {
@@ -129,7 +129,7 @@ public class PlayroomManager : MonoBehaviour
     {
         // Only host should respond with snapshot; determine host by queue[0]
         var queue = GetOutsideQueue();
-        if (queue.Count == 0 || queue[0] != _playroomKit.MyPlayer().id)
+        if (queue.Count == 0 || queue[_playroomKit.MyPlayer().id] != true)
             return;
 
         if (gameState == null || gameState.currentState != GameSceneState.OutSide)
@@ -137,7 +137,7 @@ public class PlayroomManager : MonoBehaviour
 
         // Build snapshot: semicolon-separated entries: idx,x,y,z
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
-        var metas = GameObject.FindObjectsOfType<EnemyMeta>();
+        var metas = FindObjectsOfType<EnemyMeta>();
         for (int i = 0; i < metas.Length; i++)
         {
             var m = metas[i];
@@ -169,7 +169,7 @@ public class PlayroomManager : MonoBehaviour
             return;
 
         // Clear current active enemies before applying snapshot to avoid duplicates
-        var existing = GameObject.FindObjectsOfType<EnemyMeta>();
+        var existing = FindObjectsOfType<EnemyMeta>();
         foreach (var m in existing)
         {
             if (m.gameObject.activeInHierarchy)
@@ -214,6 +214,8 @@ public class PlayroomManager : MonoBehaviour
                     player.Value.playerObject.SetActive(false);
 
                 UpdateOutsideQueue(sender, newState);
+
+                Debug.Log("Outside queue updated in HandleSyncPlayerStateChange: " + string.Join(", ", outsideQueue));
                 break;
             }
         }
@@ -257,7 +259,7 @@ public class PlayroomManager : MonoBehaviour
             // Currently only syncing bool params; extend as needed
             if (param == "IsWalking")
             {
-                bool boolValue = false;
+                bool boolValue;
                 bool.TryParse(value, out boolValue);
                 animator.SetBool("IsWalking", boolValue);
             }
@@ -487,27 +489,20 @@ public class PlayroomManager : MonoBehaviour
         _playroomKit.RpcCall("SyncPlayerAnim", $"{parameterName}|?|{value}", PlayroomKit.RpcMode.ALL);
     }
 
-    public IReadOnlyList<string> GetOutsideQueue()
+    public Dictionary<string, bool> GetOutsideQueue()
     {
         return outsideQueue;
     }
 
     public void UpdateOutsideQueue(string playerId, GameSceneState newState)
     {
-        bool contains = outsideQueue.Contains(playerId);
         if (newState == GameSceneState.OutSide)
         {
-            if (!contains)
-            {
-                outsideQueue.Add(playerId);
-            }
+            bool hostExists = outsideQueue.ContainsValue(true); 
+            outsideQueue[playerId] = !hostExists;               // true only if no host yet
         }
         else
-        {
-            if (contains)
-            {
-                outsideQueue.Remove(playerId);
-            }
-        }
+            outsideQueue[playerId] = false;                     // leaving OutSide
+        Debug.Log("Updated Outside Queue: " + string.Join(", ", outsideQueue));
     }
 }
